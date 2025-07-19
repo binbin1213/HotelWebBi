@@ -1,0 +1,334 @@
+{% extends "base.html" %}
+
+{% block title %}乐巷酒店 - 智能数据分析{% endblock %}
+
+{% block head_extra %}
+<!-- 引入CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/analytics.css', v=678910) }}">
+<!-- 打印样式表 -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/print.css', v=123456) }}" media="all">
+
+<style>
+    /* 移动端优化样式 */
+    @media (max-width: 640px) {
+        .quick-queries-container {
+            overflow-x: auto;
+            padding-bottom: 10px;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .quick-queries-inner {
+            display: flex;
+            min-width: min-content;
+        }
+
+        #chart-container {
+            height: 300px !important;
+        }
+        
+        .data-table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    }
+    
+    /* 快捷查询分类样式 */
+    .query-category {
+        margin-top: 0.75rem;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        color: #4B5563;
+    }
+    
+    /* 快捷查询按钮组样式 */
+    .quick-queries-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+    
+    /* 不同类别的快捷查询按钮颜色 */
+    .revenue-query {
+        background-color: #EBF5FF;
+        color: #1E40AF;
+    }
+    .revenue-query:hover {
+        background-color: #DBEAFE;
+    }
+    
+    .room-query {
+        background-color: #ECFDF5;
+        color: #065F46;
+    }
+    .room-query:hover {
+        background-color: #D1FAE5;
+    }
+    
+    .multi-query {
+        background-color: #FEF3C7;
+        color: #92400E;
+    }
+    .multi-query:hover {
+        background-color: #FDE68A;
+    }
+    
+    .trend-query {
+        background-color: #F3E8FF;
+        color: #6B21A8;
+    }
+    .trend-query:hover {
+        background-color: #E9D5FF;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 gap-3">
+        <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">智能数据分析中心</h1>
+        <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+            <a href="/view" class="px-3 py-2 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200 text-sm sm:text-base">查看数据</a>
+            <a href="/" class="px-3 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 text-sm sm:text-base">返回主页</a>
+        </div>
+    </div>
+    
+    <!-- AI查询区域 -->
+    <div class="bg-white shadow-lg rounded-xl p-4 sm:p-6 mb-6">
+        <h2 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">数据智能查询</h2>
+        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+            <div class="relative flex-grow">
+                <input id="ai-query" type="text" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+                       placeholder="例如: 展示上半年各渠道收入占比">
+                <div class="absolute right-3 top-3 text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                    </svg>
+                </div>
+            </div>
+            <div class="flex space-x-2">
+                <select id="model-select" class="px-3 py-3 bg-white border border-gray-300 rounded-lg text-gray-700">
+                    <option value="deepseek-chat">DeepSeek Chat</option>
+                    <option value="deepseek-reasoner">DeepSeek Reasoner</option>
+                    <option value="gpt-4o">OpenAI GPT-4o</option>
+                </select>
+                <button id="query-btn" class="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors shrink-0">
+                    分析
+                </button>
+            </div>
+        </div>
+        
+        <!-- 快捷分析按钮 -->
+        <div class="mt-4 quick-queries-container">
+            <div class="query-category">收入分析</div>
+            <div class="quick-queries-group">
+                <button class="quick-query revenue-query px-3 py-1 text-sm rounded-full whitespace-nowrap">收入渠道分布</button>
+                <button class="quick-query revenue-query px-3 py-1 text-sm rounded-full whitespace-nowrap">月度收入趋势</button>
+                <button class="quick-query revenue-query px-3 py-1 text-sm rounded-full whitespace-nowrap">渠道收入排名</button>
+                <button class="quick-query revenue-query px-3 py-1 text-sm rounded-full whitespace-nowrap">周收入分布</button>
+            </div>
+            
+            <div class="query-category">间夜分析</div>
+            <div class="quick-queries-group">
+                <button class="quick-query room-query px-3 py-1 text-sm rounded-full whitespace-nowrap">渠道间夜对比</button>
+                <button class="quick-query room-query px-3 py-1 text-sm rounded-full whitespace-nowrap">月度间夜趋势</button>
+                <button class="quick-query room-query px-3 py-1 text-sm rounded-full whitespace-nowrap">平均房价分析</button>
+                <button class="quick-query room-query px-3 py-1 text-sm rounded-full whitespace-nowrap">出租率分析</button>
+            </div>
+            
+            <div class="query-category">多维度分析</div>
+            <div class="quick-queries-group">
+                <button class="quick-query multi-query px-3 py-1 text-sm rounded-full whitespace-nowrap">渠道和星期维度分析</button>
+                <button class="quick-query multi-query px-3 py-1 text-sm rounded-full whitespace-nowrap">美团和携程对比</button>
+                <button class="quick-query multi-query px-3 py-1 text-sm rounded-full whitespace-nowrap">工作日与周末表现</button>
+                <button class="quick-query multi-query px-3 py-1 text-sm rounded-full whitespace-nowrap">渠道月度热力图</button>
+            </div>
+            
+            <div class="query-category">趋势与预测</div>
+            <div class="quick-queries-group">
+                <button class="quick-query trend-query px-3 py-1 text-sm rounded-full whitespace-nowrap">收入和间夜趋势</button>
+                <button class="quick-query trend-query px-3 py-1 text-sm rounded-full whitespace-nowrap">渠道占比变化</button>
+                <button class="quick-query trend-query px-3 py-1 text-sm rounded-full whitespace-nowrap">季节性分析</button>
+                <button class="quick-query trend-query px-3 py-1 text-sm rounded-full whitespace-nowrap">收入预测</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 分析结果区域 -->
+    <div id="results-container" class="grid grid-cols-1 gap-4 sm:gap-6 mb-6 sm:mb-8" style="display: none;">
+        <!-- AI洞察区域 - 现在占据整行 -->
+        <div class="bg-white shadow-lg rounded-xl p-4 sm:p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-900">AI数据洞察</h3>
+                <div class="flex space-x-2">
+                    <button id="toggle-view" class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-md hover:bg-indigo-200 transition-colors text-sm">
+                        切换视图
+                    </button>
+                    <button id="export-insights" class="p-2 bg-gray-100 rounded-md hover:bg-gray-200" title="导出分析文本">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"></path>
+                        </svg>
+                    </button>
+                    <button id="print-report" class="p-2 bg-gray-100 rounded-md hover:bg-gray-200" title="打印报表">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M5 4v3H4a2 2 0 00-2 2v3a2 2 0 002 2h1v2a2 2 0 002 2h6a2 2 0 002-2v-2h1a2 2 0 002-2V9a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H7a2 2 0 00-2 2zm8 0v3H7V4h6zm-3 11v-4h2v4h-2zm3 0v-4h2v4h-2zm-6 0v-4h2v4H7z"></path>
+                        </svg>
+                    </button>
+                    <button id="export-pdf" class="p-2 bg-gray-100 rounded-md hover:bg-gray-200" title="导出PDF">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a2 2 0 00-2 2v8a2 2 0 002 2h6a2 2 0 002-2V6.414A2 2 0 0016.414 5L14 2.586A2 2 0 0012.586 2H9z"></path>
+                            <path d="M3 8a2 2 0 012-2v10h8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="ai-insights" class="prose max-w-none text-sm sm:text-base"></div>
+        </div>
+        
+        <!-- 可视化区域 - 默认显示 -->
+        <div id="visualization-container">
+            <!-- 图表区域 -->
+            <div class="bg-white shadow-lg rounded-xl p-4 sm:p-6 mb-4">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 id="chart-title" class="text-lg font-medium text-gray-900">数据可视化</h3>
+                    <div class="flex space-x-2">
+                        <button id="switch-chart" class="p-2 bg-gray-100 rounded-md hover:bg-gray-200" title="切换图表类型">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                            </svg>
+                        </button>
+                        <button id="export-chart" class="p-2 bg-gray-100 rounded-md hover:bg-gray-200" title="导出图表">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div id="chart-container" class="w-full" style="min-height: 400px; height: 400px; width: 100%;"></div>
+            </div>
+            
+            <!-- 表格区域 -->
+            <div id="data-table-wrapper" class="bg-white shadow-lg rounded-xl p-4 sm:p-6" style="display: none;">
+                <h3 class="text-lg font-medium text-gray-900 mb-3 sm:mb-4">详细数据</h3>
+                <div class="data-table-responsive">
+                    <table id="data-table" class="min-w-full divide-y divide-gray-200 stripe hover cell-border"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 加载动画 -->
+    <div id="loading-overlay" class="fixed top-0 left-0 right-0 z-50" style="display: none;">
+        <div class="bg-indigo-600 text-white py-2 px-4 flex items-center justify-center">
+            <div class="loading-spinner-small mr-3"></div>
+            <span>正在分析数据中，请稍候...</span>
+        </div>
+        <div class="h-1 bg-indigo-200 relative">
+            <div id="progress-bar" class="h-full bg-indigo-600 absolute left-0 top-0 transition-all duration-300" style="width: 0%"></div>
+        </div>
+    </div>
+</div>
+
+<!-- 测试按钮 - 隐藏但保留功能 -->
+<button id="test-echarts" class="hidden">测试ECharts</button>
+{% endblock %}
+
+{% block scripts %}
+<!-- 引入JS库 -->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js/dist/html2pdf.bundle.min.js"></script>
+
+<!-- 业务脚本 -->
+<script src="{{ url_for('static', filename='js/analytics.js', v=234567) }}"></script>
+
+<script>
+// 检查ECharts是否正确加载
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM已加载完成');
+    
+    if (typeof echarts === 'undefined') {
+        console.error('错误: ECharts库未加载');
+    } else {
+        console.log('ECharts库已成功加载，版本:', echarts.version);
+    }
+    
+    // 检查图表容器
+    const chartContainer = document.getElementById('chart-container');
+    if (chartContainer) {
+        console.log('图表容器已找到，尺寸:', chartContainer.offsetWidth, 'x', chartContainer.offsetHeight);
+    } else {
+        console.error('错误: 图表容器未找到');
+    }
+    
+    // 添加测试按钮事件
+    const testButton = document.getElementById('test-echarts');
+    if (testButton) {
+        testButton.addEventListener('click', function() {
+            console.log('测试ECharts按钮被点击');
+            try {
+                const container = document.getElementById('chart-container');
+                if (!container) {
+                    console.error('找不到图表容器!');
+                    return;
+                }
+                
+                // 如果已有图表实例，先销毁
+                if (container.echart) {
+                    console.log('销毁现有图表实例');
+                    container.echart.dispose();
+                }
+                
+                console.log('创建测试图表');
+                const myChart = echarts.init(container);
+                
+                // 简单测试数据
+                const testOption = {
+                    title: {
+                        text: 'ECharts 测试图表',
+                        left: 'center'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data: ['销量'],
+                        left: 'right'
+                    },
+                    xAxis: {
+                        data: ['衬衫', '羊毛衫', '雪纺衫', '裤子', '高跟鞋', '袜子']
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '销量',
+                        type: 'bar',
+                        data: [5, 20, 36, 10, 10, 20]
+                    }]
+                };
+                
+                console.log('设置图表选项');
+                myChart.setOption(testOption);
+                console.log('测试图表创建成功');
+                
+                // 保存图表实例
+                container.echart = myChart;
+                
+                // 显示结果容器
+                document.getElementById('results-container').style.display = 'grid';
+            } catch (error) {
+                console.error('测试图表创建失败:', error);
+                alert('测试图表创建失败: ' + error.message);
+            }
+        });
+        console.log('测试按钮事件监听器已添加');
+    } else {
+        console.error('错误: 测试按钮未找到');
+    }
+});
+</script>
+{% endblock %} 

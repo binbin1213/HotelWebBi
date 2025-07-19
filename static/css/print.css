@@ -1,0 +1,206 @@
+/**
+ * 乐巷酒店数据管理系统 - 打印样式表
+ * 用于优化PDF导出和打印功能
+ */
+
+/* 隐藏不需要打印的元素 */
+@media print {
+  /* 隐藏导航栏和页眉 */
+  header, 
+  .mobile-nav,
+  footer,
+  #mobile-menu-button,
+  #mobile-menu {
+    display: none !important;
+  }
+  
+  /* 隐藏分析页面中的查询区域和操作按钮 */
+  .quick-queries-container,
+  #query-btn,
+  #ai-query,
+  #model-select,
+  #toggle-view,
+  #switch-chart,
+  #export-chart,
+  #export-insights,
+  #export-pdf,
+  #print-report,
+  #loading-overlay {
+    display: none !important;
+  }
+  
+  /* 移除页面内容的顶部间距 */
+  body.has-mobile-nav {
+    padding-top: 0 !important;
+  }
+  
+  /* 确保内容显示完整 */
+  #results-container {
+    display: grid !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* 确保可视化区域显示 */
+  #visualization-container {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+  
+  /* 确保表格数据显示 */
+  #data-table-wrapper {
+    display: block !important;
+    page-break-inside: avoid;
+    margin-top: 20px !important;
+    width: 100% !important;
+  }
+  
+  /* 图表区域样式优化 */
+  #chart-container {
+    height: 400px !important;
+    width: 100% !important;
+    page-break-inside: avoid;
+    margin: 0 auto !important;
+  }
+  
+  /* 优化AI洞察区域 */
+  #ai-insights {
+    page-break-inside: avoid;
+    margin-bottom: 20px !important;
+  }
+  
+  /* 修改整体页面布局 */
+  .w-full.max-w-7xl {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  /* 添加页眉和页脚 */
+  @page {
+    margin: 1cm;
+    size: A4;
+  }
+  
+  /* 优化字体和颜色 */
+  body {
+    font-family: 'Arial', sans-serif !important;
+    color: black !important;
+    background-color: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  /* 确保所有文本都是黑色的，以便打印清晰 */
+  p, h1, h2, h3, h4, h5, h6, span, div, table, th, td {
+    color: black !important;
+  }
+  
+  /* 优化表格样式 */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin-bottom: 20px !important;
+    font-size: 12px !important;
+  }
+  
+  th, td {
+    border: 1px solid #ddd !important;
+    padding: 6px !important;
+    text-align: left !important;
+  }
+  
+  th {
+    background-color: #f2f2f2 !important;
+    font-weight: bold !important;
+  }
+  
+  /* 隐藏DataTables的搜索、分页和其他控件 */
+  .dataTables_wrapper .dataTables_length,
+  .dataTables_wrapper .dataTables_filter,
+  .dataTables_wrapper .dataTables_info,
+  .dataTables_wrapper .dataTables_paginate,
+  .dataTables_wrapper .dataTables_processing,
+  .dataTables_wrapper .dt-buttons {
+    display: none !important;
+  }
+  
+  /* 添加报表标题 */
+  #results-container::before {
+    content: "乐巷酒店数据分析报表";
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+  }
+  
+  /* 添加日期时间戳 */
+  #results-container::after {
+    content: "生成时间: " attr(data-timestamp);
+    display: block;
+    font-size: 12px;
+    text-align: right;
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+  }
+  
+  /* 确保每个主要部分都从新页面开始 */
+  .bg-white.shadow-lg {
+    page-break-before: always;
+    margin-bottom: 20px !important;
+    padding: 15px !important;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: white !important;
+  }
+  
+  /* 第一个元素不需要分页 */
+  .bg-white.shadow-lg:first-child {
+    page-break-before: avoid;
+  }
+  
+  /* 优化标题样式 */
+  .text-xl, .text-lg {
+    font-size: 18px !important;
+    margin-bottom: 15px !important;
+  }
+  
+  /* 优化按钮容器 */
+  .flex.justify-between.items-center {
+    justify-content: flex-start !important;
+  }
+  
+  /* 优化图表标题 */
+  #chart-title {
+    font-size: 16px !important;
+    font-weight: bold !important;
+    margin-bottom: 10px !important;
+  }
+  
+  /* 优化数据表格标题 */
+  #data-table-wrapper h3 {
+    font-size: 16px !important;
+    font-weight: bold !important;
+    margin-bottom: 10px !important;
+  }
+  
+  /* 确保列表样式正确 */
+  ul.list-disc {
+    padding-left: 20px !important;
+  }
+  
+  /* 优化洞察内容 */
+  .prose {
+    max-width: none !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+}

@@ -1,0 +1,424 @@
+{% extends "base.html" %}
+
+{% block title %}乐巷酒店数据管理系统 - 数据查看{% endblock %}
+
+{% block head_extra %}
+<style>
+    /* 移动端表格优化 */
+    @media (max-width: 640px) {
+        .responsive-table {
+            border: 0;
+        }
+        
+        .responsive-table thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+        
+        .responsive-table tr {
+            display: block;
+            margin-bottom: 1rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+        }
+        
+        .responsive-table td {
+            display: block;
+            font-size: 0.875rem;
+            text-align: right;
+            padding: 0.5rem 0;
+        }
+        
+        .responsive-table td::before {
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            color: #6b7280;
+        }
+        
+        .responsive-table td:last-child {
+            border-bottom: 0;
+        }
+        
+        /* 调整筛选器样式 */
+        .filters-container {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.75rem;
+        }
+        
+        .filter-item {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="p-3 sm:p-8">
+    <div class="max-w-7xl mx-auto bg-white rounded-xl shadow-lg p-4 sm:p-8">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+            <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">数据库记录</h1>
+            <div class="w-full sm:w-auto flex flex-col sm:flex-row gap-3 filters-container">
+                <form action="/view" method="GET" class="flex flex-wrap items-center gap-2">
+                    <!-- 年份选择器 -->
+                    <div class="relative filter-item">
+                        <select id="year" name="year" onchange="this.form.submit()" class="appearance-none w-full min-w-[120px] px-4 py-2 pl-4 pr-10 bg-white border border-gray-300 hover:border-indigo-500 rounded-lg text-gray-700 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                            <option value="">所有年份</option>
+                            {% for year in available_years %}
+                            <option value="{{ year }}" {% if year == selected_year %}selected{% endif %}>{{ year }}年</option>
+                            {% endfor %}
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-indigo-600">
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <!-- 月份选择器 - 仅当选择了年份时显示 -->
+                    {% if selected_year %}
+                    <div class="relative filter-item">
+                        <select id="month" name="month" onchange="this.form.submit()" class="appearance-none w-full min-w-[100px] px-4 py-2 pl-4 pr-10 bg-white border border-gray-300 hover:border-indigo-500 rounded-lg text-gray-700 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all">
+                            <option value="">全年</option>
+                            {% for month in available_months %}
+                            <option value="{{ month }}" {% if month == selected_month %}selected{% endif %}>{{ month_names.get(month, month) }}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-indigo-600">
+                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    <!-- 重置按钮 - 仅当有筛选时显示 -->
+                    {% if selected_year %}
+                    <a href="/view" class="px-3 py-2 bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200 transition-colors font-medium text-sm flex items-center filter-item">
+                        <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd" />
+                        </svg>
+                        重置
+                    </a>
+                    {% endif %}
+                </form>
+                <a href="/" class="w-full sm:w-auto px-6 py-2 bg-indigo-600 text-white text-center font-semibold rounded-md hover:bg-indigo-700 transition-colors">
+                    返回录入页面
+                </a>
+            </div>
+        </div>
+
+        <!-- 添加筛选提示 -->
+        {% if selected_year %}
+        <div class="mb-4 p-3 bg-indigo-50 text-indigo-800 rounded-xl shadow-sm border border-indigo-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+            <div class="flex items-center">
+                <svg class="h-5 w-5 mr-2 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                </svg>
+                <span class="font-medium">当前显示: {{ display_period }} 数据</span>
+            </div>
+            <a href="/view" class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 transition-colors font-medium text-sm flex items-center w-full sm:w-auto justify-center sm:justify-start">
+                <svg class="h-4 w-4 mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                查看所有数据
+            </a>
+        </div>
+        {% endif %}
+        
+        <!-- 添加合计信息区域 -->
+        <div class="mb-4 p-4 bg-white rounded-xl shadow-sm border border-gray-200">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="flex flex-col">
+                    <div class="text-sm text-gray-500 mb-1">合计间夜数</div>
+                    <div class="text-xl font-bold text-gray-800">{{ total_room_nights|int }}</div>
+                </div>
+                <div class="flex flex-col">
+                    <div class="text-sm text-gray-500 mb-1">合计间夜收入</div>
+                    <div class="text-xl font-bold text-indigo-600">¥ {{ "%.2f"|format(total_revenue) }}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200 responsive-table">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">日期</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">渠道</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">房费科目</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">间夜数量</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">间夜收入 (元)</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% for row in rows %}
+                    <tr>
+                        <td data-label="日期" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ row['record_date'] }}</td>
+                        <td data-label="渠道" class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ row['channel'] }}</td>
+                        <td data-label="房费科目" class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ row['fee_type'] }}</td>
+                        <td data-label="间夜数量" class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ row['room_nights'] }}</td>
+                        <td data-label="间夜收入" class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ "%.2f"|format(row['revenue']) }}</td>
+                        <td data-label="操作" class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                            <button class="edit-btn bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-xs" 
+                                data-id="{{ row['id'] }}"
+                                data-date="{{ row['record_date'] }}"
+                                data-channel="{{ row['channel'] }}"
+                                data-feetype="{{ row['fee_type'] }}"
+                                data-nights="{{ row['room_nights'] }}"
+                                data-revenue="{{ row['revenue'] }}">
+                                编辑
+                            </button>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="px-6 py-12 text-center text-sm text-gray-500">
+                            数据库中还没有任何数据。
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- 编辑记录的模态框 -->
+<div id="editModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl max-w-md w-full mx-4 transform transition-all">
+        <div class="py-4 px-6 border-b border-gray-200">
+            <div class="flex justify-between items-center">
+                <h3 class="text-xl font-medium text-gray-900">编辑数据</h3>
+                <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <form id="editForm" action="/edit_data" method="POST" class="py-4 px-6">
+            <input type="hidden" id="editId" name="id">
+            <!-- 保存当前筛选条件 -->
+            {% if selected_year %}
+            <input type="hidden" name="year" value="{{ selected_year }}">
+            {% endif %}
+            {% if selected_month %}
+            <input type="hidden" name="month" value="{{ selected_month }}">
+            {% endif %}
+            
+            <div class="mb-4">
+                <label for="editDate" class="block text-sm font-medium text-gray-700 mb-1">日期</label>
+                <input type="date" id="editDate" name="record_date" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            
+            <div class="mb-4">
+                <label for="editChannel" class="block text-sm font-medium text-gray-700 mb-1">渠道</label>
+                <select id="editChannel" name="channel" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">--请选择渠道--</option>
+                    <option value="美团">美团</option>
+                    <option value="携程">携程</option>
+                    <option value="飞猪">飞猪</option>
+                    <option value="散客">散客</option>
+                    <option value="会员">会员</option>
+                    <option value="协议">协议</option>
+                    <option value="其他">其他</option>
+                </select>
+            </div>
+            
+            <div class="mb-4">
+                <label for="editFeeType" class="block text-sm font-medium text-gray-700 mb-1">房费科目</label>
+                <select id="editFeeType" name="fee_type" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                    <option value="">--请选择房费科目--</option>
+                    <option value="调整房费">调整房费</option>
+                    <option value="房费">房费</option>
+                    <option value="时租房">时租房</option>
+                    <option value="加收半天">加收半天</option>
+                    <option value="加收全天">加收全天</option>
+                    <option value="手工输入房费">手工输入房费</option>
+                </select>
+            </div>
+            
+            <div class="mb-4">
+                <label for="editRoomNights" class="block text-sm font-medium text-gray-700 mb-1">间夜数量</label>
+                <input type="number" id="editRoomNights" name="room_nights" step="0.01" min="0" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            
+            <div class="mb-6">
+                <label for="editRevenue" class="block text-sm font-medium text-gray-700 mb-1">间夜收入 (元)</label>
+                <input type="number" id="editRevenue" name="revenue" step="0.01" min="0" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500">
+            </div>
+            
+            <div class="flex justify-end">
+                <button type="button" id="cancelEditBtn" class="mr-3 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200">
+                    取消
+                </button>
+                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+                    保存修改
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 获取select元素
+        const yearSelect = document.getElementById('year');
+        const monthSelect = document.getElementById('month');
+        
+        // 设置下拉菜单样式
+        function setupSelect(selectEl) {
+            if (!selectEl) return;
+            
+            // 添加样式以控制下拉菜单的最大高度和滚动
+            selectEl.addEventListener('mousedown', function() {
+                // 在Firefox和Chrome中，这会影响下拉列表的样式
+                setTimeout(function() {
+                    // 查找打开的下拉菜单
+                    const selectOptions = document.querySelectorAll('option');
+                    selectOptions.forEach(option => {
+                        // 设置样式
+                        option.style.padding = '8px';
+                        option.style.borderBottom = '1px solid #f0f0f0';
+                    });
+                }, 10);
+            });
+        }
+        
+        // 应用到所有选择器
+        setupSelect(yearSelect);
+        setupSelect(monthSelect);
+        
+        // 编辑功能相关脚本
+        const editModal = document.getElementById('editModal');
+        const editForm = document.getElementById('editForm');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const cancelEditBtn = document.getElementById('cancelEditBtn');
+        const editBtns = document.querySelectorAll('.edit-btn');
+        
+        // 费用科目和间夜数量的关联控制
+        const editFeeTypeSelect = document.getElementById('editFeeType');
+        const editRoomNightsInput = document.getElementById('editRoomNights');
+        const editRevenueInput = document.getElementById('editRevenue');
+        
+        // 监听费用科目变化
+        editFeeTypeSelect.addEventListener('change', updateInputStates);
+        
+        function updateInputStates() {
+            const feeType = editFeeTypeSelect.value;
+            
+            // 处理间夜数量
+            if (feeType === '房费') {
+                // 只有"房费"科目可以手动设置间夜数量
+                editRoomNightsInput.disabled = false;
+                editRoomNightsInput.readOnly = false;
+                editRoomNightsInput.classList.remove('bg-gray-100');
+            } else {
+                // 其他科目不计入间夜数量，设为0
+                editRoomNightsInput.value = 0;
+                editRoomNightsInput.disabled = false;
+                editRoomNightsInput.readOnly = true;
+                editRoomNightsInput.classList.add('bg-gray-100');
+            }
+            
+            // 处理收入金额
+            if (feeType === '调整房费') {
+                // 调整房费只允许输入负数
+                if (parseFloat(editRevenueInput.value) > 0) {
+                    editRevenueInput.value = '';  // 清空正数值
+                }
+                editRevenueInput.placeholder = "请输入负数，例如: -50";
+                
+                // 添加输入验证
+                editRevenueInput.addEventListener('input', validateNegativeNumber);
+            } else {
+                // 移除验证事件
+                editRevenueInput.removeEventListener('input', validateNegativeNumber);
+                editRevenueInput.placeholder = "例如: 996.04";
+            }
+        }
+        
+        // 验证负数输入
+        function validateNegativeNumber() {
+            const value = parseFloat(this.value);
+            if (value > 0) {
+                // 如果输入为正数，转换为负数
+                this.value = -value;
+            }
+        }
+        
+        // 打开编辑模态框
+        editBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // 获取当前行的数据
+                const id = this.getAttribute('data-id');
+                const date = this.getAttribute('data-date');
+                const channel = this.getAttribute('data-channel');
+                const feeType = this.getAttribute('data-feetype');
+                const nights = this.getAttribute('data-nights');
+                const revenue = this.getAttribute('data-revenue');
+                
+                // 填充表单
+                document.getElementById('editId').value = id;
+                document.getElementById('editDate').value = date;
+                document.getElementById('editChannel').value = channel;
+                document.getElementById('editFeeType').value = feeType;
+                document.getElementById('editRoomNights').value = nights;
+                document.getElementById('editRevenue').value = revenue;
+                
+                // 根据费用科目设置间夜数量的输入状态
+                updateInputStates(); // 调用更新状态的函数
+                
+                // 显示模态框
+                editModal.classList.remove('hidden');
+                editModal.classList.add('flex');
+            });
+        });
+        
+        // 关闭模态框
+        function closeModal() {
+            editModal.classList.add('hidden');
+            editModal.classList.remove('flex');
+        }
+        
+        closeModalBtn.addEventListener('click', closeModal);
+        cancelEditBtn.addEventListener('click', closeModal);
+        
+        // 点击模态框背景也可以关闭
+        editModal.addEventListener('click', function(event) {
+            if (event.target === editModal) {
+                closeModal();
+            }
+        });
+        
+        // 处理表单提交
+        editForm.addEventListener('submit', function(event) {
+            const feeType = editFeeTypeSelect.value;
+            const revenueValue = parseFloat(editRevenueInput.value);
+            
+            if (feeType === '调整房费' && revenueValue >= 0) {
+                event.preventDefault();
+                alert('调整房费只能输入负数金额！');
+            }
+        });
+    });
+</script>
+{% endblock %}

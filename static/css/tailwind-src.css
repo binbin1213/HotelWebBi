@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 自定义样式 */
+@layer components {
+  /* 图表容器 */
+  .chart-container {
+    @apply w-full h-64 sm:h-80 lg:h-96;
+  }
+
+  /* 洞察容器 */
+  .insights-container {
+    @apply border-l-4 border-indigo-500 pl-4;
+  }
+
+  /* 快捷查询 */
+  .quick-query {
+    @apply transition-all duration-200;
+  }
+
+  .quick-query:hover {
+    @apply transform -translate-y-0.5;
+  }
+
+  /* 图表类型标识 */
+  .chart-type-badge {
+    @apply absolute top-2.5 right-2.5 py-1 px-2 rounded text-xs font-medium text-white bg-indigo-500 bg-opacity-80 z-10;
+  }
+
+  /* 图表类型特定样式 */
+  .chart-container.heatmap-chart .chart-type-badge {
+    @apply bg-green-600 bg-opacity-80;
+  }
+
+  /* 维度标签 */
+  .dimension-badge {
+    @apply inline-flex items-center py-0.5 px-2 rounded-full text-xs font-medium text-white mr-1 mb-1;
+  }
+
+  .dimension-badge.channel {
+    @apply bg-indigo-700;
+  }
+
+  .dimension-badge.date {
+    @apply bg-green-700;
+  }
+
+  .dimension-badge.weekday {
+    @apply bg-amber-600;
+  }
+
+  .dimension-badge.metric {
+    @apply bg-red-600;
+  }
+
+  /* 洞察分析样式 */
+  .insights-section {
+    @apply mb-4 pb-4 border-b border-gray-200;
+  }
+
+  .insights-section:last-child {
+    @apply border-b-0;
+  }
+
+  .insights-section h4 {
+    @apply font-semibold mb-2 text-gray-700;
+  }
+
+  .insights-highlight {
+    @apply font-medium text-indigo-700;
+  }
+
+  .insights-warning {
+    @apply font-medium text-red-600;
+  }
+
+  .insights-success {
+    @apply font-medium text-green-600;
+  }
+
+  /* 加载动画 */
+  .loading-spinner {
+    @apply w-10 h-10 border-4 border-indigo-200 rounded-full border-t-indigo-600 animate-spin;
+  }
+
+  .loading-spinner-small {
+    @apply w-5 h-5 border-2 border-white border-opacity-30 rounded-full border-t-white animate-spin;
+  }
+} 

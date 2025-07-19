@@ -1,0 +1,92 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 临时文件
+*.log
+*.tmp
+*.bak
+*~
+
+# 其他不需要的文件
+Dockerfile
+.dockerignore
+requirements_all.txt
+app_fixed.py
+app_new.py
+app_temp.py
+fix_app.py
+clear_db.py
+*.db.bak 
+*.db
+*.sqlite3
+*.sqlite
+
+# 测试文件
+tests/
+test_*.py
+*_test.py
+pytest.ini
+
+# 文档
+docs/
+*.md
+LICENSE
+README*
+
+# 前端构建文件和依赖
+node_modules/
+frontend-build/node_modules/
+yarn-error.log
+package-lock.json
+yarn.lock
+*.min.js
+*.min.css
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 日志和缓存目录
+logs/
+.cache/
+archive/
+
+# 配置文件
+.env
+.env.example
+.env.local
+.env.development
+.env.test
+.env.production
