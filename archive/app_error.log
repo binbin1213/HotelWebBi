@@ -1,0 +1,26 @@
+ * Tip: There are .env files present. Install python-dotenv to use them.
+找到.env文件，正在加载...
+从.env加载环境变量: DEEPSEEK_API_KEY
+从.env加载环境变量: DEFAULT_MODEL
+[92mDeepSeek API密钥已配置: sk-6f...cf71[0m
+现有数据已备份到 DailyRevenue_backup 表
+原 DailyRevenue 表已删除
+已创建新的 DailyRevenue 表，唯一约束更新为(record_date, channel, fee_type)
+已从备份表恢复 0 条记录
+数据库初始化成功
+
+=== 乐巷酒店数据智能分析系统 ===
+默认使用模型: deepseek-reasoner
+数据库初始化完成
+启动Web服务器在端口 5001...
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.1.23:5001
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Tip: There are .env files present. Install python-dotenv to use them.
+ * Debugger is active!
+ * Debugger PIN: 118-974-613
