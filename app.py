@@ -4,10 +4,12 @@ import json
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
-from flask import Flask, render_template, request, flash, redirect, url_for, jsonify
+from flask import Flask, render_template, request, flash, redirect, url_for, jsonify, session, send_file
 from ai_service import call_ai_api, analyze_data_with_ai, DEFAULT_MODEL
 import argparse
 import logging
+import shutil
+import hashlib
 from logging.handlers import RotatingFileHandler
 
 try:
@@ -1374,6 +1376,278 @@ def import_excel():
     return render_template('import_excel.html')
 
 # --- Main Execution ---
+# --- 数据库管理路由 ---
+
+def check_admin_password():
+    """检查管理员密码"""
+    admin_password = os.getenv('DB_ADMIN_PASSWORD')
+    if not admin_password:
+        return False, "未设置管理员密码"
+
+    if 'admin_authenticated' not in session:
+        return False, "未认证"
+
+    return session['admin_authenticated'], "已认证"
+
+@app.route('/db_admin')
+def db_admin():
+    """数据库管理主页面"""
+    # 检查是否已认证
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        return redirect(url_for('db_admin_login'))
+
+    # 获取数据库统计信息
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+
+            # 总记录数
+            cursor.execute("SELECT COUNT(*) FROM DailyRevenue")
+            total_records = cursor.fetchone()[0]
+
+            # 总收入
+            cursor.execute("SELECT SUM(revenue) FROM DailyRevenue")
+            total_revenue = cursor.fetchone()[0] or 0
+
+            # 总间夜数
+            cursor.execute("SELECT SUM(room_nights) FROM DailyRevenue")
+            total_room_nights = cursor.fetchone()[0] or 0
+
+            # 数据库文件大小
+            db_size = os.path.getsize(DATABASE)
+            db_size_mb = f"{db_size / (1024*1024):.2f} MB"
+
+            stats = {
+                'total_records': total_records,
+                'total_revenue': total_revenue,
+                'total_room_nights': total_room_nights,
+                'db_size': db_size_mb
+            }
+
+    except Exception as e:
+        flash(f'获取统计信息失败: {e}')
+        stats = {
+            'total_records': 0,
+            'total_revenue': 0,
+            'total_room_nights': 0,
+            'db_size': '0 MB'
+        }
+
+    return render_template('db_admin.html', stats=stats)
+
+@app.route('/db_admin/login', methods=['GET', 'POST'])
+def db_admin_login():
+    """管理员登录页面"""
+    if request.method == 'POST':
+        password = request.form.get('password')
+        admin_password = os.getenv('DB_ADMIN_PASSWORD')
+
+        if not admin_password:
+            flash('系统未配置管理员密码')
+            return render_template('db_admin_login.html')
+
+        if password == admin_password:
+            session['admin_authenticated'] = True
+            return redirect(url_for('db_admin'))
+        else:
+            flash('密码错误')
+
+    return render_template('db_admin_login.html')
+
+@app.route('/db_admin/logout')
+def db_admin_logout():
+    """管理员登出"""
+    session.pop('admin_authenticated', None)
+    flash('已安全登出')
+    return redirect(url_for('index'))
+
+@app.route('/db_admin/records')
+def db_admin_records():
+    """获取所有记录"""
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        return jsonify({'success': False, 'error': '未认证'})
+
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM DailyRevenue ORDER BY record_date DESC, id DESC LIMIT 1000")
+            records = [dict(row) for row in cursor.fetchall()]
+
+        return jsonify({'success': True, 'records': records})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/db_admin/record/<int:record_id>')
+def db_admin_get_record(record_id):
+    """获取单个记录"""
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        return jsonify({'success': False, 'error': '未认证'})
+
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM DailyRevenue WHERE id = ?", (record_id,))
+            record = cursor.fetchone()
+
+            if record:
+                return jsonify({'success': True, 'record': dict(record)})
+            else:
+                return jsonify({'success': False, 'error': '记录不存在'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/db_admin/update', methods=['POST'])
+def db_admin_update_record():
+    """更新记录"""
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        return jsonify({'success': False, 'error': '未认证'})
+
+    try:
+        data = request.get_json()
+        record_id = data.get('id')
+
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                UPDATE DailyRevenue
+                SET record_date = ?, channel = ?, fee_type = ?,
+                    room_nights = ?, revenue = ?, guest_name = ?
+                WHERE id = ?
+            """, (
+                data.get('record_date'),
+                data.get('channel'),
+                data.get('fee_type'),
+                data.get('room_nights'),
+                data.get('revenue'),
+                data.get('guest_name'),
+                record_id
+            ))
+
+            if cursor.rowcount > 0:
+                conn.commit()
+                return jsonify({'success': True})
+            else:
+                return jsonify({'success': False, 'error': '记录不存在'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/db_admin/delete/<int:record_id>', methods=['DELETE'])
+def db_admin_delete_record(record_id):
+    """删除单个记录"""
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        return jsonify({'success': False, 'error': '未认证'})
+
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM DailyRevenue WHERE id = ?", (record_id,))
+
+            if cursor.rowcount > 0:
+                conn.commit()
+                return jsonify({'success': True})
+            else:
+                return jsonify({'success': False, 'error': '记录不存在'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/db_admin/delete_batch', methods=['POST'])
+def db_admin_delete_batch():
+    """批量删除记录"""
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        return jsonify({'success': False, 'error': '未认证'})
+
+    try:
+        data = request.get_json()
+        ids = data.get('ids', [])
+
+        if not ids:
+            return jsonify({'success': False, 'error': '未选择记录'})
+
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            placeholders = ','.join(['?'] * len(ids))
+            cursor.execute(f"DELETE FROM DailyRevenue WHERE id IN ({placeholders})", ids)
+            deleted_count = cursor.rowcount
+            conn.commit()
+
+        return jsonify({'success': True, 'deleted_count': deleted_count})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/db_admin/clear_all', methods=['POST'])
+def db_admin_clear_all():
+    """清空所有数据"""
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        return jsonify({'success': False, 'error': '未认证'})
+
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM DailyRevenue")
+            deleted_count = cursor.rowcount
+            conn.commit()
+
+        return jsonify({'success': True, 'deleted_count': deleted_count})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/db_admin/backup', methods=['POST'])
+def db_admin_backup():
+    """备份数据库"""
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        return jsonify({'success': False, 'error': '未认证'})
+
+    try:
+        # 创建备份目录
+        backup_dir = os.path.join(BASE_DIR, 'backups')
+        os.makedirs(backup_dir, exist_ok=True)
+
+        # 生成备份文件名
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        backup_filename = f'hotel_revenue_backup_{timestamp}.db'
+        backup_path = os.path.join(backup_dir, backup_filename)
+
+        # 复制数据库文件
+        shutil.copy2(DATABASE, backup_path)
+
+        return jsonify({'success': True, 'backup_file': backup_filename})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/db_admin/export')
+def db_admin_export():
+    """导出数据为CSV"""
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        flash('未认证')
+        return redirect(url_for('db_admin_login'))
+
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            df = pd.read_sql_query("SELECT * FROM DailyRevenue ORDER BY record_date, id", conn)
+
+        # 生成CSV文件
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        csv_filename = f'hotel_revenue_export_{timestamp}.csv'
+        csv_path = os.path.join(BASE_DIR, csv_filename)
+
+        df.to_csv(csv_path, index=False, encoding='utf-8-sig')
+
+        return send_file(csv_path, as_attachment=True, download_name=csv_filename)
+    except Exception as e:
+        flash(f'导出失败: {e}')
+        return redirect(url_for('db_admin'))
+
 if __name__ == '__main__':
     # 设置命令行参数
     parser = argparse.ArgumentParser(description='乐巷酒店数据智能分析系统')

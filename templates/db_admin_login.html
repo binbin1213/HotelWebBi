@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}数据库管理 - 登录{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card mt-5">
+                <div class="card-header bg-danger text-white text-center">
+                    <h4><i class="fas fa-shield-alt"></i> 数据库管理</h4>
+                    <p class="mb-0">管理员认证</p>
+                </div>
+                <div class="card-body">
+                    <!-- 安全警告 -->
+                    <div class="alert alert-warning" role="alert">
+                        <small>
+                            <i class="fas fa-exclamation-triangle"></i>
+                            此区域包含敏感操作，仅限授权人员访问
+                        </small>
+                    </div>
+
+                    <!-- 登录表单 -->
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="password">
+                                <i class="fas fa-key"></i> 管理员密码
+                            </label>
+                            <input type="password" 
+                                   class="form-control" 
+                                   id="password" 
+                                   name="password" 
+                                   required 
+                                   placeholder="请输入管理员密码"
+                                   autocomplete="current-password">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-danger btn-block">
+                            <i class="fas fa-sign-in-alt"></i> 登录
+                        </button>
+                    </form>
+
+                    <!-- 返回链接 -->
+                    <div class="text-center mt-3">
+                        <a href="{{ url_for('index') }}" class="btn btn-link">
+                            <i class="fas fa-arrow-left"></i> 返回首页
+                        </a>
+                    </div>
+                </div>
+                <div class="card-footer text-muted text-center">
+                    <small>
+                        <i class="fas fa-info-circle"></i>
+                        如需帮助，请联系系统管理员
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: none;
+}
+
+.card-header {
+    border-bottom: none;
+}
+
+.form-control:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+</style>
+
+<script>
+// 自动聚焦到密码输入框
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('password').focus();
+});
+
+// 防止表单重复提交
+document.querySelector('form').addEventListener('submit', function() {
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 验证中...';
+});
+</script>
+{% endblock %}

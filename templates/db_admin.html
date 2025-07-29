@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block title %}数据库管理{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-database"></i> 数据库管理
+                        <span class="badge badge-warning ml-2">危险操作</span>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <!-- 安全警告 -->
+                    <div class="alert alert-danger" role="alert">
+                        <h5><i class="fas fa-exclamation-triangle"></i> 重要警告</h5>
+                        <p>此页面包含危险操作，可能导致数据丢失。请谨慎操作并确保已备份重要数据。</p>
+                    </div>
+
+                    <!-- 数据库统计信息 -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card bg-info text-white">
+                                <div class="card-body">
+                                    <h5>总记录数</h5>
+                                    <h3>{{ stats.total_records }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-success text-white">
+                                <div class="card-body">
+                                    <h5>总收入</h5>
+                                    <h3>¥{{ "%.2f"|format(stats.total_revenue) }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-warning text-white">
+                                <div class="card-body">
+                                    <h5>总间夜数</h5>
+                                    <h3>{{ stats.total_room_nights }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-secondary text-white">
+                                <div class="card-body">
+                                    <h5>数据库大小</h5>
+                                    <h3>{{ stats.db_size }}</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 操作按钮区域 -->
+                    <div class="row">
+                        <!-- 数据查看和编辑 -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5><i class="fas fa-edit"></i> 数据编辑</h5>
+                                </div>
+                                <div class="card-body">
+                                    <button class="btn btn-primary btn-block mb-2" onclick="loadRecords()">
+                                        <i class="fas fa-table"></i> 查看所有记录
+                                    </button>
+                                    <button class="btn btn-warning btn-block mb-2" onclick="showBulkEdit()">
+                                        <i class="fas fa-edit"></i> 批量编辑
+                                    </button>
+                                    <button class="btn btn-info btn-block" onclick="exportData()">
+                                        <i class="fas fa-download"></i> 导出数据
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 危险操作 -->
+                        <div class="col-md-6">
+                            <div class="card border-danger">
+                                <div class="card-header bg-danger text-white">
+                                    <h5><i class="fas fa-exclamation-triangle"></i> 危险操作</h5>
+                                </div>
+                                <div class="card-body">
+                                    <button class="btn btn-outline-danger btn-block mb-2" onclick="confirmBackup()">
+                                        <i class="fas fa-save"></i> 备份数据库
+                                    </button>
+                                    <button class="btn btn-outline-danger btn-block mb-2" onclick="confirmDeleteSelected()">
+                                        <i class="fas fa-trash"></i> 删除选中记录
+                                    </button>
+                                    <button class="btn btn-danger btn-block" onclick="confirmClearAll()">
+                                        <i class="fas fa-trash-alt"></i> 清空所有数据
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 数据表格区域 -->
+                    <div class="mt-4" id="dataTableContainer" style="display: none;">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>数据记录</h5>
+                                <div class="float-right">
+                                    <button class="btn btn-sm btn-secondary" onclick="selectAll()">全选</button>
+                                    <button class="btn btn-sm btn-secondary" onclick="selectNone()">取消全选</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-hover" id="dataTable">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th><input type="checkbox" id="selectAllCheckbox"></th>
+                                                <th>ID</th>
+                                                <th>日期</th>
+                                                <th>渠道</th>
+                                                <th>费用类型</th>
+                                                <th>间夜数</th>
+                                                <th>收入</th>
+                                                <th>订单ID</th>
+                                                <th>客人姓名</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="dataTableBody">
+                                            <!-- 数据将通过JavaScript加载 -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 编辑模态框 -->
+                    <div class="modal fade" id="editModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">编辑记录</h5>
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        <span>&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="editForm">
+                                        <input type="hidden" id="editId">
+                                        <div class="form-group">
+                                            <label>日期</label>
+                                            <input type="date" class="form-control" id="editDate" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>渠道</label>
+                                            <input type="text" class="form-control" id="editChannel" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>费用类型</label>
+                                            <input type="text" class="form-control" id="editFeeType" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>间夜数</label>
+                                            <input type="number" step="0.01" class="form-control" id="editRoomNights">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>收入</label>
+                                            <input type="number" step="0.01" class="form-control" id="editRevenue">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>客人姓名</label>
+                                            <input type="text" class="form-control" id="editGuestName">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-primary" onclick="saveEdit()">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 加载JavaScript -->
+<script src="{{ url_for('static', filename='js/db_admin.js') }}"></script>
+{% endblock %}
