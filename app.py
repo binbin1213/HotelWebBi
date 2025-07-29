@@ -31,43 +31,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Define the path to the database file
 DATABASE = os.path.join(BASE_DIR, 'hotel_revenue.db')
 
-# --- 配置日志记录 ---
-# 确保日志目录存在
-LOG_DIR = os.path.join(BASE_DIR, 'logs')
-os.makedirs(LOG_DIR, exist_ok=True)
-
-# 配置日志处理器
-log_handler = RotatingFileHandler(os.path.join(LOG_DIR, 'app.log'), maxBytes=10485760, backupCount=5)
-log_handler.setLevel(logging.INFO)
-log_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-log_handler.setFormatter(log_formatter)
-
-# 添加单独的错误日志
-error_handler = RotatingFileHandler(os.path.join(LOG_DIR, 'error.log'), maxBytes=10485760, backupCount=5)
-error_handler.setLevel(logging.ERROR)
-error_handler.setFormatter(log_formatter)
-
-# 设置Flask应用的日志记录器
-app.logger.addHandler(log_handler)
-app.logger.addHandler(error_handler)
-app.logger.setLevel(logging.INFO)
-
-# 设置Werkzeug的日志记录器
-werkzeug_logger = logging.getLogger('werkzeug')
-werkzeug_logger.addHandler(log_handler)
-
-# 记录应用启动信息
-app.logger.info("=== 乐巷酒店数据智能分析系统启动 ===")
-
-# 检查环境变量加载情况
-admin_password = os.getenv('DB_ADMIN_PASSWORD')
-if admin_password:
-    app.logger.info("数据库管理密码已配置")
-else:
-    app.logger.warning("警告：数据库管理密码未配置！")
-
-app.logger.info(f"总房间数配置: {os.getenv('TOTAL_ROOMS', '未配置')}")
-app.logger.info(f"DeepSeek API Key: {'已配置' if os.getenv('DEEPSEEK_API_KEY') else '未配置'}")
+# --- 日志配置将在main函数中进行 ---
 
 def init_db():
     """
@@ -96,11 +60,95 @@ def init_db():
                     );
                 """)
                 print("已创建 DailyRevenue 表")
+
+            # 检查系统配置表是否存在
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='system_config'")
+            config_table_exists = cursor.fetchone()
+
+            if not config_table_exists:
+                # 创建系统配置表
+                cursor.execute("""
+                    CREATE TABLE system_config (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        config_key TEXT UNIQUE NOT NULL,
+                        config_value TEXT NOT NULL,
+                        description TEXT,
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    );
+                """)
+                print("已创建 system_config 表")
+
+                # 插入默认配置值
+                default_configs = [
+                    ('TOTAL_ROOMS', '29', '酒店总房间数'),
+                    ('DEFAULT_MODEL', 'deepseek-reasoner', '默认AI模型'),
+                    ('HOTEL_NAME', '乐巷酒店', '酒店名称'),
+                    ('CURRENCY', 'CNY', '货币单位'),
+                    ('TIMEZONE', 'Asia/Shanghai', '时区设置')
+                ]
+
+                for key, value, desc in default_configs:
+                    cursor.execute('''
+                        INSERT INTO system_config (config_key, config_value, description)
+                        VALUES (?, ?, ?)
+                    ''', (key, value, desc))
+                print("已插入默认配置值")
             conn.commit()
             print("数据库初始化成功")
             # 如果表已存在，不做任何操作
     except Exception as e:
         print(f"初始化数据库时出错: {e}")
+
+# --- Configuration Management Functions ---
+
+def get_config(key, default_value=None):
+    """从数据库获取配置值，如果不存在则返回默认值"""
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT config_value FROM system_config WHERE config_key = ?", (key,))
+            result = cursor.fetchone()
+            if result:
+                return result[0]
+            else:
+                # 如果数据库中没有，尝试从环境变量获取
+                env_value = os.getenv(key)
+                if env_value:
+                    # 将环境变量值保存到数据库
+                    set_config(key, env_value, f"从环境变量导入: {key}")
+                    return env_value
+                return default_value
+    except Exception as e:
+        print(f"获取配置 {key} 时出错: {e}")
+        # 如果数据库出错，尝试从环境变量获取
+        return os.getenv(key, default_value)
+
+def set_config(key, value, description=None):
+    """设置配置值到数据库"""
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                INSERT OR REPLACE INTO system_config (config_key, config_value, description, updated_at)
+                VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+            """, (key, value, description))
+            conn.commit()
+            return True
+    except Exception as e:
+        print(f"设置配置 {key} 时出错: {e}")
+        return False
+
+def get_all_configs():
+    """获取所有配置"""
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT config_key, config_value, description, updated_at FROM system_config ORDER BY config_key")
+            return cursor.fetchall()
+    except Exception as e:
+        print(f"获取所有配置时出错: {e}")
+        return []
 
 # --- Routes ---
 
@@ -110,8 +158,8 @@ def index():
     Renders the main homepage with real statistics.
     """
     try:
-        # 从环境变量获取房间总数，如果未设置则默认为29
-        total_rooms = int(os.getenv('TOTAL_ROOMS', 29))
+        # 从配置获取房间总数，如果未设置则默认为29
+        total_rooms = int(get_config('TOTAL_ROOMS', 29))
         
         stats = {}
         with sqlite3.connect(DATABASE) as conn:
@@ -914,7 +962,7 @@ def weekly_report():
     } for channel, summary in channel_summary_dict.items()]
 
     # 准备每日明细和图表数据
-    total_rooms = int(os.getenv('TOTAL_ROOMS', 29))
+    total_rooms = int(get_config('TOTAL_ROOMS', 29))
     date_range_df = pd.DataFrame(pd.date_range(start=start_date, end=end_date), columns=['record_date'])
     daily_agg_df = df.groupby('record_date').agg(
         room_nights=('room_nights', 'sum'),
@@ -1145,7 +1193,7 @@ def generate_weekly_report(start_date, end_date):
             # 计算其他指标
             total_avg_price = total_room_revenue / total_room_nights if total_room_nights > 0 else 0  # 平均房价不含钟点房
 
-            total_rooms = int(os.getenv('TOTAL_ROOMS', 29))
+            total_rooms = int(get_config('TOTAL_ROOMS', 29))
             num_days = (datetime.strptime(end_date, '%Y-%m-%d') - datetime.strptime(start_date, '%Y-%m-%d')).days + 1
             total_occupancy_rate = (total_room_nights / (total_rooms * num_days)) * 100 if num_days > 0 else 0
             total_revpar = total_accommodation_revenue / (total_rooms * num_days) if num_days > 0 else 0  # RevPAR用住宿费用总计
@@ -1407,6 +1455,42 @@ def check_admin_password():
         return False, "未认证"
 
     return session['admin_authenticated'], "已认证"
+
+@app.route('/system_config')
+def system_config():
+    """系统配置管理页面"""
+    # 检查是否已认证
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        return redirect(url_for('db_admin_login'))
+
+    # 获取所有配置
+    configs = get_all_configs()
+    return render_template('system_config.html', configs=configs)
+
+@app.route('/update_config', methods=['POST'])
+def update_config():
+    """更新系统配置"""
+    # 检查是否已认证
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        return jsonify({'success': False, 'error': '未认证'})
+
+    try:
+        config_key = request.form.get('config_key')
+        config_value = request.form.get('config_value')
+        description = request.form.get('description', '')
+
+        if not config_key or config_value is None:
+            return jsonify({'success': False, 'error': '配置键和值不能为空'})
+
+        success = set_config(config_key, config_value, description)
+        if success:
+            return jsonify({'success': True, 'message': f'配置 {config_key} 更新成功'})
+        else:
+            return jsonify({'success': False, 'error': '更新配置失败'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/db_admin')
 def db_admin():
@@ -1763,7 +1847,7 @@ if __name__ == '__main__':
     else:
         app.logger.warning("警告：数据库管理密码未配置！")
 
-    app.logger.info(f"总房间数配置: {os.getenv('TOTAL_ROOMS', '未配置')}")
+    app.logger.info(f"总房间数配置: {get_config('TOTAL_ROOMS', '未配置')}")
     app.logger.info("数据库初始化完成")
     app.logger.info(f"启动Web服务器在端口 {args.port}...")
     
