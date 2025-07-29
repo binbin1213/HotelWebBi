@@ -1,0 +1,378 @@
+2025-07-29 12:08:46,440 - app - ERROR - 生成周报表时发生错误: local variable 'accommodation_df' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1108, in generate_weekly_report
+    total_accommodation_revenue = accommodation_df['revenue'].sum()
+UnboundLocalError: local variable 'accommodation_df' referenced before assignment
+2025-07-29 12:08:46,440 - app - ERROR - 生成周报表时发生错误: local variable 'accommodation_df' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1108, in generate_weekly_report
+    total_accommodation_revenue = accommodation_df['revenue'].sum()
+UnboundLocalError: local variable 'accommodation_df' referenced before assignment
+2025-07-29 12:08:46,496 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:08:46,496 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:08:57,380 - app - ERROR - 生成周报表时发生错误: local variable 'accommodation_df' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1108, in generate_weekly_report
+    total_accommodation_revenue = accommodation_df['revenue'].sum()
+UnboundLocalError: local variable 'accommodation_df' referenced before assignment
+2025-07-29 12:08:57,380 - app - ERROR - 生成周报表时发生错误: local variable 'accommodation_df' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1108, in generate_weekly_report
+    total_accommodation_revenue = accommodation_df['revenue'].sum()
+UnboundLocalError: local variable 'accommodation_df' referenced before assignment
+2025-07-29 12:08:57,381 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:08:57,381 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:11:07,380 - app - ERROR - 生成周报表时发生错误: local variable 'accommodation_df' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1108, in generate_weekly_report
+    total_accommodation_revenue = accommodation_df['revenue'].sum()
+UnboundLocalError: local variable 'accommodation_df' referenced before assignment
+2025-07-29 12:11:07,380 - app - ERROR - 生成周报表时发生错误: local variable 'accommodation_df' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1108, in generate_weekly_report
+    total_accommodation_revenue = accommodation_df['revenue'].sum()
+UnboundLocalError: local variable 'accommodation_df' referenced before assignment
+2025-07-29 12:11:07,383 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:11:07,383 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:13:33,413 - app - ERROR - 生成周报表时发生错误: name 'total_revenue' is not defined
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1222, in generate_weekly_report
+    fee_type_summary['revenue_percent'] = (fee_type_summary['revenue'] / total_revenue * 100) if total_revenue > 0 else 0
+NameError: name 'total_revenue' is not defined
+2025-07-29 12:13:33,413 - app - ERROR - 生成周报表时发生错误: name 'total_revenue' is not defined
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1222, in generate_weekly_report
+    fee_type_summary['revenue_percent'] = (fee_type_summary['revenue'] / total_revenue * 100) if total_revenue > 0 else 0
+NameError: name 'total_revenue' is not defined
+2025-07-29 12:13:33,467 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:13:33,467 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 13:39:05,362 - app - ERROR - 生成周报表时发生错误: 'revenue'
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'revenue'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1198, in generate_weekly_report
+    current_revenue = channel_summary.loc[channel, 'revenue'] if channel in channel_summary.index else 0
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/frame.py", line 4219, in _get_value
+    series = self._get_item_cache(col)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/frame.py", line 4643, in _get_item_cache
+    loc = self.columns.get_loc(item)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'revenue'
+2025-07-29 13:39:05,362 - app - ERROR - 生成周报表时发生错误: 'revenue'
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'revenue'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1198, in generate_weekly_report
+    current_revenue = channel_summary.loc[channel, 'revenue'] if channel in channel_summary.index else 0
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/frame.py", line 4219, in _get_value
+    series = self._get_item_cache(col)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/frame.py", line 4643, in _get_item_cache
+    loc = self.columns.get_loc(item)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'revenue'
+2025-07-29 13:39:05,447 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.total_revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'total_revenue'
+2025-07-29 13:39:05,447 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.total_revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'total_revenue'
