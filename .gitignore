@@ -82,6 +82,14 @@ Thumbs.db
 .env.test.local
 .env.production.local
 
+# Docker configuration with sensitive data
+docker-compose.yml
+docker-compose.override.yml
+
+# Docker configuration with sensitive data
+docker-compose.yml
+docker-compose.override.yml
+
 # Cache
 .cache/
 .parcel-cache/
