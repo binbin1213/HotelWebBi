@@ -3,101 +3,242 @@
 {% block title %}数据库管理{% endblock %}
 
 {% block content %}
+<style>
+    .admin-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 30px 0;
+        margin-bottom: 30px;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    }
+
+    .admin-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .danger-badge {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        padding: 8px 16px;
+        border-radius: 25px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        animation: pulse-warning 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-warning {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    .stats-card {
+        background: white;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: none;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .stats-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--card-color);
+    }
+
+    .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .stats-card.info { --card-color: linear-gradient(135deg, #74b9ff, #0984e3); }
+    .stats-card.success { --card-color: linear-gradient(135deg, #00b894, #00a085); }
+    .stats-card.warning { --card-color: linear-gradient(135deg, #fdcb6e, #e17055); }
+    .stats-card.secondary { --card-color: linear-gradient(135deg, #636e72, #2d3436); }
+
+    .stats-icon {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        opacity: 0.8;
+    }
+
+    .stats-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .stats-label {
+        font-size: 1.1rem;
+        color: #7f8c8d;
+        font-weight: 500;
+    }
+
+    .action-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .action-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    }
+
+    .action-btn {
+        border-radius: 12px;
+        padding: 12px 20px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .action-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s;
+    }
+
+    .action-btn:hover::before {
+        left: 100%;
+    }
+
+    .action-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .danger-card {
+        border: 2px solid #ff6b6b;
+        background: linear-gradient(135deg, #fff5f5, #ffe8e8);
+    }
+
+    .danger-card .card-header {
+        background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+        border: none;
+    }
+</style>
+
 <div class="container-fluid">
+    <!-- 管理页面头部 -->
+    <div class="admin-header text-center">
+        <div class="container">
+            <h1 class="admin-title">
+                <i class="fas fa-database"></i> 数据库管理中心
+            </h1>
+            <span class="danger-badge">
+                <i class="fas fa-exclamation-triangle"></i> 高权限操作区域
+            </span>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <div class="card-header bg-danger text-white">
-                    <h4 class="mb-0">
-                        <i class="fas fa-database"></i> 数据库管理
-                        <span class="badge badge-warning ml-2">危险操作</span>
-                    </h4>
+            <!-- 安全警告 -->
+            <div class="alert alert-danger" role="alert" style="border-radius: 15px; border: none; background: linear-gradient(135deg, #ff7675, #fd79a8); color: white; box-shadow: 0 10px 30px rgba(255, 118, 117, 0.3);">
+                <h5><i class="fas fa-exclamation-triangle"></i> 重要安全提醒</h5>
+                <p class="mb-0">此页面包含危险操作，可能导致数据丢失。请谨慎操作并确保已备份重要数据。</p>
+            </div>
+
+            <!-- 数据库统计信息 -->
+            <div class="row mb-5">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stats-card info text-center">
+                        <div class="stats-icon" style="color: #74b9ff;">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="stats-value" style="color: #0984e3;">{{ stats.total_records }}</div>
+                        <div class="stats-label">总记录数</div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <!-- 安全警告 -->
-                    <div class="alert alert-danger" role="alert">
-                        <h5><i class="fas fa-exclamation-triangle"></i> 重要警告</h5>
-                        <p>此页面包含危险操作，可能导致数据丢失。请谨慎操作并确保已备份重要数据。</p>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stats-card success text-center">
+                        <div class="stats-icon" style="color: #00b894;">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="stats-value" style="color: #00a085;">¥{{ "%.2f"|format(stats.total_revenue) }}</div>
+                        <div class="stats-label">总收入</div>
                     </div>
-
-                    <!-- 数据库统计信息 -->
-                    <div class="row mb-4">
-                        <div class="col-md-3">
-                            <div class="card bg-info text-white">
-                                <div class="card-body">
-                                    <h5>总记录数</h5>
-                                    <h3>{{ stats.total_records }}</h3>
-                                </div>
-                            </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stats-card warning text-center">
+                        <div class="stats-icon" style="color: #fdcb6e;">
+                            <i class="fas fa-bed"></i>
                         </div>
-                        <div class="col-md-3">
-                            <div class="card bg-success text-white">
-                                <div class="card-body">
-                                    <h5>总收入</h5>
-                                    <h3>¥{{ "%.2f"|format(stats.total_revenue) }}</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card bg-warning text-white">
-                                <div class="card-body">
-                                    <h5>总间夜数</h5>
-                                    <h3>{{ stats.total_room_nights }}</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="card bg-secondary text-white">
-                                <div class="card-body">
-                                    <h5>数据库大小</h5>
-                                    <h3>{{ stats.db_size }}</h3>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="stats-value" style="color: #e17055;">{{ stats.total_room_nights }}</div>
+                        <div class="stats-label">总间夜数</div>
                     </div>
-
-                    <!-- 操作按钮区域 -->
-                    <div class="row">
-                        <!-- 数据查看和编辑 -->
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5><i class="fas fa-edit"></i> 数据编辑</h5>
-                                </div>
-                                <div class="card-body">
-                                    <button class="btn btn-primary btn-block mb-2" onclick="loadRecords()">
-                                        <i class="fas fa-table"></i> 查看所有记录
-                                    </button>
-                                    <button class="btn btn-warning btn-block mb-2" onclick="showBulkEdit()">
-                                        <i class="fas fa-edit"></i> 批量编辑
-                                    </button>
-                                    <button class="btn btn-info btn-block" onclick="exportData()">
-                                        <i class="fas fa-download"></i> 导出数据
-                                    </button>
-                                </div>
-                            </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="stats-card secondary text-center">
+                        <div class="stats-icon" style="color: #636e72;">
+                            <i class="fas fa-hdd"></i>
                         </div>
+                        <div class="stats-value" style="color: #2d3436;">{{ stats.db_size }}</div>
+                        <div class="stats-label">数据库大小</div>
+                    </div>
+                </div>
+            </div>
 
-                        <!-- 危险操作 -->
-                        <div class="col-md-6">
-                            <div class="card border-danger">
-                                <div class="card-header bg-danger text-white">
-                                    <h5><i class="fas fa-exclamation-triangle"></i> 危险操作</h5>
-                                </div>
-                                <div class="card-body">
-                                    <button class="btn btn-outline-danger btn-block mb-2" onclick="confirmBackup()">
-                                        <i class="fas fa-save"></i> 备份数据库
-                                    </button>
-                                    <button class="btn btn-outline-danger btn-block mb-2" onclick="confirmDeleteSelected()">
-                                        <i class="fas fa-trash"></i> 删除选中记录
-                                    </button>
-                                    <button class="btn btn-danger btn-block" onclick="confirmClearAll()">
-                                        <i class="fas fa-trash-alt"></i> 清空所有数据
-                                    </button>
-                                </div>
-                            </div>
+            <!-- 操作按钮区域 -->
+            <div class="row">
+                <!-- 数据查看和编辑 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="action-card">
+                        <div class="card-header" style="background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; border: none; border-radius: 15px 15px 0 0;">
+                            <h5 class="mb-0"><i class="fas fa-edit"></i> 数据管理操作</h5>
+                        </div>
+                        <div class="card-body" style="padding: 30px;">
+                            <button class="action-btn btn btn-primary btn-block mb-3" onclick="loadRecords()" style="background: linear-gradient(135deg, #74b9ff, #0984e3);">
+                                <i class="fas fa-table"></i> 查看所有记录
+                            </button>
+                            <button class="action-btn btn btn-warning btn-block mb-3" onclick="showBulkEdit()" style="background: linear-gradient(135deg, #fdcb6e, #e17055);">
+                                <i class="fas fa-edit"></i> 批量编辑
+                            </button>
+                            <button class="action-btn btn btn-info btn-block" onclick="exportData()" style="background: linear-gradient(135deg, #00cec9, #00b894);">
+                                <i class="fas fa-download"></i> 导出数据
+                            </button>
                         </div>
                     </div>
+                </div>
+
+                <!-- 危险操作 -->
+                <div class="col-lg-6 mb-4">
+                    <div class="action-card danger-card">
+                        <div class="card-header text-white">
+                            <h5 class="mb-0"><i class="fas fa-exclamation-triangle"></i> 危险操作区域</h5>
+                        </div>
+                        <div class="card-body" style="padding: 30px;">
+                            <button class="action-btn btn btn-outline-danger btn-block mb-3" onclick="confirmBackup()" style="border: 2px solid #ff6b6b; color: #ff6b6b;">
+                                <i class="fas fa-save"></i> 备份数据库
+                            </button>
+                            <button class="action-btn btn btn-outline-danger btn-block mb-3" onclick="confirmDeleteSelected()" style="border: 2px solid #ff6b6b; color: #ff6b6b;">
+                                <i class="fas fa-trash"></i> 删除选中记录
+                            </button>
+                            <button class="action-btn btn btn-danger btn-block" onclick="confirmClearAll()" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">
+                                <i class="fas fa-trash-alt"></i> 清空所有数据
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
                     <!-- 数据表格区域 -->
                     <div class="mt-4" id="dataTableContainer" style="display: none;">
