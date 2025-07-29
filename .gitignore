@@ -71,7 +71,8 @@ Thumbs.db
 *.zip
 *.rar
 
-# Environment variables (keep .env for production)
+# Environment variables (contains API keys and sensitive data)
+.env
 .env.local
 .env.development.local
 .env.test.local
