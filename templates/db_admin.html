@@ -37,12 +37,17 @@
     .stats-card {
         background: white;
         border-radius: 15px;
-        padding: 25px;
+        padding: 30px 25px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         border: none;
         transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
+        height: 180px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .stats-card::before {
@@ -160,7 +165,7 @@
             <!-- 数据库统计信息 -->
             <div class="row mb-5">
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="stats-card info text-center">
+                    <div class="stats-card info">
                         <div class="stats-icon" style="color: #74b9ff;">
                             <i class="fas fa-database"></i>
                         </div>
@@ -169,7 +174,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="stats-card success text-center">
+                    <div class="stats-card success">
                         <div class="stats-icon" style="color: #00b894;">
                             <i class="fas fa-coins"></i>
                         </div>
@@ -178,7 +183,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="stats-card warning text-center">
+                    <div class="stats-card warning">
                         <div class="stats-icon" style="color: #fdcb6e;">
                             <i class="fas fa-bed"></i>
                         </div>
@@ -187,7 +192,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4">
-                    <div class="stats-card secondary text-center">
+                    <div class="stats-card secondary">
                         <div class="stats-icon" style="color: #636e72;">
                             <i class="fas fa-hdd"></i>
                         </div>
@@ -198,21 +203,21 @@
             </div>
 
             <!-- 操作按钮区域 -->
-            <div class="row">
+            <div class="row mb-4">
                 <!-- 数据查看和编辑 -->
                 <div class="col-lg-6 mb-4">
                     <div class="action-card">
-                        <div class="card-header" style="background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; border: none; border-radius: 15px 15px 0 0;">
+                        <div class="card-header" style="background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; border: none; border-radius: 15px 15px 0 0; padding: 20px 30px;">
                             <h5 class="mb-0"><i class="fas fa-edit"></i> 数据管理操作</h5>
                         </div>
                         <div class="card-body" style="padding: 30px;">
-                            <button class="action-btn btn btn-primary btn-block mb-3" onclick="loadRecords()" style="background: linear-gradient(135deg, #74b9ff, #0984e3);">
+                            <button class="action-btn btn btn-primary btn-block mb-3" onclick="loadRecords()" style="background: linear-gradient(135deg, #74b9ff, #0984e3); padding: 15px;">
                                 <i class="fas fa-table"></i> 查看所有记录
                             </button>
-                            <button class="action-btn btn btn-warning btn-block mb-3" onclick="showBulkEdit()" style="background: linear-gradient(135deg, #fdcb6e, #e17055);">
+                            <button class="action-btn btn btn-warning btn-block mb-3" onclick="showBulkEdit()" style="background: linear-gradient(135deg, #fdcb6e, #e17055); padding: 15px;">
                                 <i class="fas fa-edit"></i> 批量编辑
                             </button>
-                            <button class="action-btn btn btn-info btn-block" onclick="exportData()" style="background: linear-gradient(135deg, #00cec9, #00b894);">
+                            <button class="action-btn btn btn-info btn-block" onclick="exportData()" style="background: linear-gradient(135deg, #00cec9, #00b894); padding: 15px;">
                                 <i class="fas fa-download"></i> 导出数据
                             </button>
                         </div>
@@ -222,17 +227,17 @@
                 <!-- 危险操作 -->
                 <div class="col-lg-6 mb-4">
                     <div class="action-card danger-card">
-                        <div class="card-header text-white">
+                        <div class="card-header text-white" style="padding: 20px 30px;">
                             <h5 class="mb-0"><i class="fas fa-exclamation-triangle"></i> 危险操作区域</h5>
                         </div>
                         <div class="card-body" style="padding: 30px;">
-                            <button class="action-btn btn btn-outline-danger btn-block mb-3" onclick="confirmBackup()" style="border: 2px solid #ff6b6b; color: #ff6b6b;">
+                            <button class="action-btn btn btn-outline-danger btn-block mb-3" onclick="confirmBackup()" style="border: 2px solid #ff6b6b; color: #ff6b6b; padding: 15px;">
                                 <i class="fas fa-save"></i> 备份数据库
                             </button>
-                            <button class="action-btn btn btn-outline-danger btn-block mb-3" onclick="confirmDeleteSelected()" style="border: 2px solid #ff6b6b; color: #ff6b6b;">
+                            <button class="action-btn btn btn-outline-danger btn-block mb-3" onclick="confirmDeleteSelected()" style="border: 2px solid #ff6b6b; color: #ff6b6b; padding: 15px;">
                                 <i class="fas fa-trash"></i> 删除选中记录
                             </button>
-                            <button class="action-btn btn btn-danger btn-block" onclick="confirmClearAll()" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24);">
+                            <button class="action-btn btn btn-danger btn-block" onclick="confirmClearAll()" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24); padding: 15px;">
                                 <i class="fas fa-trash-alt"></i> 清空所有数据
                             </button>
                         </div>
