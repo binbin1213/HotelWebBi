@@ -59,6 +59,16 @@ werkzeug_logger.addHandler(log_handler)
 # 记录应用启动信息
 app.logger.info("=== 乐巷酒店数据智能分析系统启动 ===")
 
+# 检查环境变量加载情况
+admin_password = os.getenv('DB_ADMIN_PASSWORD')
+if admin_password:
+    app.logger.info("数据库管理密码已配置")
+else:
+    app.logger.warning("警告：数据库管理密码未配置！")
+
+app.logger.info(f"总房间数配置: {os.getenv('TOTAL_ROOMS', '未配置')}")
+app.logger.info(f"DeepSeek API Key: {'已配置' if os.getenv('DEEPSEEK_API_KEY') else '未配置'}")
+
 def init_db():
     """
     Initializes the database and creates the table if it doesn't exist.
