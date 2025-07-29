@@ -1,0 +1,708 @@
+2025-07-29 10:48:55,684 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 10:48:55,701 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 10:48:55,701 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 10:48:55,702 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-07-29 10:48:55,702 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-07-29 10:48:55,702 - app - INFO - 数据库初始化完成
+2025-07-29 10:48:55,702 - app - INFO - 数据库初始化完成
+2025-07-29 10:48:55,702 - app - INFO - 启动Web服务器在端口 5001...
+2025-07-29 10:48:55,702 - app - INFO - 启动Web服务器在端口 5001...
+2025-07-29 10:48:55,927 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-07-29 10:48:55,927 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-07-29 10:48:55,927 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-29 10:48:55,927 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-29 10:49:31,769 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:31] "GET /import_excel HTTP/1.1" 200 -
+2025-07-29 10:49:31,769 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:31] "GET /import_excel HTTP/1.1" 200 -
+2025-07-29 10:49:31,892 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:31] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-07-29 10:49:31,892 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:31] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-07-29 10:49:44,780 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:44] "[32mPOST /import_excel HTTP/1.1[0m" 302 -
+2025-07-29 10:49:44,780 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:44] "[32mPOST /import_excel HTTP/1.1[0m" 302 -
+2025-07-29 10:49:44,818 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:44] "GET /view HTTP/1.1" 200 -
+2025-07-29 10:49:44,818 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:44] "GET /view HTTP/1.1" 200 -
+2025-07-29 10:49:44,892 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:44] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 10:49:44,892 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:44] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 10:49:51,529 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:51] "GET / HTTP/1.1" 200 -
+2025-07-29 10:49:51,529 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:51] "GET / HTTP/1.1" 200 -
+2025-07-29 10:49:51,614 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:51] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 10:49:51,614 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:51] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 10:49:51,618 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:51] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-07-29 10:49:51,618 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:51] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-07-29 10:49:54,216 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:54] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-29 10:49:54,216 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 10:49:54] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-29 11:28:52,243 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 11:28:52,243 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 11:28:52,261 - app - INFO - 图表数据生成完成: {"dates": ["07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "day_names": ["星期三", "星期四...
+2025-07-29 11:28:52,261 - app - INFO - 图表数据生成完成: {"dates": ["07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "day_names": ["星期三", "星期四...
+2025-07-29 11:28:52,305 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 11:28:52] "GET /weekly_report HTTP/1.1" 200 -
+2025-07-29 11:28:52,305 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 11:28:52] "GET /weekly_report HTTP/1.1" 200 -
+2025-07-29 11:28:52,381 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 11:28:52] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 11:28:52,381 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 11:28:52] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 11:29:06,336 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 11:29:06,336 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 11:29:06,350 - app - INFO - 图表数据生成完成: {"dates": ["07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27"], "day_names": ["星期一", "星期二...
+2025-07-29 11:29:06,350 - app - INFO - 图表数据生成完成: {"dates": ["07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27"], "day_names": ["星期一", "星期二...
+2025-07-29 11:29:06,352 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 11:29:06] "GET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1" 200 -
+2025-07-29 11:29:06,352 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 11:29:06] "GET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1" 200 -
+2025-07-29 11:29:06,422 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 11:29:06] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 11:29:06,422 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 11:29:06] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 12:08:18,556 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 12:08:18,565 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 12:08:18,565 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 12:08:18,565 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-07-29 12:08:18,565 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-07-29 12:08:18,565 - app - INFO - 数据库初始化完成
+2025-07-29 12:08:18,565 - app - INFO - 数据库初始化完成
+2025-07-29 12:08:18,566 - app - INFO - 启动Web服务器在端口 5001...
+2025-07-29 12:08:18,566 - app - INFO - 启动Web服务器在端口 5001...
+2025-07-29 12:08:18,574 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-07-29 12:08:18,574 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-07-29 12:08:18,575 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-29 12:08:18,575 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-29 12:08:46,440 - app - ERROR - 生成周报表时发生错误: local variable 'accommodation_df' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1108, in generate_weekly_report
+    total_accommodation_revenue = accommodation_df['revenue'].sum()
+UnboundLocalError: local variable 'accommodation_df' referenced before assignment
+2025-07-29 12:08:46,440 - app - ERROR - 生成周报表时发生错误: local variable 'accommodation_df' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1108, in generate_weekly_report
+    total_accommodation_revenue = accommodation_df['revenue'].sum()
+UnboundLocalError: local variable 'accommodation_df' referenced before assignment
+2025-07-29 12:08:46,496 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:08:46,496 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:08:46,522 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:08:46] "[35m[1mGET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1[0m" 500 -
+2025-07-29 12:08:46,522 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:08:46] "[35m[1mGET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1[0m" 500 -
+2025-07-29 12:08:46,866 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:08:46] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-29 12:08:46,866 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:08:46] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-29 12:08:53,960 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:08:53] "GET / HTTP/1.1" 200 -
+2025-07-29 12:08:53,960 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:08:53] "GET / HTTP/1.1" 200 -
+2025-07-29 12:08:54,065 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:08:54] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 12:08:54,065 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:08:54] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 12:08:54,080 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:08:54] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-07-29 12:08:54,080 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:08:54] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-07-29 12:08:57,380 - app - ERROR - 生成周报表时发生错误: local variable 'accommodation_df' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1108, in generate_weekly_report
+    total_accommodation_revenue = accommodation_df['revenue'].sum()
+UnboundLocalError: local variable 'accommodation_df' referenced before assignment
+2025-07-29 12:08:57,380 - app - ERROR - 生成周报表时发生错误: local variable 'accommodation_df' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1108, in generate_weekly_report
+    total_accommodation_revenue = accommodation_df['revenue'].sum()
+UnboundLocalError: local variable 'accommodation_df' referenced before assignment
+2025-07-29 12:08:57,381 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:08:57,381 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:08:57,382 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:08:57] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-07-29 12:08:57,382 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:08:57] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-07-29 12:10:32,006 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:10:32] "GET /view HTTP/1.1" 200 -
+2025-07-29 12:10:32,006 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:10:32] "GET /view HTTP/1.1" 200 -
+2025-07-29 12:10:32,072 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:10:32] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 12:10:32,072 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:10:32] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 12:11:07,380 - app - ERROR - 生成周报表时发生错误: local variable 'accommodation_df' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1108, in generate_weekly_report
+    total_accommodation_revenue = accommodation_df['revenue'].sum()
+UnboundLocalError: local variable 'accommodation_df' referenced before assignment
+2025-07-29 12:11:07,380 - app - ERROR - 生成周报表时发生错误: local variable 'accommodation_df' referenced before assignment
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1108, in generate_weekly_report
+    total_accommodation_revenue = accommodation_df['revenue'].sum()
+UnboundLocalError: local variable 'accommodation_df' referenced before assignment
+2025-07-29 12:11:07,383 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:11:07,383 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:11:07,385 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:11:07] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-07-29 12:11:07,385 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:11:07] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-07-29 12:13:28,540 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 12:13:28,548 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 12:13:28,548 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 12:13:28,549 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-07-29 12:13:28,549 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-07-29 12:13:28,549 - app - INFO - 数据库初始化完成
+2025-07-29 12:13:28,549 - app - INFO - 数据库初始化完成
+2025-07-29 12:13:28,550 - app - INFO - 启动Web服务器在端口 5001...
+2025-07-29 12:13:28,550 - app - INFO - 启动Web服务器在端口 5001...
+2025-07-29 12:13:28,558 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-07-29 12:13:28,558 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-07-29 12:13:28,558 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-29 12:13:28,558 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-29 12:13:33,413 - app - ERROR - 生成周报表时发生错误: name 'total_revenue' is not defined
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1222, in generate_weekly_report
+    fee_type_summary['revenue_percent'] = (fee_type_summary['revenue'] / total_revenue * 100) if total_revenue > 0 else 0
+NameError: name 'total_revenue' is not defined
+2025-07-29 12:13:33,413 - app - ERROR - 生成周报表时发生错误: name 'total_revenue' is not defined
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1222, in generate_weekly_report
+    fee_type_summary['revenue_percent'] = (fee_type_summary['revenue'] / total_revenue * 100) if total_revenue > 0 else 0
+NameError: name 'total_revenue' is not defined
+2025-07-29 12:13:33,467 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:13:33,467 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'revenue'
+2025-07-29 12:13:33,488 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:13:33] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-07-29 12:13:33,488 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:13:33] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-07-29 12:14:20,783 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 12:14:20,804 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 12:14:20,804 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 12:14:20,804 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-07-29 12:14:20,804 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-07-29 12:14:20,805 - app - INFO - 数据库初始化完成
+2025-07-29 12:14:20,805 - app - INFO - 数据库初始化完成
+2025-07-29 12:14:20,805 - app - INFO - 启动Web服务器在端口 5001...
+2025-07-29 12:14:20,805 - app - INFO - 启动Web服务器在端口 5001...
+2025-07-29 12:14:20,814 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-07-29 12:14:20,814 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-07-29 12:14:20,814 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-29 12:14:20,814 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-29 12:14:24,102 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 12:14:24,102 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 12:14:24,118 - app - INFO - 图表数据生成完成: {"dates": ["07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "day_names": ["星期三", "星期四...
+2025-07-29 12:14:24,118 - app - INFO - 图表数据生成完成: {"dates": ["07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "day_names": ["星期三", "星期四...
+2025-07-29 12:14:24,195 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:14:24] "GET /weekly_report HTTP/1.1" 200 -
+2025-07-29 12:14:24,195 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:14:24] "GET /weekly_report HTTP/1.1" 200 -
+2025-07-29 12:14:24,310 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:14:24] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 12:14:24,310 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:14:24] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 12:14:51,385 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 12:14:51,385 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 12:14:51,398 - app - INFO - 图表数据生成完成: {"dates": ["07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27"], "day_names": ["星期一", "星期二...
+2025-07-29 12:14:51,398 - app - INFO - 图表数据生成完成: {"dates": ["07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27"], "day_names": ["星期一", "星期二...
+2025-07-29 12:14:51,400 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:14:51] "GET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1" 200 -
+2025-07-29 12:14:51,400 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:14:51] "GET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1" 200 -
+2025-07-29 12:14:51,454 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:14:51] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 12:14:51,454 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 12:14:51] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:38:19,009 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 13:38:19,020 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 13:38:19,020 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 13:38:19,021 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-07-29 13:38:19,021 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-07-29 13:38:19,021 - app - INFO - 数据库初始化完成
+2025-07-29 13:38:19,021 - app - INFO - 数据库初始化完成
+2025-07-29 13:38:19,021 - app - INFO - 启动Web服务器在端口 5001...
+2025-07-29 13:38:19,021 - app - INFO - 启动Web服务器在端口 5001...
+2025-07-29 13:38:19,032 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-07-29 13:38:19,032 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-07-29 13:38:19,032 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-29 13:38:19,032 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-29 13:39:05,362 - app - ERROR - 生成周报表时发生错误: 'revenue'
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'revenue'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1198, in generate_weekly_report
+    current_revenue = channel_summary.loc[channel, 'revenue'] if channel in channel_summary.index else 0
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/frame.py", line 4219, in _get_value
+    series = self._get_item_cache(col)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/frame.py", line 4643, in _get_item_cache
+    loc = self.columns.get_loc(item)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'revenue'
+2025-07-29 13:39:05,362 - app - ERROR - 生成周报表时发生错误: 'revenue'
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'revenue'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1198, in generate_weekly_report
+    current_revenue = channel_summary.loc[channel, 'revenue'] if channel in channel_summary.index else 0
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexing.py", line 1183, in __getitem__
+    return self.obj._get_value(*key, takeable=self._takeable)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/frame.py", line 4219, in _get_value
+    series = self._get_item_cache(col)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/frame.py", line 4643, in _get_item_cache
+    loc = self.columns.get_loc(item)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'revenue'
+2025-07-29 13:39:05,447 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.total_revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'total_revenue'
+2025-07-29 13:39:05,447 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 879, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 247, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 122, in block 'content'
+    <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.total_revenue|float) }}</div>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
+    return float(value)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'total_revenue'
+2025-07-29 13:39:05,467 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:39:05] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-07-29 13:39:05,467 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:39:05] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-07-29 13:41:06,660 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 13:41:06,672 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 13:41:06,672 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-07-29 13:41:06,672 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-07-29 13:41:06,672 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-07-29 13:41:06,672 - app - INFO - 数据库初始化完成
+2025-07-29 13:41:06,672 - app - INFO - 数据库初始化完成
+2025-07-29 13:41:06,672 - app - INFO - 启动Web服务器在端口 5001...
+2025-07-29 13:41:06,672 - app - INFO - 启动Web服务器在端口 5001...
+2025-07-29 13:41:06,682 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-07-29 13:41:06,682 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-07-29 13:41:06,682 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-29 13:41:06,682 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-07-29 13:41:19,632 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:41:19,632 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:41:19,644 - app - INFO - 图表数据生成完成: {"dates": ["07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "day_names": ["星期三", "星期四...
+2025-07-29 13:41:19,644 - app - INFO - 图表数据生成完成: {"dates": ["07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "day_names": ["星期三", "星期四...
+2025-07-29 13:41:19,695 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:41:19] "GET /weekly_report HTTP/1.1" 200 -
+2025-07-29 13:41:19,695 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:41:19] "GET /weekly_report HTTP/1.1" 200 -
+2025-07-29 13:41:19,789 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:41:19] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:41:19,789 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:41:19] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:41:35,737 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:41:35,737 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:41:35,750 - app - INFO - 图表数据生成完成: {"dates": ["07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27"], "day_names": ["星期一", "星期二...
+2025-07-29 13:41:35,750 - app - INFO - 图表数据生成完成: {"dates": ["07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27"], "day_names": ["星期一", "星期二...
+2025-07-29 13:41:35,752 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:41:35] "GET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1" 200 -
+2025-07-29 13:41:35,752 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:41:35] "GET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1" 200 -
+2025-07-29 13:41:35,804 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:41:35] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:41:35,804 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:41:35] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:42:27,840 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:42:27,840 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:42:27,855 - app - INFO - 图表数据生成完成: {"dates": ["07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27"], "day_names": ["星期一", "星期二...
+2025-07-29 13:42:27,855 - app - INFO - 图表数据生成完成: {"dates": ["07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27"], "day_names": ["星期一", "星期二...
+2025-07-29 13:42:27,858 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:42:27] "GET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1" 200 -
+2025-07-29 13:42:27,858 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:42:27] "GET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1" 200 -
+2025-07-29 13:42:27,906 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:42:27] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:42:27,906 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:42:27] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:42:35,715 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:42:35,715 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:42:35,725 - app - INFO - 图表数据生成完成: {"dates": ["07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27"], "day_names": ["星期一", "星期二...
+2025-07-29 13:42:35,725 - app - INFO - 图表数据生成完成: {"dates": ["07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27"], "day_names": ["星期一", "星期二...
+2025-07-29 13:42:35,728 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:42:35] "GET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1" 200 -
+2025-07-29 13:42:35,728 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:42:35] "GET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1" 200 -
+2025-07-29 13:42:35,796 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:42:35] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-07-29 13:42:35,796 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:42:35] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-07-29 13:43:01,008 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:43:01] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-29 13:43:01,008 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:43:01] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-29 13:51:17,805 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:51:17] "GET / HTTP/1.1" 200 -
+2025-07-29 13:51:17,805 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:51:17] "GET / HTTP/1.1" 200 -
+2025-07-29 13:51:17,941 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:51:17] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-07-29 13:51:17,941 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:51:17] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-07-29 13:51:17,943 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:51:17] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:51:17,943 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:51:17] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:55:33,973 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:55:33,973 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:55:33,987 - app - INFO - 图表数据生成完成: {"dates": ["07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "day_names": ["星期三", "星期四...
+2025-07-29 13:55:33,987 - app - INFO - 图表数据生成完成: {"dates": ["07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "day_names": ["星期三", "星期四...
+2025-07-29 13:55:33,992 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:33] "GET /weekly_report HTTP/1.1" 200 -
+2025-07-29 13:55:33,992 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:33] "GET /weekly_report HTTP/1.1" 200 -
+2025-07-29 13:55:34,024 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:34] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-07-29 13:55:34,024 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:34] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-07-29 13:55:39,596 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:39] "GET / HTTP/1.1" 200 -
+2025-07-29 13:55:39,596 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:39] "GET / HTTP/1.1" 200 -
+2025-07-29 13:55:39,614 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:39] "GET /static/js/home.js HTTP/1.1" 200 -
+2025-07-29 13:55:39,614 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:39] "GET /static/js/home.js HTTP/1.1" 200 -
+2025-07-29 13:55:39,617 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:39] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:55:39,617 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:39] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:55:45,656 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:45] "GET /entry HTTP/1.1" 200 -
+2025-07-29 13:55:45,656 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:45] "GET /entry HTTP/1.1" 200 -
+2025-07-29 13:55:45,667 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:45] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:55:45,667 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:45] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:55:46,563 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:46] "GET /view HTTP/1.1" 200 -
+2025-07-29 13:55:46,563 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:46] "GET /view HTTP/1.1" 200 -
+2025-07-29 13:55:46,574 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:46] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:55:46,574 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:46] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:55:47,647 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:47] "GET /analytics HTTP/1.1" 200 -
+2025-07-29 13:55:47,647 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:47] "GET /analytics HTTP/1.1" 200 -
+2025-07-29 13:55:47,671 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:47] "GET /static/css/analytics.css?v=678910 HTTP/1.1" 200 -
+2025-07-29 13:55:47,671 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:47] "GET /static/css/analytics.css?v=678910 HTTP/1.1" 200 -
+2025-07-29 13:55:47,672 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:47] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:55:47,672 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:47] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:55:47,678 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:47] "GET /static/css/print.css?v=123456 HTTP/1.1" 200 -
+2025-07-29 13:55:47,678 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:47] "GET /static/js/analytics.js?v=234567 HTTP/1.1" 200 -
+2025-07-29 13:55:47,678 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:47] "GET /static/css/print.css?v=123456 HTTP/1.1" 200 -
+2025-07-29 13:55:47,678 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:47] "GET /static/js/analytics.js?v=234567 HTTP/1.1" 200 -
+2025-07-29 13:55:48,682 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:55:48,682 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:55:48,694 - app - INFO - 图表数据生成完成: {"dates": ["07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "day_names": ["星期三", "星期四...
+2025-07-29 13:55:48,694 - app - INFO - 图表数据生成完成: {"dates": ["07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "day_names": ["星期三", "星期四...
+2025-07-29 13:55:48,696 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:48] "GET /weekly_report HTTP/1.1" 200 -
+2025-07-29 13:55:48,696 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:48] "GET /weekly_report HTTP/1.1" 200 -
+2025-07-29 13:55:48,708 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:48] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:55:48,708 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:48] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:55:56,387 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:56] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-29 13:55:56,387 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:55:56] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-07-29 13:56:06,719 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:06] "GET / HTTP/1.1" 200 -
+2025-07-29 13:56:06,719 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:06] "GET / HTTP/1.1" 200 -
+2025-07-29 13:56:06,786 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:06] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-07-29 13:56:06,786 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:06] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-07-29 13:56:06,788 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:06] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:56:06,788 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:06] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:56:27,198 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:27] "GET / HTTP/1.1" 200 -
+2025-07-29 13:56:27,198 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:27] "GET / HTTP/1.1" 200 -
+2025-07-29 13:56:27,213 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:27] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:56:27,213 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:27] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:56:27,217 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:27] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-07-29 13:56:27,217 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:27] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-07-29 13:56:32,259 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:32] "GET /analytics HTTP/1.1" 200 -
+2025-07-29 13:56:32,259 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:32] "GET /analytics HTTP/1.1" 200 -
+2025-07-29 13:56:32,281 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:32] "[36mGET /static/css/print.css?v=123456 HTTP/1.1[0m" 304 -
+2025-07-29 13:56:32,281 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:32] "[36mGET /static/css/print.css?v=123456 HTTP/1.1[0m" 304 -
+2025-07-29 13:56:32,285 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:32] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:56:32,285 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:32] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:56:32,291 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:32] "[36mGET /static/css/analytics.css?v=678910 HTTP/1.1[0m" 304 -
+2025-07-29 13:56:32,291 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:32] "[36mGET /static/css/analytics.css?v=678910 HTTP/1.1[0m" 304 -
+2025-07-29 13:56:32,295 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:32] "[36mGET /static/js/analytics.js?v=234567 HTTP/1.1[0m" 304 -
+2025-07-29 13:56:32,295 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:32] "[36mGET /static/js/analytics.js?v=234567 HTTP/1.1[0m" 304 -
+2025-07-29 13:56:33,860 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:56:33,860 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:56:33,870 - app - INFO - 图表数据生成完成: {"dates": ["07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "day_names": ["星期三", "星期四...
+2025-07-29 13:56:33,870 - app - INFO - 图表数据生成完成: {"dates": ["07-23", "07-24", "07-25", "07-26", "07-27", "07-28", "07-29"], "day_names": ["星期三", "星期四...
+2025-07-29 13:56:33,873 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:33] "GET /weekly_report HTTP/1.1" 200 -
+2025-07-29 13:56:33,873 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:33] "GET /weekly_report HTTP/1.1" 200 -
+2025-07-29 13:56:33,884 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:33] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:56:33,884 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:33] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:56:53,081 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:56:53,081 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-07-29 13:56:53,093 - app - INFO - 图表数据生成完成: {"dates": ["07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27"], "day_names": ["星期一", "星期二...
+2025-07-29 13:56:53,093 - app - INFO - 图表数据生成完成: {"dates": ["07-21", "07-22", "07-23", "07-24", "07-25", "07-26", "07-27"], "day_names": ["星期一", "星期二...
+2025-07-29 13:56:53,096 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:53] "GET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1" 200 -
+2025-07-29 13:56:53,096 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:53] "GET /weekly_report?start_date=2025-07-21&end_date=2025-07-27 HTTP/1.1" 200 -
+2025-07-29 13:56:53,104 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:53] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 13:56:53,104 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 13:56:53] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 14:01:57,960 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:01:57] "GET /analytics HTTP/1.1" 200 -
+2025-07-29 14:01:57,960 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:01:57] "GET /analytics HTTP/1.1" 200 -
+2025-07-29 14:01:57,991 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:01:57] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 14:01:57,991 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:01:57] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 14:01:57,996 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:01:57] "[36mGET /static/css/analytics.css?v=678910 HTTP/1.1[0m" 304 -
+2025-07-29 14:01:57,996 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:01:57] "[36mGET /static/css/analytics.css?v=678910 HTTP/1.1[0m" 304 -
+2025-07-29 14:01:57,998 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:01:57] "[36mGET /static/js/analytics.js?v=234567 HTTP/1.1[0m" 304 -
+2025-07-29 14:01:57,998 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:01:57] "[36mGET /static/js/analytics.js?v=234567 HTTP/1.1[0m" 304 -
+2025-07-29 14:01:58,001 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:01:58] "[36mGET /static/css/print.css?v=123456 HTTP/1.1[0m" 304 -
+2025-07-29 14:01:58,001 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:01:58] "[36mGET /static/css/print.css?v=123456 HTTP/1.1[0m" 304 -
+2025-07-29 14:02:09,821 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:09] "GET /view HTTP/1.1" 200 -
+2025-07-29 14:02:09,821 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:09] "GET /view HTTP/1.1" 200 -
+2025-07-29 14:02:09,829 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:09] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 14:02:09,829 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:09] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 14:02:11,641 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:11] "GET /entry HTTP/1.1" 200 -
+2025-07-29 14:02:11,641 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:11] "GET /entry HTTP/1.1" 200 -
+2025-07-29 14:02:11,650 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:11] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 14:02:11,650 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:11] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 14:02:12,603 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:12] "GET / HTTP/1.1" 200 -
+2025-07-29 14:02:12,603 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:12] "GET / HTTP/1.1" 200 -
+2025-07-29 14:02:12,618 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:12] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 14:02:12,618 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:12] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-07-29 14:02:12,622 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:12] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-07-29 14:02:12,622 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 14:02:12] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
