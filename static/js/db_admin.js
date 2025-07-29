@@ -249,6 +249,82 @@ function showBulkEdit() {
     alert('批量编辑功能开发中...');
 }
 
+// 按日期范围删除数据
+function confirmDeleteByDateRange() {
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+
+    if (!startDate || !endDate) {
+        alert('请选择开始日期和结束日期');
+        return;
+    }
+
+    if (startDate > endDate) {
+        alert('开始日期不能晚于结束日期');
+        return;
+    }
+
+    const confirmation = confirm(`确定要删除 ${startDate} 到 ${endDate} 期间的所有数据吗？\n\n此操作不可撤销！`);
+
+    if (confirmation) {
+        fetch('/db_admin/delete_by_date_range', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                start_date: startDate,
+                end_date: endDate
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                loadRecords(); // 重新加载数据
+                alert(`成功删除了 ${data.deleted_count} 条记录`);
+                // 清空日期选择器
+                document.getElementById('startDate').value = '';
+                document.getElementById('endDate').value = '';
+            } else {
+                alert('删除失败: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('删除时发生错误');
+        });
+    }
+}
+
+// 清空整个数据库
+function confirmClearDatabase() {
+    const confirmation = prompt('此操作将删除整个数据库文件！\n请输入 "DELETE DATABASE" 确认操作：');
+
+    if (confirmation === 'DELETE DATABASE') {
+        fetch('/db_admin/clear_database', {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // 隐藏数据表格
+                document.getElementById('dataTableContainer').style.display = 'none';
+                alert('数据库已完全清空');
+                // 刷新页面以更新统计信息
+                window.location.reload();
+            } else {
+                alert('清空数据库失败: ' + data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('清空数据库时发生错误');
+        });
+    } else if (confirmation !== null) {
+        alert('确认文本不正确，操作已取消');
+    }
+}
+
 // 页面加载完成后的初始化
 document.addEventListener('DOMContentLoaded', function() {
     // 全选复选框事件

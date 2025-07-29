@@ -878,10 +878,19 @@ def weekly_report():
     report_data, df = generate_weekly_report(start_date, end_date)
 
     if df.empty:
+        empty_total_summary = {
+            'date_range': f"{start_date.replace('-', '.')} - {end_date.replace('-', '.')}",
+            'total_revenue': 0.0,
+            'room_revenue': 0.0,
+            'hourly_revenue': 0.0,
+            'room_nights': 0,
+            'avg_price': 0.0,
+            'occupancy_rate': 0.0
+        }
         return render_template('weekly_report.html',
                                start_date=start_date,
                                end_date=end_date,
-                               report_data={'total_summary': {'date_range': f"{start_date.replace('-', '.')} - {end_date.replace('-', '.')}"}},
+                               report_data={'total_summary': empty_total_summary},
                                channel_data=[], daily_data=[], detail_data=[], chart_data=json.dumps({}), pivot_html="")
 
     # 准备渠道分析数据
@@ -1647,6 +1656,57 @@ def db_admin_export():
     except Exception as e:
         flash(f'导出失败: {e}')
         return redirect(url_for('db_admin'))
+
+@app.route('/db_admin/delete_by_date_range', methods=['POST'])
+def db_admin_delete_by_date_range():
+    """按日期范围删除数据"""
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        return jsonify({'success': False, 'error': '未认证'})
+
+    try:
+        data = request.get_json()
+        start_date = data.get('start_date')
+        end_date = data.get('end_date')
+
+        if not start_date or not end_date:
+            return jsonify({'success': False, 'error': '请提供开始日期和结束日期'})
+
+        conn = sqlite3.connect(DB_PATH)
+        cursor = conn.cursor()
+
+        # 删除指定日期范围内的记录
+        cursor.execute('''
+            DELETE FROM revenue_data
+            WHERE record_date BETWEEN ? AND ?
+        ''', (start_date, end_date))
+
+        deleted_count = cursor.rowcount
+        conn.commit()
+        conn.close()
+
+        return jsonify({'success': True, 'deleted_count': deleted_count})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/db_admin/clear_database', methods=['POST'])
+def db_admin_clear_database():
+    """清空整个数据库"""
+    is_authenticated, message = check_admin_password()
+    if not is_authenticated:
+        return jsonify({'success': False, 'error': '未认证'})
+
+    try:
+        # 删除数据库文件
+        if os.path.exists(DB_PATH):
+            os.remove(DB_PATH)
+
+        # 重新初始化数据库
+        init_db()
+
+        return jsonify({'success': True, 'message': '数据库已完全清空并重新初始化'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
 
 if __name__ == '__main__':
     # 设置命令行参数
