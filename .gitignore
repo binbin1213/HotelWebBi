@@ -40,6 +40,10 @@ yarn-error.log*
 *.sqlite
 *.sqlite3
 
+# Backups
+backups/
+*.csv
+
 # Logs
 logs/
 *.log

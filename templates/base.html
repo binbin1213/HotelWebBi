@@ -175,6 +175,10 @@
             <i class="fas fa-info-circle"></i>
             <span>系统说明</span>
         </a>
+        <a href="/db_admin" class="{{ 'active' if request.path.startswith('/db_admin') else '' }}">
+            <i class="fas fa-database"></i>
+            <span>数据库</span>
+        </a>
     </nav>
     
     <header class="bg-gray-800 text-white shadow-md sticky top-0 z-50 hidden md:block">
@@ -197,6 +201,7 @@
                     <a href="/analytics" class="{{ 'active' if request.path == '/analytics' else '' }}">数据分析</a>
                     <a href="/weekly_report" class="{{ 'active' if request.path == '/weekly_report' else '' }}">周报表</a>
                     <a href="/system_guide" class="{{ 'active' if request.path == '/system_guide' else '' }}">系统说明</a>
+                    <a href="/db_admin" class="{{ 'active' if request.path.startswith('/db_admin') else '' }}">数据库管理</a>
                 </nav>
                 
                 <!-- 联系信息 -->
