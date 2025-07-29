@@ -1545,17 +1545,29 @@ def db_admin_login():
     """管理员登录页面"""
     if request.method == 'POST':
         password = request.form.get('password')
+
+        # 调试信息
+        env_password = os.getenv('DB_ADMIN_PASSWORD')
+        config_password = get_config('DB_ADMIN_PASSWORD')
+        app.logger.info(f"登录调试 - 环境变量密码: {'已设置' if env_password else '未设置'}")
+        app.logger.info(f"登录调试 - 配置密码: {'已设置' if config_password else '未设置'}")
+        app.logger.info(f"登录调试 - 当前工作目录: {os.getcwd()}")
+        app.logger.info(f"登录调试 - .env文件存在: {os.path.exists('.env')}")
+
         # 优先从环境变量获取，如果没有则从数据库配置获取
-        admin_password = os.getenv('DB_ADMIN_PASSWORD') or get_config('DB_ADMIN_PASSWORD')
+        admin_password = env_password or config_password
 
         if not admin_password:
+            app.logger.warning("登录失败 - 系统未配置管理员密码")
             flash('系统未配置管理员密码')
             return render_template('db_admin_login.html')
 
         if password == admin_password:
+            app.logger.info("登录成功")
             session['admin_authenticated'] = True
             return redirect(url_for('db_admin'))
         else:
+            app.logger.warning("登录失败 - 密码错误")
             flash('密码错误')
 
     return render_template('db_admin_login.html')
