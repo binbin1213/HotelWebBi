@@ -71,8 +71,7 @@ Thumbs.db
 *.zip
 *.rar
 
-# Environment variables
-.env
+# Environment variables (keep .env for production)
 .env.local
 .env.development.local
 .env.test.local
@@ -90,3 +89,23 @@ coverage.xml
 *.cover
 .hypothesis/
 .pytest_cache/
+
+# AI Assistant Files
+.serena/
+
+# Archive/Backup directories
+archive/
+backup/
+backups/
+
+# Documentation (keep only essential docs)
+*综合文档.md
+server_deploy_steps.md
+
+# Deployment packages
+hotel_deploy.tar.gz
+update_files.tar.gz
+*.deployment.tar.gz
+
+# Print CSS (if not needed in production)
+static/css/print.css
