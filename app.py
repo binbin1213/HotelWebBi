@@ -293,11 +293,82 @@ def index():
             # 5. 计算本周 RevPAR
             week_revpar = (avg_price * occupancy_rate) / 100 if occupancy_rate > 0 else 0
             last_week_revpar = (last_week_avg_price * last_week_occupancy_rate) / 100 if last_week_occupancy_rate > 0 else 0
-            
+
             revpar_change = 0
             if last_week_revpar > 0:
                 revpar_change = ((week_revpar - last_week_revpar) / last_week_revpar) * 100
-            
+
+            # --- 上周数据计算（用于显示上周统计，对比上上周） ---
+            # 上上周的日期范围
+            two_weeks_ago_start = (today - timedelta(days=today.weekday() + 14)).strftime('%Y-%m-%d')
+            two_weeks_ago_end = (today - timedelta(days=today.weekday() + 8)).strftime('%Y-%m-%d')
+
+            # 1. 上周收入
+            # last_week_revenue 已经在上面计算过了
+
+            # 获取上上周收入，用于计算同比
+            cursor.execute("SELECT SUM(revenue) FROM DailyRevenue WHERE record_date >= ? AND record_date <= ?",
+                          (two_weeks_ago_start, two_weeks_ago_end))
+            two_weeks_ago_revenue = cursor.fetchone()[0] or 0
+
+            # 计算上周收入同比变化（vs 上上周）
+            last_week_revenue_change = 0
+            if two_weeks_ago_revenue > 0:
+                last_week_revenue_change = ((last_week_revenue - two_weeks_ago_revenue) / two_weeks_ago_revenue) * 100
+
+            # 2. 上周间夜数
+            # last_week_room_nights 已经在上面计算过了
+
+            # 获取上上周间夜数，用于计算同比
+            cursor.execute("SELECT SUM(room_nights) FROM DailyRevenue WHERE record_date >= ? AND record_date <= ?",
+                          (two_weeks_ago_start, two_weeks_ago_end))
+            two_weeks_ago_room_nights = cursor.fetchone()[0] or 0
+
+            # 计算上周间夜同比变化（vs 上上周）
+            last_week_room_nights_change = 0
+            if two_weeks_ago_room_nights > 0:
+                last_week_room_nights_change = ((last_week_room_nights - two_weeks_ago_room_nights) / two_weeks_ago_room_nights) * 100
+
+            # 3. 上周平均房价
+            # last_week_avg_price 已经在上面计算过了
+
+            # 获取上上周平均房价，用于计算同比
+            cursor.execute("""
+                SELECT SUM(revenue) / SUM(room_nights)
+                FROM DailyRevenue
+                WHERE record_date >= ? AND record_date <= ? AND room_nights > 0
+            """, (two_weeks_ago_start, two_weeks_ago_end))
+            two_weeks_ago_avg_price = cursor.fetchone()[0] or 0
+
+            # 计算上周平均房价同比变化（vs 上上周）
+            last_week_avg_price_change = 0
+            if two_weeks_ago_avg_price > 0:
+                last_week_avg_price_change = ((last_week_avg_price - two_weeks_ago_avg_price) / two_weeks_ago_avg_price) * 100
+
+            # 4. 上周入住率
+            # last_week_occupancy_rate 已经在上面计算过了
+
+            # 获取上上周入住率，用于计算同比
+            cursor.execute("""
+                SELECT SUM(room_nights) * 100.0 / (? * 7)
+                FROM DailyRevenue
+                WHERE record_date >= ? AND record_date <= ?
+            """, (total_rooms, two_weeks_ago_start, two_weeks_ago_end))
+            two_weeks_ago_occupancy_rate = cursor.fetchone()[0] or 0
+
+            # 计算上周入住率同比变化（vs 上上周）
+            last_week_occupancy_rate_change = 0
+            if two_weeks_ago_occupancy_rate > 0:
+                last_week_occupancy_rate_change = ((last_week_occupancy_rate - two_weeks_ago_occupancy_rate) / two_weeks_ago_occupancy_rate) * 100
+
+            # 5. 计算上周 RevPAR
+            # last_week_revpar 已经在上面计算过了
+            two_weeks_ago_revpar = (two_weeks_ago_avg_price * two_weeks_ago_occupancy_rate) / 100 if two_weeks_ago_occupancy_rate > 0 else 0
+
+            last_week_revpar_change = 0
+            if two_weeks_ago_revpar > 0:
+                last_week_revpar_change = ((last_week_revpar - two_weeks_ago_revpar) / two_weeks_ago_revpar) * 100
+
             stats = {
                 # 本月数据
                 'month_revenue': int(month_revenue),
@@ -311,6 +382,18 @@ def index():
                 'month_revpar': round(month_revpar, 2),
                 'month_revpar_change': round(month_revpar_change, 1),
                 
+                # 上周数据
+                'last_week_revenue': int(last_week_revenue),
+                'last_week_revenue_change': round(last_week_revenue_change, 1),
+                'last_week_room_nights': int(last_week_room_nights),
+                'last_week_room_nights_change': round(last_week_room_nights_change, 1),
+                'last_week_avg_price': round(last_week_avg_price, 2),
+                'last_week_avg_price_change': round(last_week_avg_price_change, 1),
+                'last_week_occupancy_rate': round(last_week_occupancy_rate, 2),
+                'last_week_occupancy_rate_change': round(last_week_occupancy_rate_change, 1),
+                'last_week_revpar': round(last_week_revpar, 2),
+                'last_week_revpar_change': round(last_week_revpar_change, 1),
+
                 # 本周数据
                 'today_revenue': int(week_revenue),
                 'revenue_change': round(revenue_change, 1),
@@ -337,18 +420,32 @@ def index():
             'month_avg_price_change': -1.5,
             'month_occupancy_rate': 85.0,
             'month_occupancy_rate_change': 2.5,
-            
+            'month_revpar': 57,
+            'month_revpar_change': 31.3,
+
+            # 上周数据默认值
+            'last_week_revenue': 0,
+            'last_week_revenue_change': -100.0,
+            'last_week_room_nights': 0,
+            'last_week_room_nights_change': -100.0,
+            'last_week_avg_price': 0,
+            'last_week_avg_price_change': -100.0,
+            'last_week_occupancy_rate': 0,
+            'last_week_occupancy_rate_change': -100.0,
+            'last_week_revpar': 0,
+            'last_week_revpar_change': -100.0,
+
             # 本周数据默认值
-            'today_revenue': 8521,
-            'revenue_change': 12.0,
-            'week_room_nights': 124,
-            'room_nights_change': 5.0,
-            'avg_price': 328,
-            'avg_price_change': -2.0,
-            'week_occupancy_rate': 87.0,
-            'occupancy_rate_change': 3.0,
-            'week_revpar': 280.0,
-            'revpar_change': 12.0,
+            'today_revenue': 0,
+            'revenue_change': -100.0,
+            'week_room_nights': 0,
+            'room_nights_change': -100.0,
+            'avg_price': 0,
+            'avg_price_change': -100.0,
+            'week_occupancy_rate': 0,
+            'occupancy_rate_change': -100.0,
+            'week_revpar': 0,
+            'revpar_change': -100.0,
         }
     
     return render_template('home.html', stats=stats)
@@ -764,6 +861,10 @@ def standardize_channel_name(channel):
         return '美团'
     elif channel in ['飞猪', '飞猪信用住']:
         return '飞猪'
+    elif channel in ['抖音来客', '抖音', '其他']:
+        return '抖音来客'
+    elif channel in ['散客', '门店']:
+        return '散客'
     return channel
 
 @app.route('/weekly_report')
@@ -854,8 +955,12 @@ def weekly_report():
     chart_data_dict['avg_price'] = [float(x) for x in daily_data_df['avg_price'].round(2).tolist()]
     chart_data_dict['weekly_revenue'] = daily_summary_for_chart
     
-    # 定义所有预期的渠道列表（标准化后的名称）
-    all_channels = ['携程', '美团', '飞猪', '散客', '会员', '协议', '其他']
+    # 定义预期的渠道列表（标准化后的名称）
+    expected_channels = ['携程', '美团', '飞猪', '抖音来客', '散客']  # , '会员', '协议'  # 暂时注释，以后可能会用
+
+    # 获取实际存在的渠道
+    actual_channels = set(df['channel'].unique()) if not df.empty else set()
+    all_channels = list(actual_channels.union(set(expected_channels)))
 
     # 按渠道分组数据 - 使用标准化的渠道名称
     channel_series = {}
@@ -918,12 +1023,13 @@ def generate_weekly_report(start_date, end_date):
     """生成周报表数据"""
     try:
         with sqlite3.connect(DATABASE) as conn:
+            # 查询本周数据
             query = """
-                SELECT 
-                    record_date, 
-                    channel, 
+                SELECT
+                    record_date,
+                    channel,
                     fee_type,
-                    SUM(room_nights) as room_nights, 
+                    SUM(room_nights) as room_nights,
                     SUM(revenue) as revenue
                 FROM DailyRevenue
                 WHERE record_date BETWEEN ? AND ?
@@ -931,12 +1037,28 @@ def generate_weekly_report(start_date, end_date):
             """
             df = pd.read_sql_query(query, conn, params=(start_date, end_date))
 
+            # 计算上周日期范围
+            start_dt = datetime.strptime(start_date, '%Y-%m-%d')
+            end_dt = datetime.strptime(end_date, '%Y-%m-%d')
+            days_diff = (end_dt - start_dt).days + 1
+
+            last_week_end = start_dt - timedelta(days=1)
+            last_week_start = last_week_end - timedelta(days=days_diff-1)
+
+            last_week_start_str = last_week_start.strftime('%Y-%m-%d')
+            last_week_end_str = last_week_end.strftime('%Y-%m-%d')
+
+            # 查询上周数据
+            df_last_week = pd.read_sql_query(query, conn, params=(last_week_start_str, last_week_end_str))
+
             if df.empty:
                 # 返回空报表结构，保持与预期结构一致
                 empty_report = {
                     "total_summary": {
                         "date_range": f"{start_date.replace('-', '.')} - {end_date.replace('-', '.')}",
-                        "revenue": 0.0,
+                        "total_revenue": 0.0,
+                        "room_revenue": 0.0,
+                        "hourly_revenue": 0.0,
                         "room_nights": 0,
                         "avg_price": 0.0,
                         "occupancy_rate": 0.0,
@@ -984,66 +1106,147 @@ def generate_weekly_report(start_date, end_date):
                 observed=False
             ).astype(float)
 
-            # 计算总计 - 适应新的透视表结构
-            total_revenue = pivot_df.loc['合计', ('revenue', '合计')]
-            total_room_nights = pivot_df.loc['合计', ('room_nights', '合计')]
+            # 定义预期的渠道列表（标准化后的名称）
+            expected_channels = ['携程', '美团', '飞猪', '抖音来客', '散客']  # , '会员', '协议'  # 暂时注释，以后可能会用
+
+            # 渠道分析 - 使用标准化的渠道名称，分别计算住宿收入和钟点房收入
+            # 住宿收入：房费 + 手工输入房费 + 调整房费
+            accommodation_df = df[df['fee_type'].isin(['房费', '手工输入房费', '调整房费'])]
+            # 钟点房收入：加收全天
+            hourly_df = df[df['fee_type'] == '加收全天']
+
+            # 计算总计 - 分别计算不同类型的收入
+            total_room_revenue = accommodation_df['revenue'].sum()  # 间夜房收入（不含钟点房）
+            total_hourly_revenue = hourly_df['revenue'].sum()  # 钟点房收入
+            total_accommodation_revenue = total_room_revenue + total_hourly_revenue  # 住宿费用总计（含钟点房）
+            total_room_nights = accommodation_df['room_nights'].sum()  # 只计算住宿间夜数
 
             # 计算其他指标
-            total_avg_price = total_revenue / total_room_nights if total_room_nights > 0 else 0
-            
+            total_avg_price = total_room_revenue / total_room_nights if total_room_nights > 0 else 0  # 平均房价不含钟点房
+
             total_rooms = int(os.getenv('TOTAL_ROOMS', 29))
             num_days = (datetime.strptime(end_date, '%Y-%m-%d') - datetime.strptime(start_date, '%Y-%m-%d')).days + 1
             total_occupancy_rate = (total_room_nights / (total_rooms * num_days)) * 100 if num_days > 0 else 0
-            total_revpar = total_revenue / (total_rooms * num_days) if num_days > 0 else 0
+            total_revpar = total_accommodation_revenue / (total_rooms * num_days) if num_days > 0 else 0  # RevPAR用住宿费用总计
 
             # 每日指标计算 - 保持按星期分组，用于图表数据
-            daily_summary = df.groupby('day_name', observed=False).agg(
+            daily_summary = accommodation_df.groupby('day_name', observed=False).agg(
                 revenue=('revenue', 'sum'),
                 room_nights=('room_nights', 'sum')
             ).reindex(all_days, fill_value=0)
-            
+
             daily_summary['avg_price'] = (daily_summary['revenue'] / daily_summary['room_nights']).where(daily_summary['room_nights'] > 0, 0)
             daily_summary['occupancy'] = (daily_summary['room_nights'] / total_rooms) * 100
             daily_summary['revpar'] = daily_summary['avg_price'] * (daily_summary['occupancy'] / 100)
 
-            # 定义所有预期的渠道列表（标准化后的名称）
-            all_channels = ['携程', '美团', '飞猪', '散客', '会员', '协议', '其他']
-
-            # 渠道分析 - 使用标准化的渠道名称
-            channel_summary = df.groupby('standardized_channel').agg(
-                revenue=('revenue', 'sum'),
+            channel_summary = accommodation_df.groupby('standardized_channel').agg(
+                room_revenue=('revenue', 'sum'),  # 间夜房收入
                 room_nights=('room_nights', 'sum')
             )
+
+            # 计算钟点房收入
+            hourly_summary = hourly_df.groupby('standardized_channel').agg(
+                hourly_revenue=('revenue', 'sum')
+            )
+
+            # 获取实际存在的渠道和预期渠道的并集
+            actual_channels = set(channel_summary.index.tolist())
+            all_channels = list(actual_channels.union(set(expected_channels)))
 
             # 确保所有渠道都出现在结果中，即使数据为0
             for channel in all_channels:
                 if channel not in channel_summary.index:
-                    channel_summary.loc[channel] = {'revenue': 0.0, 'room_nights': 0}
+                    channel_summary.loc[channel] = {'room_revenue': 0.0, 'room_nights': 0}
+                if channel not in hourly_summary.index:
+                    hourly_summary.loc[channel] = {'hourly_revenue': 0.0}
 
-            # 按收入排序，但保持0收入渠道在末尾
-            channel_summary = channel_summary.sort_values('revenue', ascending=False)
+            # 合并钟点房收入到渠道汇总中
+            channel_summary = channel_summary.join(hourly_summary, how='left')
+            channel_summary['hourly_revenue'] = channel_summary['hourly_revenue'].fillna(0.0)
 
-            channel_summary['revenue_percent'] = (channel_summary['revenue'] / total_revenue * 100) if total_revenue > 0 else 0
-            channel_summary['avg_price'] = (channel_summary['revenue'] / channel_summary['room_nights']).where(channel_summary['room_nights'] > 0, 0)
+            # 计算住宿费用总计（间夜房收入 + 钟点房收入）
+            channel_summary['total_revenue'] = channel_summary['room_revenue'] + channel_summary['hourly_revenue']
+
+            # 按住宿费用总计排序，但保持0收入渠道在末尾
+            channel_summary = channel_summary.sort_values('total_revenue', ascending=False)
+
+            # 计算各种占比和平均值
+            channel_summary['revenue_percent'] = (channel_summary['room_revenue'] / total_room_revenue * 100) if total_room_revenue > 0 else 0  # 间夜房收入占比
+            channel_summary['avg_price'] = (channel_summary['room_revenue'] / channel_summary['room_nights']).where(channel_summary['room_nights'] > 0, 0)  # 平均房价不含钟点房
+
+            # 处理上周数据进行对比分析
+            channel_comparison = {}
+
+            # 初始化上周数据汇总
+            last_week_channel_summary = pd.DataFrame(columns=['room_revenue', 'room_nights'])
+
+            if not df_last_week.empty:
+                # 标准化上周数据的渠道名称
+                df_last_week['standardized_channel'] = df_last_week['channel'].apply(standardize_channel_name)
+
+                # 分离上周的住宿收入和钟点房收入
+                last_week_accommodation_df = df_last_week[df_last_week['fee_type'].isin(['房费', '手工输入房费', '调整房费'])]
+
+                # 上周渠道分析
+                last_week_channel_summary = last_week_accommodation_df.groupby('standardized_channel').agg(
+                    room_revenue=('revenue', 'sum'),
+                    room_nights=('room_nights', 'sum')
+                )
+
+            # 确保所有渠道都出现在上周数据中
+            for channel in all_channels:
+                if channel not in last_week_channel_summary.index:
+                    last_week_channel_summary.loc[channel] = {'room_revenue': 0.0, 'room_nights': 0}
+
+            # 计算对比数据（无论是否有上周数据都要计算）
+            for channel in all_channels:
+                current_revenue = channel_summary.loc[channel, 'room_revenue'] if channel in channel_summary.index else 0
+                current_room_nights = channel_summary.loc[channel, 'room_nights'] if channel in channel_summary.index else 0
+
+                last_revenue = last_week_channel_summary.loc[channel, 'room_revenue'] if channel in last_week_channel_summary.index else 0
+                last_room_nights = last_week_channel_summary.loc[channel, 'room_nights'] if channel in last_week_channel_summary.index else 0
+
+                # 计算变化
+                revenue_change = current_revenue - last_revenue
+                room_nights_change = current_room_nights - last_room_nights
+
+                # 计算变化率
+                revenue_change_rate = (revenue_change / last_revenue * 100) if last_revenue > 0 else 0
+                room_nights_change_rate = (room_nights_change / last_room_nights * 100) if last_room_nights > 0 else 0
+
+                channel_comparison[channel] = {
+                    'current_revenue': round(float(current_revenue), 2),
+                    'last_revenue': round(float(last_revenue), 2),
+                    'revenue_change': round(float(revenue_change), 2),
+                    'revenue_change_rate': round(float(revenue_change_rate), 2),
+                    'current_room_nights': int(current_room_nights),
+                    'last_room_nights': int(last_room_nights),
+                    'room_nights_change': int(room_nights_change),
+                    'room_nights_change_rate': round(float(room_nights_change_rate), 2)
+                }
 
             # 费用类型分析
             fee_type_summary = df.groupby('fee_type').agg(
                 revenue=('revenue', 'sum')
             ).sort_values('revenue', ascending=False)
-            fee_type_summary['revenue_percent'] = (fee_type_summary['revenue'] / total_revenue * 100) if total_revenue > 0 else 0
+            fee_type_summary['revenue_percent'] = (fee_type_summary['revenue'] / total_accommodation_revenue * 100) if total_accommodation_revenue > 0 else 0
 
             # 准备最终结果
             report = {
                 'total_summary': {
                     'date_range': f"{start_date.replace('-', '.')} - {end_date.replace('-', '.')}",
-                    'revenue': round(total_revenue, 2),
+                    'total_revenue': round(total_accommodation_revenue, 2),  # 住宿费用总计（含钟点房）
+                    'room_revenue': round(total_room_revenue, 2),  # 间夜房收入（不含钟点房）
+                    'hourly_revenue': round(total_hourly_revenue, 2),  # 钟点房收入
                     'room_nights': int(total_room_nights),
-                    'avg_price': round(total_avg_price, 2),
+                    'avg_price': round(total_avg_price, 2),  # 平均房价（不含钟点房）
                     'occupancy_rate': round(total_occupancy_rate, 2),
-                    'revpar': round(total_revpar, 2)
+                    'revpar': round(total_revpar, 2)  # RevPAR（基于住宿费用总计）
                 },
                 'daily_summary': daily_summary.round(2).to_dict(orient='index'),
                 'channel_summary': channel_summary.round(2).to_dict(orient='index'),
+                'channel_comparison': channel_comparison,  # 新增渠道对比数据
+                'comparison_period': f"{last_week_start_str.replace('-', '.')} - {last_week_end_str.replace('-', '.')}",  # 对比周期
                 'fee_type_summary': fee_type_summary.round(2).to_dict(orient='index'),
                 'pivot_table': pivot_df.round(2).to_html(classes='table table-sm table-bordered', escape=False, sparsify=True)
             }
@@ -1101,21 +1304,16 @@ def import_excel():
                 
                 # 打印导入前的数据统计
                 print(f"导入前数据统计: 总行数={len(df)}, 房费总和={df['房费'].sum()}")
-                
-                # 按渠道、日期和房费科目分组，汇总间夜数和房费
-                grouped_df = df.groupby(['统计渠道', 'record_date', '房费科目']).agg({
-                    '间夜数': 'sum',
-                    '房费': 'sum'
-                }).reset_index()
-                
-                # 打印分组后的数据统计
-                print(f"分组后数据统计: 总行数={len(grouped_df)}, 房费总和={grouped_df['房费'].sum()}")
-                
+
+                # 不再进行汇总，直接处理原始订单明细数据
+                # 为每个订单生成唯一的order_id
+                df['order_id'] = df.apply(lambda row: f"{row['统计渠道']}_{row['record_date']}_{row.name}", axis=1)
+
                 with sqlite3.connect(DATABASE) as conn:
                     cursor = conn.cursor()
-                    
-                    # 处理每一行汇总后的数据
-                    for _, row in grouped_df.iterrows():
+
+                    # 处理每一行原始订单数据
+                    for _, row in df.iterrows():
                         try:
                             # 提取数据
                             channel = row['统计渠道']
@@ -1123,31 +1321,31 @@ def import_excel():
                             fee_type = row['房费科目']
                             room_nights = float(row['间夜数'])
                             revenue = float(row['房费'])
-                            
+                            order_id = row['order_id']
+                            guest_name = row.get('客人', '')  # 如果Excel中有客人姓名列
+
+                            # 业务规则：不计入间夜数的费用类型
+                            if fee_type in ['加收全天', '手工输入房费', '调整房费']:
+                                room_nights = 0
+
                             # 打印每行数据以便调试
-                            print(f"导入数据: 渠道={channel}, 日期={record_date}, 科目={fee_type}, 间夜={room_nights}, 房费={revenue}")
-                            
-                            # 检查是否已存在相同渠道、日期和房费科目的记录
+                            print(f"导入数据: 渠道={channel}, 日期={record_date}, 科目={fee_type}, 间夜={room_nights}, 房费={revenue}, 订单ID={order_id}")
+
+                            # 检查是否已存在相同的订单记录（防止重复导入）
                             cursor.execute(
-                                "SELECT id, room_nights, revenue FROM DailyRevenue WHERE record_date = ? AND channel = ? AND fee_type = ?", 
-                                (record_date, channel, fee_type)
+                                "SELECT id FROM DailyRevenue WHERE order_id = ?",
+                                (order_id,)
                             )
                             existing_record = cursor.fetchone()
-                            
+
                             if existing_record:
-                                # 更新现有记录
-                                record_id, existing_nights, existing_revenue = existing_record
-                                new_nights = existing_nights + room_nights
-                                new_revenue = existing_revenue + revenue
-                                
-                                cursor.execute(
-                                    "UPDATE DailyRevenue SET room_nights = ?, revenue = ? WHERE id = ?",
-                                    (new_nights, new_revenue, record_id)
-                                )
+                                # 订单已存在，跳过
+                                print(f"订单 {order_id} 已存在，跳过")
+                                continue
                             else:
-                                # 插入新记录
-                                sql = "INSERT INTO DailyRevenue (record_date, channel, fee_type, room_nights, revenue) VALUES (?, ?, ?, ?, ?)"
-                                cursor.execute(sql, (record_date, channel, fee_type, room_nights, revenue))
+                                # 插入新的订单记录
+                                sql = "INSERT INTO DailyRevenue (record_date, channel, fee_type, room_nights, revenue, order_id, guest_name) VALUES (?, ?, ?, ?, ?, ?, ?)"
+                                cursor.execute(sql, (record_date, channel, fee_type, room_nights, revenue, order_id, guest_name))
                             
                             success_count += 1
                             

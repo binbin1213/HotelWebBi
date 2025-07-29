@@ -666,6 +666,10 @@ def standardize_channel_name(channel):
         return '美团'
     elif channel in ['飞猪', '飞猪信用住']:
         return '飞猪'
+    elif channel in ['抖音来客', '抖音', '其他']:
+        return '抖音来客'
+    elif channel in ['散客', '门店']:
+        return '散客'
     return channel
 
 def simulate_insights(df):

@@ -13,6 +13,24 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentConfig = null;
     let currentModel = 'deepseek-chat'; // 默认使用deepseek-chat模型
     let viewMode = 'insights'; // 默认显示洞察视图
+
+    // 预定义颜色映射（与周报页面保持一致）
+    const colorMap = {
+        '美团': '#4e79a7',
+        '携程': '#f28e2c',
+        '飞猪': '#aaaaaa',
+        '去哪儿': '#59a14f',
+        '直销': '#e15759',
+        '微信': '#76b7b2',
+        '线下': '#edc949',
+        // 添加更多通用颜色
+        '收入': '#4e79a7',
+        '间夜数': '#f28e2c',
+        '平均房价': '#59a14f',
+        '出租率': '#e15759',
+        '总收入': '#4e79a7',
+        '总间夜数': '#f28e2c'
+    };
     
     // 初始化移动端触摸支持
     initTouchEvents();
@@ -333,67 +351,75 @@ document.addEventListener('DOMContentLoaded', function() {
         if (Array.isArray(yField)) {
             // 如果是数组，为每个y字段创建一个系列
             seriesData = yField.map(field => {
+                const displayName = getFieldDisplayName(field);
                 return {
-                    name: getFieldDisplayName(field),
+                    name: displayName,
                     type: 'bar',
-                    data: data.map(item => item[field] || 0)
+                    data: data.map(item => item[field] || 0),
+                    label: {
+                        show: true,
+                        position: 'top',
+                        formatter: '{c}',
+                        fontSize: 12
+                    },
+                    itemStyle: {
+                        color: colorMap[displayName] || colorMap[field] || null
+                    }
                 };
             });
         } else {
             // 如果不是数组，创建单一系列
+            const displayName = getFieldDisplayName(yField);
             seriesData = [{
-                name: getFieldDisplayName(yField),
+                name: displayName,
                 type: 'bar',
-                data: data.map(item => item[yField] || 0)
+                data: data.map(item => item[yField] || 0),
+                label: {
+                    show: true,
+                    position: 'top',
+                    formatter: '{c}',
+                    fontSize: 12
+                },
+                itemStyle: {
+                    color: colorMap[displayName] || colorMap[yField] || null
+                }
             }];
         }
         
         // 准备X轴数据
         const xAxisData = data.map(item => item[xField]);
         
-        // 图表配置
+        // 图表配置（采用周报页面风格）
         const option = {
             tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
-                }
+                trigger: 'axis'
             },
             legend: {
                 data: seriesData.map(series => series.name),
-                top: isMobile ? 0 : 10,
-                left: isMobile ? 'center' : 'right',
-                textStyle: {
-                    fontSize: isMobile ? 10 : 12
-                },
-                itemWidth: isMobile ? 12 : 16,
-                itemHeight: isMobile ? 8 : 12
+                bottom: 0
             },
             grid: {
                 left: '3%',
                 right: '4%',
-                bottom: '3%',
+                bottom: '15%',
+                top: '10%',
                 containLabel: true
             },
             xAxis: {
                 type: 'category',
                 data: xAxisData,
+                boundaryGap: true,
                 axisLabel: {
-                    rotate: xAxisData.length > 5 ? 45 : 0,
-                    fontSize: isMobile ? 10 : 12
+                    interval: 0,
+                    fontSize: 12
                 }
             },
             yAxis: {
                 type: 'value',
-                name: config.y_label,
-                nameTextStyle: {
-                    fontSize: isMobile ? 10 : 12
-                },
-                axisLabel: {
-                    formatter: function(value) {
-                        return value >= 1000 ? (value / 1000).toFixed(1) + 'k' : value;
-                    },
-                    fontSize: isMobile ? 10 : 12
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
                 }
             },
             series: seriesData
@@ -425,69 +451,77 @@ document.addEventListener('DOMContentLoaded', function() {
         if (Array.isArray(yField)) {
             // 如果是数组，为每个y字段创建一个系列
             seriesData = yField.map(field => {
+                const displayName = getFieldDisplayName(field);
                 return {
-                    name: getFieldDisplayName(field),
+                    name: displayName,
                     type: 'line',
                     smooth: true,
                     data: data.map(item => item[field] || 0),
-                    symbolSize: isMobile ? 4 : 6
+                    symbolSize: 6,
+                    symbol: 'circle',
+                    lineStyle: {
+                        width: 2,
+                        color: colorMap[displayName] || colorMap[field] || null
+                    },
+                    itemStyle: {
+                        color: colorMap[displayName] || colorMap[field] || null
+                    }
                 };
             });
         } else {
             // 如果不是数组，创建单一系列
+            const displayName = getFieldDisplayName(yField);
             seriesData = [{
-                name: getFieldDisplayName(yField),
+                name: displayName,
                 type: 'line',
                 smooth: true,
                 data: data.map(item => item[yField] || 0),
-                symbolSize: isMobile ? 4 : 6
+                symbolSize: 6,
+                symbol: 'circle',
+                lineStyle: {
+                    width: 2,
+                    color: colorMap[displayName] || colorMap[yField] || null
+                },
+                itemStyle: {
+                    color: colorMap[displayName] || colorMap[yField] || null
+                }
             }];
         }
         
         // 准备X轴数据
         const xAxisData = data.map(item => item[xField]);
         
-        // 图表配置
+        // 图表配置（采用周报页面风格）
         const option = {
             tooltip: {
                 trigger: 'axis'
             },
             legend: {
                 data: seriesData.map(series => series.name),
-                top: isMobile ? 0 : 10,
-                left: isMobile ? 'center' : 'right',
-                textStyle: {
-                    fontSize: isMobile ? 10 : 12
-                },
-                itemWidth: isMobile ? 12 : 16,
-                itemHeight: isMobile ? 8 : 12
+                bottom: 0
             },
             grid: {
                 left: '3%',
                 right: '4%',
-                bottom: '3%',
+                bottom: '15%',
+                top: '10%',
                 containLabel: true
             },
             xAxis: {
                 type: 'category',
-                boundaryGap: false,
                 data: xAxisData,
+                boundaryGap: false,
                 axisLabel: {
-                    rotate: xAxisData.length > 5 ? 45 : 0,
-                    fontSize: isMobile ? 10 : 12
+                    interval: 0,
+                    fontSize: 12
                 }
             },
             yAxis: {
                 type: 'value',
-                name: config.y_label,
-                nameTextStyle: {
-                    fontSize: isMobile ? 10 : 12
-                },
-                axisLabel: {
-                    formatter: function(value) {
-                        return value >= 1000 ? (value / 1000).toFixed(1) + 'k' : value;
-                    },
-                    fontSize: isMobile ? 10 : 12
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
                 }
             },
             series: seriesData
@@ -520,7 +554,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // 准备饼图数据
         const pieData = data.map(item => ({
             name: item[xField],
-            value: item[primaryYField] || 0
+            value: item[primaryYField] || 0,
+            itemStyle: {
+                color: colorMap[item[xField]] || null
+            }
         }));
         
         // 图表配置
@@ -1109,10 +1146,26 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
+        // 列名中文映射
+        const columnTitleMap = {
+            'avg_price': '平均房价',
+            'month': '月份',
+            'total_revenue': '总收入',
+            'total_room_nights': '总间夜数',
+            'revenue': '收入',
+            'room_nights': '间夜数',
+            'channel': '渠道',
+            'record_date': '日期',
+            'day_of_week': '星期',
+            'day_name': '星期',
+            'occupancy_rate': '出租率',
+            'percentage': '百分比'
+        };
+
         // 获取列名
         const columns = Object.keys(data[0]).map(key => {
             let columnDef = {
-                title: key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' '),
+                title: columnTitleMap[key] || key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' '),
                 data: key
             };
             
@@ -1355,9 +1408,15 @@ document.addEventListener('DOMContentLoaded', function() {
             'avg_price': '平均房价',
             'occupancy_rate': '出租率',
             'total_revenue': '总收入',
-            'total_room_nights': '总间夜数'
+            'total_room_nights': '总间夜数',
+            'channel': '渠道',
+            'record_date': '日期',
+            'month': '月份',
+            'day_of_week': '星期',
+            'day_name': '星期',
+            'percentage': '百分比'
         };
-        
+
         return fieldLabels[field] || field;
     }
     
