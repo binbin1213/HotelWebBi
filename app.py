@@ -1745,6 +1745,15 @@ if __name__ == '__main__':
     # 记录系统启动信息
     app.logger.info("=== 乐巷酒店数据智能分析系统启动 ===")
     app.logger.info(f"默认使用模型: {DEFAULT_MODEL}")
+
+    # 检查环境变量加载情况
+    admin_password = os.getenv('DB_ADMIN_PASSWORD')
+    if admin_password:
+        app.logger.info("数据库管理密码已配置")
+    else:
+        app.logger.warning("警告：数据库管理密码未配置！")
+
+    app.logger.info(f"总房间数配置: {os.getenv('TOTAL_ROOMS', '未配置')}")
     app.logger.info("数据库初始化完成")
     app.logger.info(f"启动Web服务器在端口 {args.port}...")
     
