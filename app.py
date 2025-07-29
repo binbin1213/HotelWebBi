@@ -1447,7 +1447,8 @@ def import_excel():
 
 def check_admin_password():
     """检查管理员密码"""
-    admin_password = os.getenv('DB_ADMIN_PASSWORD')
+    # 优先从环境变量获取，如果没有则从数据库配置获取
+    admin_password = os.getenv('DB_ADMIN_PASSWORD') or get_config('DB_ADMIN_PASSWORD')
     if not admin_password:
         return False, "未设置管理员密码"
 
@@ -1544,7 +1545,8 @@ def db_admin_login():
     """管理员登录页面"""
     if request.method == 'POST':
         password = request.form.get('password')
-        admin_password = os.getenv('DB_ADMIN_PASSWORD')
+        # 优先从环境变量获取，如果没有则从数据库配置获取
+        admin_password = os.getenv('DB_ADMIN_PASSWORD') or get_config('DB_ADMIN_PASSWORD')
 
         if not admin_password:
             flash('系统未配置管理员密码')
