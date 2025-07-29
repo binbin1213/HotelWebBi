@@ -275,6 +275,135 @@
             </div>
         </div>
 
+        <!-- 上周数据 -->
+        <div class="mb-8 stats-container">
+            <div class="stats-header">
+                <div class="stats-header-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-800">上周统计</h3>
+            </div>
+
+            <div class="stats-grid">
+                <!-- 上周收入卡片 -->
+                <div class="stat-item">
+                    <div class="stat-label">上周收入</div>
+                    <div class="stat-value">
+                        <span class="animated-stat" data-target="{{ stats.last_week_revenue }}" data-prefix="¥">¥0</span>
+                    </div>
+                    {% if stats.last_week_revenue_change > 0 %}
+                    <div class="stat-change stat-change-positive">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                        </svg>
+                        {{ stats.last_week_revenue_change }}% vs 上上周
+                    </div>
+                    {% else %}
+                    <div class="stat-change stat-change-negative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                        {{ stats.last_week_revenue_change|abs }}% vs 上上周
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- 上周间夜卡片 -->
+                <div class="stat-item">
+                    <div class="stat-label">上周间夜</div>
+                    <div class="stat-value">
+                        <span class="animated-stat" data-target="{{ stats.last_week_room_nights }}">0</span>
+                    </div>
+                    {% if stats.last_week_room_nights_change > 0 %}
+                    <div class="stat-change stat-change-positive">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                        </svg>
+                        {{ stats.last_week_room_nights_change }}% vs 上上周
+                    </div>
+                    {% else %}
+                    <div class="stat-change stat-change-negative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                        {{ stats.last_week_room_nights_change|abs }}% vs 上上周
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- 上周平均房价卡片 -->
+                <div class="stat-item">
+                    <div class="stat-label">上周房价</div>
+                    <div class="stat-value">
+                        <span class="animated-stat" data-target="{{ stats.last_week_avg_price }}" data-prefix="¥">¥0</span>
+                    </div>
+                    {% if stats.last_week_avg_price_change > 0 %}
+                    <div class="stat-change stat-change-positive">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                        </svg>
+                        {{ stats.last_week_avg_price_change }}% vs 上上周
+                    </div>
+                    {% else %}
+                    <div class="stat-change stat-change-negative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                        {{ stats.last_week_avg_price_change|abs }}% vs 上上周
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- 上周入住率卡片 -->
+                <div class="stat-item">
+                    <div class="stat-label">上周入住率</div>
+                    <div class="stat-value">
+                        <span class="animated-stat" data-target="{{ stats.last_week_occupancy_rate }}" data-suffix="%">0%</span>
+                    </div>
+                    {% if stats.last_week_occupancy_rate_change > 0 %}
+                    <div class="stat-change stat-change-positive">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                        </svg>
+                        {{ stats.last_week_occupancy_rate_change }}% vs 上上周
+                    </div>
+                    {% else %}
+                    <div class="stat-change stat-change-negative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                        {{ stats.last_week_occupancy_rate_change|abs }}% vs 上上周
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- 上周 RevPAR 卡片 -->
+                <div class="stat-item">
+                    <div class="stat-label">上周 RevPAR</div>
+                    <div class="stat-value">
+                        <span class="animated-stat" data-target="{{ stats.last_week_revpar }}" data-prefix="¥">¥0</span>
+                    </div>
+                    {% if stats.last_week_revpar_change > 0 %}
+                    <div class="stat-change stat-change-positive">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                        </svg>
+                        {{ stats.last_week_revpar_change }}% vs 上上周
+                    </div>
+                    {% else %}
+                    <div class="stat-change stat-change-negative">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                        </svg>
+                        {{ stats.last_week_revpar_change|abs }}% vs 上上周
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
         <!-- 本周数据 -->
         <div class="stats-container">
             <div class="stats-header">
