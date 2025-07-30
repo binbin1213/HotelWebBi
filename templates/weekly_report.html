@@ -221,6 +221,7 @@
                         </thead>
                         <tbody>
                             {% for channel, data in report_data.channel_comparison.items() %}
+                            {% if channel != '合计' %}
                             <tr>
                                 <td><strong>{{ channel }}</strong></td>
                                 <td>{{ data.current_room_nights }}</td>
@@ -240,7 +241,30 @@
                                     {% endif %}
                                 </td>
                             </tr>
+                            {% endif %}
                             {% endfor %}
+                            <!-- 合计行 -->
+                            {% if report_data.channel_comparison['合计'] %}
+                            <tr class="font-bold bg-gray-100 border-t-2">
+                                <td><strong>合计</strong></td>
+                                <td><strong>{{ report_data.channel_comparison['合计'].current_room_nights }}</strong></td>
+                                <td><strong>{{ report_data.channel_comparison['合计'].last_room_nights }}</strong></td>
+                                <td class="{% if report_data.channel_comparison['合计'].room_nights_change > 0 %}text-green-600{% elif report_data.channel_comparison['合计'].room_nights_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ report_data.channel_comparison['合计'].room_nights_change }}
+                                    {% if report_data.channel_comparison['合计'].room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(report_data.channel_comparison['合计'].room_nights_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                                <td><strong>{{ "%.2f"|format(report_data.channel_comparison['合计'].current_revenue) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(report_data.channel_comparison['合计'].last_revenue) }}</strong></td>
+                                <td class="{% if report_data.channel_comparison['合计'].revenue_change > 0 %}text-green-600{% elif report_data.channel_comparison['合计'].revenue_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ "%.2f"|format(report_data.channel_comparison['合计'].revenue_change) }}
+                                    {% if report_data.channel_comparison['合计'].revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(report_data.channel_comparison['合计'].revenue_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                            </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
@@ -273,6 +297,7 @@
                         </thead>
                         <tbody>
                             {% for channel, data in report_data.yearly_comparison.items() %}
+                            {% if channel != '合计' %}
                             <tr>
                                 <td><strong>{{ channel }}</strong></td>
                                 <td>{{ data.current_room_nights }}</td>
@@ -292,7 +317,30 @@
                                     {% endif %}
                                 </td>
                             </tr>
+                            {% endif %}
                             {% endfor %}
+                            <!-- 合计行 -->
+                            {% if report_data.yearly_comparison['合计'] %}
+                            <tr class="font-bold bg-gray-100 border-t-2">
+                                <td><strong>合计</strong></td>
+                                <td><strong>{{ report_data.yearly_comparison['合计'].current_room_nights }}</strong></td>
+                                <td><strong>{{ report_data.yearly_comparison['合计'].last_year_room_nights }}</strong></td>
+                                <td class="{% if report_data.yearly_comparison['合计'].room_nights_change > 0 %}text-green-600{% elif report_data.yearly_comparison['合计'].room_nights_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ report_data.yearly_comparison['合计'].room_nights_change }}
+                                    {% if report_data.yearly_comparison['合计'].room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(report_data.yearly_comparison['合计'].room_nights_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                                <td><strong>{{ "%.2f"|format(report_data.yearly_comparison['合计'].current_revenue) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(report_data.yearly_comparison['合计'].last_year_revenue) }}</strong></td>
+                                <td class="{% if report_data.yearly_comparison['合计'].revenue_change > 0 %}text-green-600{% elif report_data.yearly_comparison['合计'].revenue_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ "%.2f"|format(report_data.yearly_comparison['合计'].revenue_change) }}
+                                    {% if report_data.yearly_comparison['合计'].revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(report_data.yearly_comparison['合计'].revenue_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                            </tr>
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>

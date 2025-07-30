@@ -1305,6 +1305,28 @@ def generate_weekly_report(start_date, end_date):
                     'room_nights_change_rate': round(float(room_nights_change_rate), 2)
                 }
 
+            # 计算环比对比合计
+            total_current_revenue = sum(data['current_revenue'] for data in channel_comparison.values())
+            total_last_revenue = sum(data['last_revenue'] for data in channel_comparison.values())
+            total_current_room_nights = sum(data['current_room_nights'] for data in channel_comparison.values())
+            total_last_room_nights = sum(data['last_room_nights'] for data in channel_comparison.values())
+
+            total_revenue_change = total_current_revenue - total_last_revenue
+            total_room_nights_change = total_current_room_nights - total_last_room_nights
+            total_revenue_change_rate = (total_revenue_change / total_last_revenue * 100) if total_last_revenue > 0 else 0
+            total_room_nights_change_rate = (total_room_nights_change / total_last_room_nights * 100) if total_last_room_nights > 0 else 0
+
+            channel_comparison['合计'] = {
+                'current_revenue': round(float(total_current_revenue), 2),
+                'last_revenue': round(float(total_last_revenue), 2),
+                'revenue_change': round(float(total_revenue_change), 2),
+                'revenue_change_rate': round(float(total_revenue_change_rate), 2),
+                'current_room_nights': int(total_current_room_nights),
+                'last_room_nights': int(total_last_room_nights),
+                'room_nights_change': int(total_room_nights_change),
+                'room_nights_change_rate': round(float(total_room_nights_change_rate), 2)
+            }
+
             # 处理去年同期数据进行同比分析
             yearly_comparison = {}
 
@@ -1355,6 +1377,28 @@ def generate_weekly_report(start_date, end_date):
                     'room_nights_change': int(room_nights_change),
                     'room_nights_change_rate': round(float(room_nights_change_rate), 2)
                 }
+
+            # 计算同比对比合计
+            yearly_total_current_revenue = sum(data['current_revenue'] for data in yearly_comparison.values())
+            yearly_total_last_year_revenue = sum(data['last_year_revenue'] for data in yearly_comparison.values())
+            yearly_total_current_room_nights = sum(data['current_room_nights'] for data in yearly_comparison.values())
+            yearly_total_last_year_room_nights = sum(data['last_year_room_nights'] for data in yearly_comparison.values())
+
+            yearly_total_revenue_change = yearly_total_current_revenue - yearly_total_last_year_revenue
+            yearly_total_room_nights_change = yearly_total_current_room_nights - yearly_total_last_year_room_nights
+            yearly_total_revenue_change_rate = (yearly_total_revenue_change / yearly_total_last_year_revenue * 100) if yearly_total_last_year_revenue > 0 else 0
+            yearly_total_room_nights_change_rate = (yearly_total_room_nights_change / yearly_total_last_year_room_nights * 100) if yearly_total_last_year_room_nights > 0 else 0
+
+            yearly_comparison['合计'] = {
+                'current_revenue': round(float(yearly_total_current_revenue), 2),
+                'last_year_revenue': round(float(yearly_total_last_year_revenue), 2),
+                'revenue_change': round(float(yearly_total_revenue_change), 2),
+                'revenue_change_rate': round(float(yearly_total_revenue_change_rate), 2),
+                'current_room_nights': int(yearly_total_current_room_nights),
+                'last_year_room_nights': int(yearly_total_last_year_room_nights),
+                'room_nights_change': int(yearly_total_room_nights_change),
+                'room_nights_change_rate': round(float(yearly_total_room_nights_change_rate), 2)
+            }
 
             # 费用类型分析
             fee_type_summary = df.groupby('fee_type').agg(
