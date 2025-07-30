@@ -249,7 +249,9 @@
     </header>
 
     <main class="flex-grow">
-        {% block content %}{% endblock %}
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {% block content %}{% endblock %}
+        </div>
     </main>
 
     <footer class="bg-gray-800 text-white mt-auto">
