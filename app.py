@@ -1121,6 +1121,16 @@ def generate_weekly_report(start_date, end_date):
             # 查询上周数据
             df_last_week = pd.read_sql_query(query, conn, params=(last_week_start_str, last_week_end_str))
 
+            # 计算去年同期日期范围
+            last_year_start = start_dt.replace(year=start_dt.year - 1)
+            last_year_end = end_dt.replace(year=end_dt.year - 1)
+
+            last_year_start_str = last_year_start.strftime('%Y-%m-%d')
+            last_year_end_str = last_year_end.strftime('%Y-%m-%d')
+
+            # 查询去年同期数据
+            df_last_year = pd.read_sql_query(query, conn, params=(last_year_start_str, last_year_end_str))
+
             if df.empty:
                 # 返回空报表结构，保持与预期结构一致
                 empty_report = {
@@ -1295,6 +1305,57 @@ def generate_weekly_report(start_date, end_date):
                     'room_nights_change_rate': round(float(room_nights_change_rate), 2)
                 }
 
+            # 处理去年同期数据进行同比分析
+            yearly_comparison = {}
+
+            # 初始化去年同期数据汇总
+            last_year_channel_summary = pd.DataFrame(columns=['room_revenue', 'room_nights'])
+
+            if not df_last_year.empty:
+                # 标准化去年同期数据的渠道名称
+                df_last_year['standardized_channel'] = df_last_year['channel'].apply(standardize_channel_name)
+
+                # 分离去年同期的住宿收入和钟点房收入
+                last_year_accommodation_df = df_last_year[df_last_year['fee_type'].isin(['房费', '手工输入房费', '调整房费'])]
+
+                # 去年同期渠道分析
+                last_year_channel_summary = last_year_accommodation_df.groupby('standardized_channel').agg(
+                    room_revenue=('revenue', 'sum'),
+                    room_nights=('room_nights', 'sum')
+                )
+
+            # 确保所有渠道都出现在去年同期数据中
+            for channel in all_channels:
+                if channel not in last_year_channel_summary.index:
+                    last_year_channel_summary.loc[channel] = {'room_revenue': 0.0, 'room_nights': 0}
+
+            # 计算同比对比数据
+            for channel in all_channels:
+                current_revenue = channel_summary.loc[channel, 'room_revenue'] if channel in channel_summary.index else 0
+                current_room_nights = channel_summary.loc[channel, 'room_nights'] if channel in channel_summary.index else 0
+
+                last_year_revenue = last_year_channel_summary.loc[channel, 'room_revenue'] if channel in last_year_channel_summary.index else 0
+                last_year_room_nights = last_year_channel_summary.loc[channel, 'room_nights'] if channel in last_year_channel_summary.index else 0
+
+                # 计算变化
+                revenue_change = current_revenue - last_year_revenue
+                room_nights_change = current_room_nights - last_year_room_nights
+
+                # 计算变化率
+                revenue_change_rate = (revenue_change / last_year_revenue * 100) if last_year_revenue > 0 else 0
+                room_nights_change_rate = (room_nights_change / last_year_room_nights * 100) if last_year_room_nights > 0 else 0
+
+                yearly_comparison[channel] = {
+                    'current_revenue': round(float(current_revenue), 2),
+                    'last_year_revenue': round(float(last_year_revenue), 2),
+                    'revenue_change': round(float(revenue_change), 2),
+                    'revenue_change_rate': round(float(revenue_change_rate), 2),
+                    'current_room_nights': int(current_room_nights),
+                    'last_year_room_nights': int(last_year_room_nights),
+                    'room_nights_change': int(room_nights_change),
+                    'room_nights_change_rate': round(float(room_nights_change_rate), 2)
+                }
+
             # 费用类型分析
             fee_type_summary = df.groupby('fee_type').agg(
                 revenue=('revenue', 'sum')
@@ -1315,8 +1376,10 @@ def generate_weekly_report(start_date, end_date):
                 },
                 'daily_summary': daily_summary.round(2).to_dict(orient='index'),
                 'channel_summary': channel_summary.round(2).to_dict(orient='index'),
-                'channel_comparison': channel_comparison,  # 新增渠道对比数据
-                'comparison_period': f"{last_week_start_str.replace('-', '.')} - {last_week_end_str.replace('-', '.')}",  # 对比周期
+                'channel_comparison': channel_comparison,  # 环比对比数据（与上周对比）
+                'comparison_period': f"{last_week_start_str.replace('-', '.')} - {last_week_end_str.replace('-', '.')}",  # 环比对比周期
+                'yearly_comparison': yearly_comparison,  # 同比对比数据（与去年同期对比）
+                'yearly_comparison_period': f"{last_year_start_str.replace('-', '.')} - {last_year_end_str.replace('-', '.')}",  # 同比对比周期
                 'fee_type_summary': fee_type_summary.round(2).to_dict(orient='index'),
                 'pivot_table': pivot_df.round(2).to_html(classes='table table-sm table-bordered', escape=False, sparsify=True)
             }

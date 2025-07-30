@@ -195,12 +195,12 @@
                 </div>
             </div>
 
-            <!-- 渠道周同比对比分析 -->
+            <!-- 渠道周环比对比分析 -->
             {% if report_data.channel_comparison and report_data.channel_comparison|length > 0 %}
             <div class="report-card mt-6">
-                <h3 class="text-lg font-semibold mb-3 text-center">渠道周同比对比分析</h3>
+                <h3 class="text-lg font-semibold mb-3 text-center">渠道周环比对比分析</h3>
                 <p class="text-sm text-gray-600 mb-3">
-                    上周：{{ report_data.total_summary.date_range }} vs 上上周：{{ report_data.comparison_period }}
+                    本周：{{ report_data.total_summary.date_range }} vs 上周：{{ report_data.comparison_period }}
                 </p>
                 <div class="table-responsive">
                     <table class="report-table">
@@ -233,6 +233,58 @@
                                 </td>
                                 <td>{{ "%.2f"|format(data.current_revenue) }}</td>
                                 <td>{{ "%.2f"|format(data.last_revenue) }}</td>
+                                <td class="{% if data.revenue_change > 0 %}text-green-600{% elif data.revenue_change < 0 %}text-red-600{% endif %}">
+                                    {{ "%.2f"|format(data.revenue_change) }}
+                                    {% if data.revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.revenue_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- 渠道同比对比分析（与去年同期对比） -->
+            {% if report_data.yearly_comparison and report_data.yearly_comparison|length > 0 %}
+            <div class="report-card mt-6">
+                <h3 class="text-lg font-semibold mb-3 text-center">渠道同比对比分析</h3>
+                <p class="text-sm text-gray-600 mb-3">
+                    本周：{{ report_data.total_summary.date_range }} vs 去年同期：{{ report_data.yearly_comparison_period }}
+                </p>
+                <div class="table-responsive">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">渠道</th>
+                                <th colspan="3">间夜数量</th>
+                                <th colspan="3">收入</th>
+                            </tr>
+                            <tr>
+                                <th>本周</th>
+                                <th>去年同期</th>
+                                <th>变化</th>
+                                <th>本周</th>
+                                <th>去年同期</th>
+                                <th>变化</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for channel, data in report_data.yearly_comparison.items() %}
+                            <tr>
+                                <td><strong>{{ channel }}</strong></td>
+                                <td>{{ data.current_room_nights }}</td>
+                                <td>{{ data.last_year_room_nights }}</td>
+                                <td class="{% if data.room_nights_change > 0 %}text-green-600{% elif data.room_nights_change < 0 %}text-red-600{% endif %}">
+                                    {{ data.room_nights_change }}
+                                    {% if data.room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.room_nights_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                                <td>{{ "%.2f"|format(data.current_revenue) }}</td>
+                                <td>{{ "%.2f"|format(data.last_year_revenue) }}</td>
                                 <td class="{% if data.revenue_change > 0 %}text-green-600{% elif data.revenue_change < 0 %}text-red-600{% endif %}">
                                     {{ "%.2f"|format(data.revenue_change) }}
                                     {% if data.revenue_change_rate != 0 %}
