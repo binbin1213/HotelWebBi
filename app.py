@@ -943,7 +943,8 @@ def weekly_report():
             'hourly_revenue': 0.0,
             'room_nights': 0,
             'avg_price': 0.0,
-            'occupancy_rate': 0.0
+            'occupancy_rate': 0.0,
+            'revpar': 0.0
         }
         return render_template('weekly_report.html',
                                start_date=start_date,
