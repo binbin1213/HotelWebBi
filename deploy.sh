@@ -42,8 +42,8 @@ show_menu() {
     echo "请选择操作："
     echo ""
     echo -e "${YELLOW}1)${NC} 开发环境启动 (本地测试)"
-    echo -e "${YELLOW}2)${NC} 生产环境部署 (Docker)"
-    echo -e "${YELLOW}3)${NC} 更新生产环境"
+    echo -e "${YELLOW}2)${NC} 生产环境部署 (首次部署/完整重建)"
+    echo -e "${YELLOW}3)${NC} 快速更新代码 (拉取+重启)"
     echo -e "${YELLOW}4)${NC} 停止生产环境"
     echo -e "${YELLOW}5)${NC} 查看运行日志"
     echo -e "${YELLOW}6)${NC} 备份数据库"
@@ -130,11 +130,20 @@ start_dev() {
     python app.py
 }
 
-# 生产环境部署
+# 生产环境部署 (首次部署或完整重建)
 deploy_prod() {
     echo -e "${BLUE}=======================================${NC}"
-    echo -e "${GREEN}部署到生产环境${NC}"
+    echo -e "${GREEN}生产环境部署 (完整重建)${NC}"
     echo -e "${BLUE}=======================================${NC}"
+
+    echo -e "${YELLOW}注意: 这将完全重新构建Docker镜像，可能需要几分钟时间${NC}"
+    echo -e "${YELLOW}如果只是更新代码，建议使用选项3 (快速更新)${NC}"
+    echo -e "${YELLOW}是否继续完整部署? [y/N]${NC}"
+    read -r deploy_choice
+    if [[ ! "$deploy_choice" =~ ^[Yy]$ ]]; then
+        echo -e "${RED}已取消部署${NC}"
+        return 1
+    fi
 
     # 拉取最新代码
     if ! pull_code; then
@@ -184,15 +193,15 @@ deploy_prod() {
     fi
 }
 
-# 更新生产环境
-update_prod() {
+# 快速更新代码
+quick_update() {
     echo -e "${BLUE}=======================================${NC}"
-    echo -e "${GREEN}更新生产环境${NC}"
+    echo -e "${GREEN}快速更新代码${NC}"
     echo -e "${BLUE}=======================================${NC}"
 
     # 拉取最新代码
     if ! pull_code; then
-        echo -e "${YELLOW}代码拉取失败，是否继续更新? [y/N]${NC}"
+        echo -e "${YELLOW}代码拉取失败，是否继续重启? [y/N]${NC}"
         read -r continue_choice
         if [[ ! "$continue_choice" =~ ^[Yy]$ ]]; then
             echo -e "${RED}已取消更新${NC}"
@@ -200,15 +209,24 @@ update_prod() {
         fi
     fi
 
-    # 重新构建并启动
-    echo -e "${YELLOW}重新构建镜像...${NC}"
-    docker-compose -f docker-compose.prod.yml build --no-cache
-    
+    # 直接重启服务
     echo -e "${YELLOW}重启服务...${NC}"
-    docker-compose -f docker-compose.prod.yml up -d
-    
-    echo -e "${GREEN}✓ 更新完成${NC}"
+    docker-compose -f docker-compose.prod.yml restart
+
+    # 等待服务启动
+    echo -e "${YELLOW}等待服务启动...${NC}"
+    sleep 3
+
+    # 检查服务状态
+    if docker-compose -f docker-compose.prod.yml ps | grep -q "Up"; then
+        echo -e "${GREEN}✓ 快速更新完成，服务运行正常${NC}"
+    else
+        echo -e "${RED}✗ 服务启动异常，请检查日志${NC}"
+        echo -e "${YELLOW}查看日志: ./deploy.sh 然后选择 6${NC}"
+    fi
 }
+
+
 
 # 停止生产环境
 stop_prod() {
@@ -253,7 +271,7 @@ handle_choice() {
             deploy_prod
             ;;
         3)
-            update_prod
+            quick_update
             ;;
         4)
             stop_prod
