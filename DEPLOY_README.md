@@ -6,30 +6,46 @@
 
 ### 使用方法
 
+**方式一：交互式菜单（推荐）**
+
 ```bash
 # 给脚本执行权限
 chmod +x deploy.sh
 
-# 查看帮助
-./deploy.sh help
+# 运行脚本，会显示选择菜单
+./deploy.sh
+```
 
-# 开发环境启动
-./deploy.sh dev
+会显示如下菜单：
+```
+=======================================
+乐巷酒店数据智能分析系统
+=======================================
 
-# 生产环境部署
-./deploy.sh prod
+请选择操作：
 
-# 更新生产环境
-./deploy.sh update
+1) 开发环境启动 (本地测试)
+2) 生产环境部署 (Docker)
+3) 更新生产环境
+4) 停止生产环境
+5) 查看运行日志
+6) 备份数据库
+7) 显示帮助信息
+0) 退出
 
-# 停止生产环境
-./deploy.sh stop
+请输入选项 [0-7]:
+```
 
-# 查看日志
-./deploy.sh logs
+**方式二：直接命令（适合脚本调用）**
 
-# 备份数据库
-./deploy.sh backup
+```bash
+./deploy.sh dev     # 开发环境启动
+./deploy.sh prod    # 生产环境部署
+./deploy.sh update  # 更新生产环境
+./deploy.sh stop    # 停止生产环境
+./deploy.sh logs    # 查看日志
+./deploy.sh backup  # 备份数据库
+./deploy.sh help    # 查看帮助
 ```
 
 ## 📋 部署前准备
