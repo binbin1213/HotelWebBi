@@ -41,17 +41,16 @@ show_menu() {
     echo ""
     echo "请选择操作："
     echo ""
-    echo -e "${YELLOW}1)${NC} 拉取最新代码"
-    echo -e "${YELLOW}2)${NC} 开发环境启动 (本地测试)"
-    echo -e "${YELLOW}3)${NC} 生产环境部署 (Docker)"
-    echo -e "${YELLOW}4)${NC} 更新生产环境"
-    echo -e "${YELLOW}5)${NC} 停止生产环境"
-    echo -e "${YELLOW}6)${NC} 查看运行日志"
-    echo -e "${YELLOW}7)${NC} 备份数据库"
-    echo -e "${YELLOW}8)${NC} 显示帮助信息"
+    echo -e "${YELLOW}1)${NC} 开发环境启动 (本地测试)"
+    echo -e "${YELLOW}2)${NC} 生产环境部署 (Docker)"
+    echo -e "${YELLOW}3)${NC} 更新生产环境"
+    echo -e "${YELLOW}4)${NC} 停止生产环境"
+    echo -e "${YELLOW}5)${NC} 查看运行日志"
+    echo -e "${YELLOW}6)${NC} 备份数据库"
+    echo -e "${YELLOW}7)${NC} 显示帮助信息"
     echo -e "${YELLOW}0)${NC} 退出"
     echo ""
-    echo -n -e "${GREEN}请输入选项 [0-8]: ${NC}"
+    echo -n -e "${GREEN}请输入选项 [0-7]: ${NC}"
 }
 
 # 检查环境变量
@@ -273,7 +272,7 @@ handle_choice() {
             exit 0
             ;;
         *)
-            echo -e "${RED}无效选项，请重新选择${NC}"
+            echo -e "${RED}无效选项，请输入 0-7${NC}"
             return 1
             ;;
     esac
