@@ -1636,6 +1636,135 @@ def system_guide():
     """
     return render_template('system_guide.html')
 
+@app.route('/room_types')
+def room_types():
+    """
+    房型管理页面
+    """
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+
+            # 获取所有房型
+            cursor.execute("SELECT id, type_name, description FROM room_types ORDER BY type_name")
+            room_types = cursor.fetchall()
+
+        return render_template('room_types.html', room_types=room_types)
+    except Exception as e:
+        app.logger.error(f"获取房型数据时出错: {e}")
+        flash(f'获取房型数据时出错: {e}')
+        return render_template('room_types.html', room_types=[])
+
+@app.route('/room_types/add', methods=['POST'])
+def add_room_type():
+    """
+    添加新房型
+    """
+    try:
+        type_name = request.form.get('type_name', '').strip()
+        description = request.form.get('description', '').strip()
+
+        if not type_name:
+            flash('房型名称不能为空')
+            return redirect(url_for('room_types'))
+
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+
+            # 检查房型是否已存在
+            cursor.execute("SELECT id FROM room_types WHERE type_name = ?", (type_name,))
+            if cursor.fetchone():
+                flash('该房型已存在')
+                return redirect(url_for('room_types'))
+
+            # 添加新房型
+            cursor.execute("INSERT INTO room_types (type_name, description) VALUES (?, ?)",
+                          (type_name, description))
+            conn.commit()
+
+        flash('房型添加成功')
+        app.logger.info(f"添加新房型: {type_name}")
+
+    except Exception as e:
+        app.logger.error(f"添加房型时出错: {e}")
+        flash(f'添加房型时出错: {e}')
+
+    return redirect(url_for('room_types'))
+
+@app.route('/room_types/update/<int:room_type_id>', methods=['POST'])
+def update_room_type(room_type_id):
+    """
+    更新房型信息
+    """
+    try:
+        type_name = request.form.get('type_name', '').strip()
+        description = request.form.get('description', '').strip()
+
+        if not type_name:
+            flash('房型名称不能为空')
+            return redirect(url_for('room_types'))
+
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+
+            # 检查房型是否存在（排除当前房型）
+            cursor.execute("SELECT id FROM room_types WHERE type_name = ? AND id != ?",
+                          (type_name, room_type_id))
+            if cursor.fetchone():
+                flash('该房型名称已存在')
+                return redirect(url_for('room_types'))
+
+            # 更新房型
+            cursor.execute("UPDATE room_types SET type_name = ?, description = ? WHERE id = ?",
+                          (type_name, description, room_type_id))
+            conn.commit()
+
+        flash('房型更新成功')
+        app.logger.info(f"更新房型: {type_name}")
+
+    except Exception as e:
+        app.logger.error(f"更新房型时出错: {e}")
+        flash(f'更新房型时出错: {e}')
+
+    return redirect(url_for('room_types'))
+
+@app.route('/room_types/delete/<int:room_type_id>', methods=['POST'])
+def delete_room_type(room_type_id):
+    """
+    删除房型
+    """
+    try:
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+
+            # 检查是否有相关的住宿记录
+            cursor.execute("SELECT COUNT(*) FROM DailyRevenue WHERE room_type = (SELECT type_name FROM room_types WHERE id = ?)",
+                          (room_type_id,))
+            count = cursor.fetchone()[0]
+
+            if count > 0:
+                flash(f'无法删除该房型，因为有 {count} 条相关的住宿记录')
+                return redirect(url_for('room_types'))
+
+            # 获取房型名称用于日志
+            cursor.execute("SELECT type_name FROM room_types WHERE id = ?", (room_type_id,))
+            room_type_name = cursor.fetchone()
+
+            if room_type_name:
+                # 删除房型
+                cursor.execute("DELETE FROM room_types WHERE id = ?", (room_type_id,))
+                conn.commit()
+                flash('房型删除成功')
+                app.logger.info(f"删除房型: {room_type_name[0]}")
+            else:
+                flash('房型不存在')
+
+    except Exception as e:
+        app.logger.error(f"删除房型时出错: {e}")
+        flash(f'删除房型时出错: {e}')
+
+    return redirect(url_for('room_types'))
+
 # --- 导入Excel数据 ---
 @app.route('/import_excel', methods=['GET', 'POST'])
 def import_excel():
