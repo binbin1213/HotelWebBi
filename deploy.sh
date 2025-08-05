@@ -33,6 +33,27 @@ show_help() {
     echo "  $0 update   # 更新生产环境"
 }
 
+# 交互式菜单
+show_menu() {
+    echo -e "${BLUE}=======================================${NC}"
+    echo -e "${GREEN}乐巷酒店数据智能分析系统${NC}"
+    echo -e "${BLUE}=======================================${NC}"
+    echo ""
+    echo "请选择操作："
+    echo ""
+    echo -e "${YELLOW}1)${NC} 拉取最新代码"
+    echo -e "${YELLOW}2)${NC} 开发环境启动 (本地测试)"
+    echo -e "${YELLOW}3)${NC} 生产环境部署 (Docker)"
+    echo -e "${YELLOW}4)${NC} 更新生产环境"
+    echo -e "${YELLOW}5)${NC} 停止生产环境"
+    echo -e "${YELLOW}6)${NC} 查看运行日志"
+    echo -e "${YELLOW}7)${NC} 备份数据库"
+    echo -e "${YELLOW}8)${NC} 显示帮助信息"
+    echo -e "${YELLOW}0)${NC} 退出"
+    echo ""
+    echo -n -e "${GREEN}请输入选项 [0-8]: ${NC}"
+}
+
 # 检查环境变量
 check_env() {
     if [ -f ".env" ]; then
@@ -47,32 +68,66 @@ check_env() {
     fi
 }
 
+# 拉取最新代码
+pull_code() {
+    echo -e "${YELLOW}正在拉取最新代码...${NC}"
+
+    # 检查是否是git仓库
+    if [ ! -d ".git" ]; then
+        echo -e "${RED}错误: 当前目录不是git仓库${NC}"
+        return 1
+    fi
+
+    # 检查是否有未提交的更改
+    if ! git diff-index --quiet HEAD --; then
+        echo -e "${YELLOW}检测到未提交的更改，正在暂存...${NC}"
+        git stash push -m "Auto stash before pull $(date)"
+        stashed=true
+    else
+        stashed=false
+    fi
+
+    # 拉取最新代码
+    if git pull origin main; then
+        echo -e "${GREEN}✓ 代码拉取成功${NC}"
+
+        # 如果之前暂存了更改，询问是否恢复
+        if [ "$stashed" = true ]; then
+            echo -e "${YELLOW}是否恢复之前暂存的更改? [y/N]${NC}"
+            read -r restore_choice
+            if [[ "$restore_choice" =~ ^[Yy]$ ]]; then
+                git stash pop
+                echo -e "${GREEN}✓ 已恢复暂存的更改${NC}"
+            else
+                echo -e "${YELLOW}暂存的更改保留在stash中，可用 'git stash pop' 恢复${NC}"
+            fi
+        fi
+        return 0
+    else
+        echo -e "${RED}✗ 代码拉取失败${NC}"
+
+        # 如果拉取失败且有暂存，恢复暂存
+        if [ "$stashed" = true ]; then
+            git stash pop
+            echo -e "${YELLOW}已恢复暂存的更改${NC}"
+        fi
+        return 1
+    fi
+}
+
 # 开发环境启动
 start_dev() {
     echo -e "${BLUE}=======================================${NC}"
     echo -e "${GREEN}启动开发环境${NC}"
     echo -e "${BLUE}=======================================${NC}"
-    
+
     check_env
-    
-    # 检查虚拟环境
-    if [ ! -d "venv" ]; then
-        echo -e "${YELLOW}创建Python虚拟环境...${NC}"
-        python3 -m venv venv
-    fi
-    
-    # 激活虚拟环境
-    echo -e "${YELLOW}激活虚拟环境...${NC}"
-    source venv/bin/activate
-    
-    # 安装依赖
-    echo -e "${YELLOW}安装依赖...${NC}"
-    pip install -r requirements.txt
-    
-    # 启动应用
+
+    # 简单启动
     echo -e "${GREEN}启动应用...${NC}"
     echo -e "${YELLOW}访问地址: http://localhost:5001${NC}"
     echo -e "${YELLOW}按 Ctrl+C 停止服务${NC}"
+    echo ""
     python app.py
 }
 
@@ -81,7 +136,17 @@ deploy_prod() {
     echo -e "${BLUE}=======================================${NC}"
     echo -e "${GREEN}部署到生产环境${NC}"
     echo -e "${BLUE}=======================================${NC}"
-    
+
+    # 拉取最新代码
+    if ! pull_code; then
+        echo -e "${YELLOW}代码拉取失败，是否继续部署? [y/N]${NC}"
+        read -r continue_choice
+        if [[ ! "$continue_choice" =~ ^[Yy]$ ]]; then
+            echo -e "${RED}已取消部署${NC}"
+            return 1
+        fi
+    fi
+
     # 检查Docker
     if ! command -v docker &> /dev/null; then
         echo -e "${RED}错误: 未安装Docker${NC}"
@@ -125,7 +190,17 @@ update_prod() {
     echo -e "${BLUE}=======================================${NC}"
     echo -e "${GREEN}更新生产环境${NC}"
     echo -e "${BLUE}=======================================${NC}"
-    
+
+    # 拉取最新代码
+    if ! pull_code; then
+        echo -e "${YELLOW}代码拉取失败，是否继续更新? [y/N]${NC}"
+        read -r continue_choice
+        if [[ ! "$continue_choice" =~ ^[Yy]$ ]]; then
+            echo -e "${RED}已取消更新${NC}"
+            return 1
+        fi
+    fi
+
     # 重新构建并启动
     echo -e "${YELLOW}重新构建镜像...${NC}"
     docker-compose -f docker-compose.prod.yml build --no-cache
@@ -169,27 +244,79 @@ backup_db() {
     fi
 }
 
+# 处理用户选择
+handle_choice() {
+    case $1 in
+        1)
+            start_dev
+            ;;
+        2)
+            deploy_prod
+            ;;
+        3)
+            update_prod
+            ;;
+        4)
+            stop_prod
+            ;;
+        5)
+            show_logs
+            ;;
+        6)
+            backup_db
+            ;;
+        7)
+            show_help
+            ;;
+        0)
+            echo -e "${GREEN}再见！${NC}"
+            exit 0
+            ;;
+        *)
+            echo -e "${RED}无效选项，请重新选择${NC}"
+            return 1
+            ;;
+    esac
+}
+
 # 主逻辑
-case "${1:-help}" in
-    "dev")
-        start_dev
-        ;;
-    "prod")
-        deploy_prod
-        ;;
-    "update")
-        update_prod
-        ;;
-    "stop")
-        stop_prod
-        ;;
-    "logs")
-        show_logs
-        ;;
-    "backup")
-        backup_db
-        ;;
-    "help"|*)
-        show_help
-        ;;
-esac
+if [ $# -eq 0 ]; then
+    # 没有参数时显示交互式菜单
+    while true; do
+        show_menu
+        read -r choice
+        echo ""
+
+        if handle_choice "$choice"; then
+            echo ""
+            echo -e "${YELLOW}操作完成！按回车键继续...${NC}"
+            read -r
+        fi
+        echo ""
+    done
+else
+    # 有参数时直接执行对应命令
+    case "${1}" in
+        "dev")
+            start_dev
+            ;;
+        "prod")
+            deploy_prod
+            ;;
+        "update")
+            update_prod
+            ;;
+        "stop")
+            stop_prod
+            ;;
+        "logs")
+            show_logs
+            ;;
+        "backup")
+            backup_db
+            ;;
+        "help"|*)
+            show_help
+            ;;
+    esac
+fi
