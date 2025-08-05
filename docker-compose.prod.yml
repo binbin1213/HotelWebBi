@@ -4,7 +4,7 @@ services:
   hotel-analytics:
     build:
       context: .
-      dockerfile: Dockerfileimage.png
+      dockerfile: Dockerfile
     container_name: hotel-analytics
     ports:
       - "5004:5004"
