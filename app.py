@@ -1646,7 +1646,7 @@ def room_types():
             cursor = conn.cursor()
 
             # 获取所有房型
-            cursor.execute("SELECT id, type_name, description FROM room_types ORDER BY type_name")
+            cursor.execute("SELECT id, type_name, type_code, description, base_price, room_count FROM room_types ORDER BY type_name")
             room_types = cursor.fetchall()
 
         return render_template('room_types.html', room_types=room_types)
@@ -1661,109 +1661,159 @@ def add_room_type():
     添加新房型
     """
     try:
-        type_name = request.form.get('type_name', '').strip()
+        # 获取表单数据
+        type_name = request.form.get('name', '').strip()  # 注意：前端发送的是'name'
+        type_code = request.form.get('type_code', '').strip()
         description = request.form.get('description', '').strip()
+        base_price = request.form.get('base_price', '')
+        room_count = request.form.get('room_count', '')
 
         if not type_name:
-            flash('房型名称不能为空')
-            return redirect(url_for('room_types'))
+            return jsonify({'success': False, 'message': '房型名称不能为空'})
+
+        if not type_code:
+            return jsonify({'success': False, 'message': '房型代码不能为空'})
+
+        # 处理数字字段
+        try:
+            base_price = float(base_price) if base_price else 0.0
+            room_count = int(room_count) if room_count else 0
+        except ValueError:
+            return jsonify({'success': False, 'message': '价格和房间数量必须是有效数字'})
 
         with sqlite3.connect(DATABASE) as conn:
             cursor = conn.cursor()
 
-            # 检查房型是否已存在
+            # 检查房型名称是否已存在
             cursor.execute("SELECT id FROM room_types WHERE type_name = ?", (type_name,))
             if cursor.fetchone():
-                flash('该房型已存在')
-                return redirect(url_for('room_types'))
+                return jsonify({'success': False, 'message': '该房型名称已存在'})
+
+            # 检查房型代码是否已存在
+            cursor.execute("SELECT id FROM room_types WHERE type_code = ?", (type_code,))
+            if cursor.fetchone():
+                return jsonify({'success': False, 'message': '该房型代码已存在'})
 
             # 添加新房型
-            cursor.execute("INSERT INTO room_types (type_name, description) VALUES (?, ?)",
-                          (type_name, description))
+            cursor.execute("""
+                INSERT INTO room_types (type_name, type_code, description, base_price, room_count)
+                VALUES (?, ?, ?, ?, ?)
+            """, (type_name, type_code, description, base_price, room_count))
             conn.commit()
 
-        flash('房型添加成功')
-        app.logger.info(f"添加新房型: {type_name}")
+        app.logger.info(f"添加新房型: {type_name} ({type_code})")
+        return jsonify({'success': True, 'message': '房型添加成功'})
 
     except Exception as e:
         app.logger.error(f"添加房型时出错: {e}")
-        flash(f'添加房型时出错: {e}')
+        return jsonify({'success': False, 'message': f'添加房型时出错: {str(e)}'})
 
-    return redirect(url_for('room_types'))
-
-@app.route('/room_types/update/<int:room_type_id>', methods=['POST'])
-def update_room_type(room_type_id):
+@app.route('/room_types/edit', methods=['POST'])
+def edit_room_type():
     """
-    更新房型信息
+    编辑房型信息
     """
     try:
-        type_name = request.form.get('type_name', '').strip()
+        # 获取表单数据
+        room_id = request.form.get('room_id', '')
+        type_name = request.form.get('name', '').strip()
+        type_code = request.form.get('type_code', '').strip()
         description = request.form.get('description', '').strip()
+        base_price = request.form.get('base_price', '')
+        room_count = request.form.get('room_count', '')
+
+        if not room_id:
+            return jsonify({'success': False, 'message': '房型ID不能为空'})
 
         if not type_name:
-            flash('房型名称不能为空')
-            return redirect(url_for('room_types'))
+            return jsonify({'success': False, 'message': '房型名称不能为空'})
+
+        if not type_code:
+            return jsonify({'success': False, 'message': '房型代码不能为空'})
+
+        # 处理数字字段
+        try:
+            room_id = int(room_id)
+            base_price = float(base_price) if base_price else 0.0
+            room_count = int(room_count) if room_count else 0
+        except ValueError:
+            return jsonify({'success': False, 'message': '数据格式错误'})
 
         with sqlite3.connect(DATABASE) as conn:
             cursor = conn.cursor()
 
-            # 检查房型是否存在（排除当前房型）
+            # 检查房型名称是否已存在（排除当前房型）
             cursor.execute("SELECT id FROM room_types WHERE type_name = ? AND id != ?",
-                          (type_name, room_type_id))
+                          (type_name, room_id))
             if cursor.fetchone():
-                flash('该房型名称已存在')
-                return redirect(url_for('room_types'))
+                return jsonify({'success': False, 'message': '该房型名称已存在'})
+
+            # 检查房型代码是否已存在（排除当前房型）
+            cursor.execute("SELECT id FROM room_types WHERE type_code = ? AND id != ?",
+                          (type_code, room_id))
+            if cursor.fetchone():
+                return jsonify({'success': False, 'message': '该房型代码已存在'})
 
             # 更新房型
-            cursor.execute("UPDATE room_types SET type_name = ?, description = ? WHERE id = ?",
-                          (type_name, description, room_type_id))
+            cursor.execute("""
+                UPDATE room_types
+                SET type_name = ?, type_code = ?, description = ?, base_price = ?, room_count = ?, updated_at = CURRENT_TIMESTAMP
+                WHERE id = ?
+            """, (type_name, type_code, description, base_price, room_count, room_id))
             conn.commit()
 
-        flash('房型更新成功')
-        app.logger.info(f"更新房型: {type_name}")
+        app.logger.info(f"更新房型: {type_name} ({type_code})")
+        return jsonify({'success': True, 'message': '房型更新成功'})
 
     except Exception as e:
         app.logger.error(f"更新房型时出错: {e}")
-        flash(f'更新房型时出错: {e}')
+        return jsonify({'success': False, 'message': f'更新房型时出错: {str(e)}'})
 
-    return redirect(url_for('room_types'))
-
-@app.route('/room_types/delete/<int:room_type_id>', methods=['POST'])
-def delete_room_type(room_type_id):
+@app.route('/room_types/delete', methods=['POST'])
+def delete_room_type():
     """
     删除房型
     """
     try:
+        room_id = request.form.get('room_id', '')
+
+        if not room_id:
+            return jsonify({'success': False, 'message': '房型ID不能为空'})
+
+        try:
+            room_id = int(room_id)
+        except ValueError:
+            return jsonify({'success': False, 'message': '房型ID格式错误'})
+
         with sqlite3.connect(DATABASE) as conn:
             cursor = conn.cursor()
 
+            # 获取房型名称用于日志
+            cursor.execute("SELECT type_name FROM room_types WHERE id = ?", (room_id,))
+            room_type_result = cursor.fetchone()
+
+            if not room_type_result:
+                return jsonify({'success': False, 'message': '房型不存在'})
+
+            room_type_name = room_type_result[0]
+
             # 检查是否有相关的住宿记录
-            cursor.execute("SELECT COUNT(*) FROM DailyRevenue WHERE room_type = (SELECT type_name FROM room_types WHERE id = ?)",
-                          (room_type_id,))
+            cursor.execute("SELECT COUNT(*) FROM DailyRevenue WHERE room_type = ?", (room_type_name,))
             count = cursor.fetchone()[0]
 
             if count > 0:
-                flash(f'无法删除该房型，因为有 {count} 条相关的住宿记录')
-                return redirect(url_for('room_types'))
+                return jsonify({'success': False, 'message': f'无法删除该房型，因为有 {count} 条相关的住宿记录'})
 
-            # 获取房型名称用于日志
-            cursor.execute("SELECT type_name FROM room_types WHERE id = ?", (room_type_id,))
-            room_type_name = cursor.fetchone()
+            # 删除房型
+            cursor.execute("DELETE FROM room_types WHERE id = ?", (room_id,))
+            conn.commit()
 
-            if room_type_name:
-                # 删除房型
-                cursor.execute("DELETE FROM room_types WHERE id = ?", (room_type_id,))
-                conn.commit()
-                flash('房型删除成功')
-                app.logger.info(f"删除房型: {room_type_name[0]}")
-            else:
-                flash('房型不存在')
+            app.logger.info(f"删除房型: {room_type_name}")
+            return jsonify({'success': True, 'message': '房型删除成功'})
 
     except Exception as e:
         app.logger.error(f"删除房型时出错: {e}")
-        flash(f'删除房型时出错: {e}')
-
-    return redirect(url_for('room_types'))
+        return jsonify({'success': False, 'message': f'删除房型时出错: {str(e)}'})
 
 # --- 导入Excel数据 ---
 @app.route('/import_excel', methods=['GET', 'POST'])

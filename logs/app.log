@@ -2873,3 +2873,16 @@ ValueError: unconverted data remains: 、
 2025-08-05 17:00:01,652 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 17:00:01] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
 2025-08-05 17:00:01,662 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 17:00:01] "GET /static/js/analytics.js?v=234567 HTTP/1.1" 200 -
 2025-08-05 17:00:01,663 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 17:00:01] "GET /static/css/print.css?v=123456 HTTP/1.1" 200 -
+2025-08-05 17:48:59,959 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 17:48:59,960 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 17:48:59,960 - app - INFO - 数据库管理密码已配置
+2025-08-05 17:48:59,961 - app - INFO - 总房间数配置: 29
+2025-08-05 17:48:59,961 - app - INFO - 数据库初始化完成
+2025-08-05 17:48:59,962 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 17:48:59,976 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 17:48:59,976 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 17:49:15,558 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 17:49:15] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 17:49:15,646 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 17:49:15] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
