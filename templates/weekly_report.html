@@ -143,6 +143,7 @@
     <div class="tab-container">
         <div class="tab-buttons">
             <button class="tab-button active" data-tab="tab-summary">客源分析表</button>
+            <button class="tab-button" data-tab="tab-room-types">房型分析表</button>
             <button class="tab-button" data-tab="tab-daily">日期明细表</button>
             <button class="tab-button" data-tab="tab-charts">图表分析</button>
         </div>
@@ -347,7 +348,384 @@
             </div>
             {% endif %}
         </div>
-        
+
+        <div id="tab-room-types" class="tab-content">
+            <div class="report-card">
+                <h3 class="text-lg font-semibold mb-3 text-center">房型分析 - 按渠道分组</h3>
+                <p class="text-sm text-gray-600 mb-3 text-center">
+                    各渠道对应房型的间夜数、收入、平均房价分析
+                </p>
+
+                {% if room_type_data and room_type_data|length > 0 %}
+                <!-- 获取所有房型名称和渠道 -->
+                {% set room_types = room_type_data | map(attribute='room_type_name') | unique | list %}
+                {% set channels = room_type_data | map(attribute='channel') | unique | list %}
+
+                <!-- 为每个房型创建独立的表格 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {% for room_type in room_types %}
+                    <div class="bg-white border border-gray-200 rounded-lg p-4">
+                        <h4 class="text-md font-semibold mb-3 text-center text-blue-600">{{ room_type }}</h4>
+                        <div class="table-responsive">
+                            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th rowspan="2" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase border-r">渠道</th>
+                                        <th colspan="3" class="px-2 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">间夜数</th>
+                                        <th colspan="3" class="px-2 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">收入</th>
+                                        <th colspan="3" class="px-2 py-1 text-center text-xs font-medium text-gray-500 uppercase">均价</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">本周</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">环比</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">同比</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">本周</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">环比</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">同比</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">本周</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">环比</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase">同比</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <!-- 先计算小计数据 -->
+                                    {% set ns = namespace(
+                                        room_type_total_nights=0,
+                                        room_type_total_revenue=0,
+                                        room_type_last_week_nights=0,
+                                        room_type_last_week_revenue=0,
+                                        room_type_last_year_nights=0,
+                                        room_type_last_year_revenue=0
+                                    ) %}
+
+                                    {% for channel in channels %}
+                                        {% set room_data = room_type_data | selectattr('room_type_name', 'equalto', room_type) | selectattr('channel', 'equalto', channel) | first %}
+                                        {% set comparison_key = channel + '_' + room_type %}
+                                        {% set comparison_data = report_data.room_type_comparison.get(comparison_key) %}
+                                        {% set year_comparison_data = report_data.room_type_year_comparison.get(comparison_key) %}
+
+                                        {% if room_data %}
+                                            {% set ns.room_type_total_nights = ns.room_type_total_nights + room_data.room_nights %}
+                                            {% set ns.room_type_total_revenue = ns.room_type_total_revenue + room_data.revenue %}
+                                        {% endif %}
+
+                                        {% if comparison_data %}
+                                            {% set ns.room_type_last_week_nights = ns.room_type_last_week_nights + comparison_data.last_week_nights %}
+                                            {% set ns.room_type_last_week_revenue = ns.room_type_last_week_revenue + comparison_data.last_week_revenue %}
+                                        {% endif %}
+
+                                        {% if year_comparison_data %}
+                                            {% set ns.room_type_last_year_nights = ns.room_type_last_year_nights + year_comparison_data.last_year_nights %}
+                                            {% set ns.room_type_last_year_revenue = ns.room_type_last_year_revenue + year_comparison_data.last_year_revenue %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    <!-- 现在显示数据行 -->
+                                    {% for channel in channels %}
+                                    {% set room_data = room_type_data | selectattr('room_type_name', 'equalto', room_type) | selectattr('channel', 'equalto', channel) | first %}
+                                    {% set comparison_key = channel + '_' + room_type %}
+                                    {% set comparison_data = report_data.room_type_comparison.get(comparison_key, {}) %}
+                                    {% set year_comparison_data = report_data.room_type_year_comparison.get(comparison_key, {}) %}
+
+                                    <tr class="border-b">
+                                        <td class="px-2 py-2 text-sm font-medium text-gray-900 border-r">{{ channel }}</td>
+
+                                        <!-- 间夜数 -->
+                                        <td class="px-1 py-2 text-xs text-center border-r">{{ room_data.room_nights if room_data else 0 }}</td>
+                                        <td class="px-1 py-2 text-xs text-center border-r">
+                                            {% if comparison_data %}
+                                            {{ comparison_data.last_week_nights }}
+                                            {% else %}
+                                            <span class="text-gray-400">-</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="px-1 py-2 text-xs text-center border-r">
+                                            {% if year_comparison_data %}
+                                            {{ year_comparison_data.last_year_nights }}
+                                            {% else %}
+                                            <span class="text-gray-400">-</span>
+                                            {% endif %}
+                                        </td>
+
+                                        <!-- 收入 -->
+                                        <td class="px-1 py-2 text-xs text-center border-r">{{ "%.0f"|format(room_data.revenue) if room_data else 0 }}</td>
+                                        <td class="px-1 py-2 text-xs text-center border-r">
+                                            {% if comparison_data %}
+                                            {{ "%.0f"|format(comparison_data.last_week_revenue) }}
+                                            {% else %}
+                                            <span class="text-gray-400">-</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="px-1 py-2 text-xs text-center border-r">
+                                            {% if year_comparison_data %}
+                                            {{ "%.0f"|format(year_comparison_data.last_year_revenue) }}
+                                            {% else %}
+                                            <span class="text-gray-400">-</span>
+                                            {% endif %}
+                                        </td>
+
+                                        <!-- 均价 -->
+                                        <td class="px-1 py-2 text-xs text-center border-r">{{ "%.0f"|format(room_data.avg_price) if room_data else 0 }}</td>
+                                        <td class="px-1 py-2 text-xs text-center border-r">
+                                            {% if comparison_data %}
+                                            {{ "%.0f"|format(comparison_data.last_week_avg_price) }}
+                                            {% else %}
+                                            <span class="text-gray-400">-</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="px-1 py-2 text-xs text-center">
+                                            {% if year_comparison_data %}
+                                            {{ "%.0f"|format(year_comparison_data.last_year_avg_price) }}
+                                            {% else %}
+                                            <span class="text-gray-400">-</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    <!-- 房型小计 -->
+                                    {% set room_type_avg_price = (ns.room_type_total_revenue / ns.room_type_total_nights) if ns.room_type_total_nights > 0 else 0 %}
+                                    {% set room_type_last_week_avg_price = (ns.room_type_last_week_revenue / ns.room_type_last_week_nights) if ns.room_type_last_week_nights > 0 else 0 %}
+                                    {% set room_type_last_year_avg_price = (ns.room_type_last_year_revenue / ns.room_type_last_year_nights) if ns.room_type_last_year_nights > 0 else 0 %}
+
+                                    <tr class="bg-blue-50 border-t-2 border-blue-200">
+                                        <td class="px-2 py-2 text-sm font-bold text-blue-800 border-r">小计</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ ns.room_type_total_nights }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ ns.room_type_last_week_nights if ns.room_type_last_week_nights > 0 else "-" }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ ns.room_type_last_year_nights if ns.room_type_last_year_nights > 0 else "-" }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ "%.0f"|format(ns.room_type_total_revenue) }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ "%.0f"|format(ns.room_type_last_week_revenue) if ns.room_type_last_week_revenue > 0 else "-" }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ "%.0f"|format(ns.room_type_last_year_revenue) if ns.room_type_last_year_revenue > 0 else "-" }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ "%.0f"|format(room_type_avg_price) }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ "%.0f"|format(room_type_last_week_avg_price) if room_type_last_week_avg_price > 0 else "-" }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800">{{ "%.0f"|format(room_type_last_year_avg_price) if room_type_last_year_avg_price > 0 else "-" }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- 总计汇总表 -->
+                <div class="mt-6 bg-gray-50 border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-md font-semibold mb-3 text-center text-gray-800">总计汇总</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div class="bg-white p-3 rounded border">
+                            <div class="text-2xl font-bold text-blue-600">{{ room_type_summary.total_room_nights }}</div>
+                            <div class="text-sm text-gray-600">总间夜数</div>
+                        </div>
+                        <div class="bg-white p-3 rounded border">
+                            <div class="text-2xl font-bold text-green-600">¥{{ "%.2f"|format(room_type_summary.total_revenue) }}</div>
+                            <div class="text-sm text-gray-600">总收入</div>
+                        </div>
+                        <div class="bg-white p-3 rounded border">
+                            <div class="text-2xl font-bold text-purple-600">¥{{ "%.2f"|format(room_type_summary.overall_avg_price) }}</div>
+                            <div class="text-sm text-gray-600">平均房价</div>
+                        </div>
+                    </div>
+                </div>
+
+                {% else %}
+                <div class="text-center py-8 text-gray-500">
+                    <p>暂无房型数据</p>
+                    <p class="text-sm mt-2">请确保数据中包含房型信息</p>
+                </div>
+                {% endif %}
+            </div>
+
+            {% if room_type_comparison and room_type_comparison|length > 0 %}
+            <div class="report-card mt-6">
+                <h3 class="text-lg font-semibold mb-3 text-center">房型周环比对比分析</h3>
+                <p class="text-sm text-gray-600 mb-3">
+                    本周：{{ report_data.total_summary.date_range }} vs 上周：{{ report_data.comparison_period }}
+                </p>
+                <div class="table-responsive">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">房型</th>
+                                <th colspan="3">间夜数量</th>
+                                <th colspan="3">收入</th>
+                                <th colspan="3">平均房价</th>
+                            </tr>
+                            <tr>
+                                <th>本周</th>
+                                <th>上周</th>
+                                <th>变化</th>
+                                <th>本周</th>
+                                <th>上周</th>
+                                <th>变化</th>
+                                <th>本周</th>
+                                <th>上周</th>
+                                <th>变化</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for room_type, data in room_type_comparison.items() %}
+                            {% if room_type != '合计' %}
+                            <tr>
+                                <td><strong>{{ room_type }}</strong></td>
+                                <td>{{ data.current_room_nights }}</td>
+                                <td>{{ data.last_room_nights }}</td>
+                                <td class="{% if data.room_nights_change > 0 %}text-green-600{% elif data.room_nights_change < 0 %}text-red-600{% endif %}">
+                                    {{ data.room_nights_change }}
+                                    {% if data.room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.room_nights_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                                <td>{{ "%.2f"|format(data.current_revenue) }}</td>
+                                <td>{{ "%.2f"|format(data.last_revenue) }}</td>
+                                <td class="{% if data.revenue_change > 0 %}text-green-600{% elif data.revenue_change < 0 %}text-red-600{% endif %}">
+                                    {{ "%.2f"|format(data.revenue_change) }}
+                                    {% if data.revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.revenue_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                                <td>{{ "%.2f"|format(data.current_avg_price) }}</td>
+                                <td>{{ "%.2f"|format(data.last_avg_price) }}</td>
+                                <td class="{% if data.avg_price_change > 0 %}text-green-600{% elif data.avg_price_change < 0 %}text-red-600{% endif %}">
+                                    {{ "%.2f"|format(data.avg_price_change) }}
+                                    {% if data.avg_price_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.avg_price_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            <!-- 合计行 -->
+                            {% if room_type_comparison['合计'] %}
+                            <tr class="font-bold bg-gray-100 border-t-2">
+                                <td><strong>合计</strong></td>
+                                <td><strong>{{ room_type_comparison['合计'].current_room_nights }}</strong></td>
+                                <td><strong>{{ room_type_comparison['合计'].last_room_nights }}</strong></td>
+                                <td class="{% if room_type_comparison['合计'].room_nights_change > 0 %}text-green-600{% elif room_type_comparison['合计'].room_nights_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ room_type_comparison['合计'].room_nights_change }}
+                                    {% if room_type_comparison['合计'].room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(room_type_comparison['合计'].room_nights_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                                <td><strong>{{ "%.2f"|format(room_type_comparison['合计'].current_revenue) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(room_type_comparison['合计'].last_revenue) }}</strong></td>
+                                <td class="{% if room_type_comparison['合计'].revenue_change > 0 %}text-green-600{% elif room_type_comparison['合计'].revenue_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ "%.2f"|format(room_type_comparison['合计'].revenue_change) }}
+                                    {% if room_type_comparison['合计'].revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(room_type_comparison['合计'].revenue_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                                <td><strong>{{ "%.2f"|format(room_type_comparison['合计'].current_avg_price) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(room_type_comparison['合计'].last_avg_price) }}</strong></td>
+                                <td class="{% if room_type_comparison['合计'].avg_price_change > 0 %}text-green-600{% elif room_type_comparison['合计'].avg_price_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ "%.2f"|format(room_type_comparison['合计'].avg_price_change) }}
+                                    {% if room_type_comparison['合计'].avg_price_change_rate != 0 %}
+                                        ({{ "%.1f"|format(room_type_comparison['合计'].avg_price_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if room_type_year_comparison and room_type_year_comparison|length > 0 %}
+            <div class="report-card mt-6">
+                <h3 class="text-lg font-semibold mb-3 text-center">房型同比对比分析</h3>
+                <p class="text-sm text-gray-600 mb-3">
+                    今年：{{ report_data.total_summary.date_range }} vs 去年同期：{{ report_data.year_comparison_period }}
+                </p>
+                <div class="table-responsive">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">房型</th>
+                                <th colspan="3">间夜数量</th>
+                                <th colspan="3">收入</th>
+                                <th colspan="3">平均房价</th>
+                            </tr>
+                            <tr>
+                                <th>今年</th>
+                                <th>去年</th>
+                                <th>变化</th>
+                                <th>今年</th>
+                                <th>去年</th>
+                                <th>变化</th>
+                                <th>今年</th>
+                                <th>去年</th>
+                                <th>变化</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for room_type, data in room_type_year_comparison.items() %}
+                            {% if room_type != '合计' %}
+                            <tr>
+                                <td><strong>{{ room_type }}</strong></td>
+                                <td>{{ data.current_room_nights }}</td>
+                                <td>{{ data.last_year_room_nights }}</td>
+                                <td class="{% if data.room_nights_change > 0 %}text-green-600{% elif data.room_nights_change < 0 %}text-red-600{% endif %}">
+                                    {{ data.room_nights_change }}
+                                    {% if data.room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.room_nights_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                                <td>{{ "%.2f"|format(data.current_revenue) }}</td>
+                                <td>{{ "%.2f"|format(data.last_year_revenue) }}</td>
+                                <td class="{% if data.revenue_change > 0 %}text-green-600{% elif data.revenue_change < 0 %}text-red-600{% endif %}">
+                                    {{ "%.2f"|format(data.revenue_change) }}
+                                    {% if data.revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.revenue_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                                <td>{{ "%.2f"|format(data.current_avg_price) }}</td>
+                                <td>{{ "%.2f"|format(data.last_year_avg_price) }}</td>
+                                <td class="{% if data.avg_price_change > 0 %}text-green-600{% elif data.avg_price_change < 0 %}text-red-600{% endif %}">
+                                    {{ "%.2f"|format(data.avg_price_change) }}
+                                    {% if data.avg_price_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.avg_price_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            <!-- 合计行 -->
+                            {% if room_type_year_comparison['合计'] %}
+                            <tr class="font-bold bg-gray-100 border-t-2">
+                                <td><strong>合计</strong></td>
+                                <td><strong>{{ room_type_year_comparison['合计'].current_room_nights }}</strong></td>
+                                <td><strong>{{ room_type_year_comparison['合计'].last_year_room_nights }}</strong></td>
+                                <td class="{% if room_type_year_comparison['合计'].room_nights_change > 0 %}text-green-600{% elif room_type_year_comparison['合计'].room_nights_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ room_type_year_comparison['合计'].room_nights_change }}
+                                    {% if room_type_year_comparison['合计'].room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(room_type_year_comparison['合计'].room_nights_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                                <td><strong>{{ "%.2f"|format(room_type_year_comparison['合计'].current_revenue) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(room_type_year_comparison['合计'].last_year_revenue) }}</strong></td>
+                                <td class="{% if room_type_year_comparison['合计'].revenue_change > 0 %}text-green-600{% elif room_type_year_comparison['合计'].revenue_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ "%.2f"|format(room_type_year_comparison['合计'].revenue_change) }}
+                                    {% if room_type_year_comparison['合计'].revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(room_type_year_comparison['合计'].revenue_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                                <td><strong>{{ "%.2f"|format(room_type_year_comparison['合计'].current_avg_price) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(room_type_year_comparison['合计'].last_year_avg_price) }}</strong></td>
+                                <td class="{% if room_type_year_comparison['合计'].avg_price_change > 0 %}text-green-600{% elif room_type_year_comparison['合计'].avg_price_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ "%.2f"|format(room_type_year_comparison['合计'].avg_price_change) }}
+                                    {% if room_type_year_comparison['合计'].avg_price_change_rate != 0 %}
+                                        ({{ "%.1f"|format(room_type_year_comparison['合计'].avg_price_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
         <div id="tab-daily" class="tab-content">
             <div class="report-card">
                 <h3 class="text-lg font-semibold mb-3">日期明细</h3>

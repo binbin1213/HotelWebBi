@@ -155,6 +155,7 @@
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">日期</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">渠道</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">房费科目</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">房型</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">间夜数量</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">间夜收入 (元)</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
@@ -166,6 +167,7 @@
                         <td data-label="日期" class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ row['record_date'] }}</td>
                         <td data-label="渠道" class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ row['channel'] }}</td>
                         <td data-label="房费科目" class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ row['fee_type'] }}</td>
+                        <td data-label="房型" class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ row['room_type'] if row['room_type'] else '-' }}</td>
                         <td data-label="间夜数量" class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ row['room_nights'] }}</td>
                         <td data-label="间夜收入" class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ "%.2f"|format(row['revenue']) }}</td>
                         <td data-label="操作" class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">

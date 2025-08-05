@@ -1379,3 +1379,1497 @@ jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'total_revenue'
 2025-07-29 20:43:51,882 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 20:43:51] "GET /db_admin HTTP/1.1" 200 -
 2025-07-29 20:43:51,906 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 20:43:51] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
 2025-07-29 20:43:51,908 - werkzeug - INFO - 127.0.0.1 - - [29/Jul/2025 20:43:51] "[36mGET /static/js/db_admin.js HTTP/1.1[0m" 304 -
+2025-08-05 11:22:52,197 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:22:52,202 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:22:52,202 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:22:52,203 - app - INFO - 总房间数配置: 29
+2025-08-05 11:22:52,203 - app - INFO - 数据库初始化完成
+2025-08-05 11:22:52,203 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:22:52,215 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 11:22:52,215 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:23:03,619 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:23:03] "GET / HTTP/1.1" 200 -
+2025-08-05 11:23:03,756 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:23:03] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 11:23:03,758 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:23:03] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-08-05 11:23:04,896 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:23:04] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-05 11:23:08,004 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:23:08] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 11:23:08,037 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:23:08] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:23:29,519 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:23:29] "GET / HTTP/1.1" 200 -
+2025-08-05 11:23:29,645 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:23:29] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-08-05 11:23:29,657 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:23:29] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 11:23:30,928 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:23:30] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-05 11:26:34,807 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:26:34,807 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:26:34,807 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:26:34,808 - app - INFO - 总房间数配置: 29
+2025-08-05 11:26:34,808 - app - INFO - 数据库初始化完成
+2025-08-05 11:26:34,809 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:26:34,822 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 11:26:34,822 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:26:45,053 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:26:45] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 11:26:45,125 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:26:45] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:26:50,492 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:26:50] "[32mPOST /import_excel HTTP/1.1[0m" 302 -
+2025-08-05 11:26:50,500 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:26:50] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 11:26:50,549 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:26:50] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:27:58,328 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:27:58,328 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:27:58,328 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:27:58,329 - app - INFO - 总房间数配置: 29
+2025-08-05 11:27:58,329 - app - INFO - 数据库初始化完成
+2025-08-05 11:27:58,330 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:27:58,337 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 11:27:58,337 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:28:02,419 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:02] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 11:28:02,473 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:02] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:28:07,528 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:07] "[32mPOST /import_excel HTTP/1.1[0m" 302 -
+2025-08-05 11:28:07,551 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:07] "GET /view HTTP/1.1" 200 -
+2025-08-05 11:28:28,420 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:28] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 11:28:34,001 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:34] "GET /view HTTP/1.1" 200 -
+2025-08-05 11:28:36,727 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:36] "GET /view HTTP/1.1" 200 -
+2025-08-05 11:28:37,709 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:37] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 11:28:40,152 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:40] "GET / HTTP/1.1" 200 -
+2025-08-05 11:28:40,221 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:40] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:28:40,234 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:40] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 11:28:48,260 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 11:28:48,270 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 11:28:48,340 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:48] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 11:28:48,369 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:28:48] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:29:07,124 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 11:29:07,141 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 11:29:07,144 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:29:07] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 11:29:07,217 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:29:07] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:29:27,939 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:29:27,939 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:29:27,939 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:29:27,940 - app - INFO - 总房间数配置: 29
+2025-08-05 11:29:27,940 - app - INFO - 数据库初始化完成
+2025-08-05 11:29:27,940 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:29:27,949 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 11:29:27,950 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:29:32,453 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:29:32] "GET /view HTTP/1.1" 200 -
+2025-08-05 11:29:32,529 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:29:32] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:35:21,367 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:35:21,368 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:35:21,368 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:35:21,368 - app - INFO - 总房间数配置: 29
+2025-08-05 11:35:21,369 - app - INFO - 数据库初始化完成
+2025-08-05 11:35:21,369 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:35:21,378 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 11:35:21,378 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:35:35,920 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:35:35] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:35:35,997 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:35:35] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:36:17,277 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:36:17] "GET /view HTTP/1.1" 200 -
+2025-08-05 11:36:17,333 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:36:17] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:36:20,919 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:36:20] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:36:20,968 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:36:20] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:42:38,382 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:42:38] "GET /view HTTP/1.1" 200 -
+2025-08-05 11:42:38,467 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:42:38] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:43:35,438 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:43:35] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:45:56,101 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:45:56,101 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:45:56,101 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:45:56,102 - app - INFO - 总房间数配置: 29
+2025-08-05 11:45:56,102 - app - INFO - 数据库初始化完成
+2025-08-05 11:45:56,102 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:45:56,111 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 11:45:56,112 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:46:00,810 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:46:00] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:46:05,278 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:46:05] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:46:11,026 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:46:11] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:46:11,205 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:46:11] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:46:16,695 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:46:16] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:46:16,743 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:46:16] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:46:26,444 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:46:26] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:47:13,290 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:47:13,291 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:47:13,291 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:47:13,291 - app - INFO - 总房间数配置: 29
+2025-08-05 11:47:13,291 - app - INFO - 数据库初始化完成
+2025-08-05 11:47:13,291 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:47:13,297 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 11:47:13,298 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:47:15,682 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:47:15] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:47:15,732 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:47:15] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:47:24,230 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:47:24] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:48:27,690 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:48:27,690 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:48:27,690 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:48:27,691 - app - INFO - 总房间数配置: 29
+2025-08-05 11:48:27,691 - app - INFO - 数据库初始化完成
+2025-08-05 11:48:27,692 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:48:27,702 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 11:48:27,702 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:48:30,151 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:48:30] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:48:30,185 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:48:30] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:48:41,465 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:48:41] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:48:46,239 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:48:46] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:48:46,338 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:48:46] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:48:59,093 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:48:59] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:50:16,278 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:50:16,278 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:50:16,278 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:50:16,279 - app - INFO - 总房间数配置: 29
+2025-08-05 11:50:16,279 - app - INFO - 数据库初始化完成
+2025-08-05 11:50:16,280 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:50:16,288 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 11:50:16,288 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:50:19,025 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:50:19] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:50:19,090 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:50:19] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:50:27,068 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:50:27] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:50:31,394 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:50:31] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:50:31,504 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:50:31] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:50:40,777 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:50:40] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:50:59,819 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:50:59] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:50:59,861 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:50:59] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-08-05 11:51:08,124 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:51:08] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:51:35,077 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:51:35] "GET / HTTP/1.1" 200 -
+2025-08-05 11:51:35,278 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:51:35] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:51:35,287 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:51:35] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 11:51:58,479 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:51:58,480 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:51:58,480 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:51:58,481 - app - INFO - 总房间数配置: 29
+2025-08-05 11:51:58,481 - app - INFO - 数据库初始化完成
+2025-08-05 11:51:58,481 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:51:58,599 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 11:51:58,600 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:51:58,601 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 11:52:00,007 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:52:00,007 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:52:00,008 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:52:00,008 - app - INFO - 总房间数配置: 29
+2025-08-05 11:52:00,009 - app - INFO - 数据库初始化完成
+2025-08-05 11:52:00,009 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:52:00,042 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 11:52:00,058 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 11:52:07,181 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:52:07] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:52:07,231 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:52:07] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:52:12,675 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:52:12] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:52:12,760 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:52:12] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:52:20,481 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:52:20] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:52:28,980 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 11:52:29,148 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 11:52:32,219 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:52:32,219 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:52:32,220 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:52:32,222 - app - INFO - 总房间数配置: 29
+2025-08-05 11:52:32,223 - app - INFO - 数据库初始化完成
+2025-08-05 11:52:32,223 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:52:32,273 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 11:52:32,294 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 11:52:52,897 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:52:52,898 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:52:52,898 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:52:52,898 - app - INFO - 总房间数配置: 29
+2025-08-05 11:52:52,899 - app - INFO - 数据库初始化完成
+2025-08-05 11:52:52,899 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:52:52,941 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 11:52:52,941 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:52:52,942 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 11:52:54,320 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:52:54,321 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:52:54,321 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:52:54,321 - app - INFO - 总房间数配置: 29
+2025-08-05 11:52:54,322 - app - INFO - 数据库初始化完成
+2025-08-05 11:52:54,322 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 11:52:54,355 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 11:52:54,371 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 11:53:07,612 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:53:07] "GET /test_route HTTP/1.1" 200 -
+2025-08-05 11:54:08,246 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:54:08,247 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:54:08,247 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:54:08,248 - app - INFO - 总房间数配置: 29
+2025-08-05 11:54:08,248 - app - INFO - 数据库初始化完成
+2025-08-05 11:54:08,249 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 11:54:08,306 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 11:54:08,306 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:54:08,309 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 11:54:10,259 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:54:10,260 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:54:10,260 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:54:10,261 - app - INFO - 总房间数配置: 29
+2025-08-05 11:54:10,261 - app - INFO - 数据库初始化完成
+2025-08-05 11:54:10,262 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 11:54:10,311 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 11:54:10,333 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 11:54:22,931 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:54:22] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:54:23,078 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:54:23] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-08-05 11:54:23,680 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:54:23] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-05 11:55:03,927 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 11:55:04,076 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 11:55:06,513 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:55:06,513 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:55:06,514 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:55:06,515 - app - INFO - 总房间数配置: 29
+2025-08-05 11:55:06,515 - app - INFO - 数据库初始化完成
+2025-08-05 11:55:06,515 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 11:55:06,558 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 11:55:06,573 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 11:55:28,765 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:55:28,766 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:55:28,766 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:55:28,767 - app - INFO - 总房间数配置: 29
+2025-08-05 11:55:28,767 - app - INFO - 数据库初始化完成
+2025-08-05 11:55:28,767 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 11:55:28,816 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 11:55:28,817 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:55:28,818 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 11:55:30,230 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:55:30,231 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:55:30,231 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:55:30,232 - app - INFO - 总房间数配置: 29
+2025-08-05 11:55:30,232 - app - INFO - 数据库初始化完成
+2025-08-05 11:55:30,233 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 11:55:30,270 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 11:55:30,284 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 11:56:00,035 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 11:56:00,250 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 11:56:01,710 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:56:01,710 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:56:01,710 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:56:01,711 - app - INFO - 总房间数配置: 29
+2025-08-05 11:56:01,711 - app - INFO - 数据库初始化完成
+2025-08-05 11:56:01,711 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 11:56:01,744 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 11:56:01,756 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 11:56:23,218 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 11:56:23,382 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 11:56:25,244 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:56:25,244 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:56:25,245 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:56:25,245 - app - INFO - 总房间数配置: 29
+2025-08-05 11:56:25,246 - app - INFO - 数据库初始化完成
+2025-08-05 11:56:25,246 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 11:56:25,273 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 11:56:25,287 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 11:56:43,353 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:56:43,354 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:56:43,354 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:56:43,354 - app - INFO - 总房间数配置: 29
+2025-08-05 11:56:43,355 - app - INFO - 数据库初始化完成
+2025-08-05 11:56:43,355 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 11:56:43,391 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 11:56:43,392 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 11:56:43,393 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 11:56:44,759 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 11:56:44,759 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 11:56:44,759 - app - INFO - 数据库管理密码已配置
+2025-08-05 11:56:44,760 - app - INFO - 总房间数配置: 29
+2025-08-05 11:56:44,760 - app - INFO - 数据库初始化完成
+2025-08-05 11:56:44,760 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 11:56:44,791 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 11:56:44,807 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 11:56:57,931 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:56:57] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:56:58,067 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:56:58] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:57:08,859 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:57:08] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:57:09,594 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:57:09] "GET /test_route HTTP/1.1" 200 -
+2025-08-05 11:57:34,690 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:57:34] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:57:34,760 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:57:34] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 11:57:46,713 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:57:46] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 11:58:08,184 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:58:08] "GET / HTTP/1.1" 200 -
+2025-08-05 11:58:24,267 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:58:24] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 11:59:26,168 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 11:59:26] "[33mPOST /add_room_type HTTP/1.1[0m" 404 -
+2025-08-05 12:02:19,631 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:02:19,631 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:02:19,632 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:02:19,632 - app - INFO - 总房间数配置: 29
+2025-08-05 12:02:19,633 - app - INFO - 数据库初始化完成
+2025-08-05 12:02:19,633 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:02:19,683 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 12:02:19,683 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 12:02:19,685 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 12:02:21,083 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:02:21,084 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:02:21,084 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:02:21,084 - app - INFO - 总房间数配置: 29
+2025-08-05 12:02:21,084 - app - INFO - 数据库初始化完成
+2025-08-05 12:02:21,085 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:02:21,115 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 12:02:21,130 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 12:02:33,967 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:02:33] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:02:33,973 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:02:33] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:02:34,230 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:02:34] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:02:34,237 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:02:34] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:02:43,761 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:02:43] "POST /room_types/add HTTP/1.1" 200 -
+2025-08-05 12:05:27,396 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 12:05:27,572 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 12:05:29,315 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:05:29,315 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:05:29,315 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:05:29,316 - app - INFO - 总房间数配置: 29
+2025-08-05 12:05:29,316 - app - INFO - 数据库初始化完成
+2025-08-05 12:05:29,316 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:05:29,347 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 12:05:29,359 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 12:06:12,208 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 12:06:12,349 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 12:06:13,869 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:06:13,869 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:06:13,870 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:06:13,871 - app - INFO - 总房间数配置: 29
+2025-08-05 12:06:13,871 - app - INFO - 数据库初始化完成
+2025-08-05 12:06:13,871 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:06:13,907 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 12:06:13,924 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 12:07:43,173 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:07:43,173 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:07:43,173 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:07:43,174 - app - INFO - 总房间数配置: 29
+2025-08-05 12:07:43,174 - app - INFO - 数据库初始化完成
+2025-08-05 12:07:43,174 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:07:43,211 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 12:07:43,211 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 12:07:43,212 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 12:07:44,500 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:07:44,500 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:07:44,501 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:07:44,501 - app - INFO - 总房间数配置: 29
+2025-08-05 12:07:44,501 - app - INFO - 数据库初始化完成
+2025-08-05 12:07:44,501 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:07:44,534 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 12:07:44,546 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 12:07:52,799 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:07:52] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:07:52,873 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:07:52] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:07:58,662 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:07:58] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:07:58,722 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:07:58] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:13:24,604 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 12:13:24,796 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 12:13:26,657 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:13:26,658 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:13:26,658 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:13:26,660 - app - INFO - 总房间数配置: 29
+2025-08-05 12:13:26,660 - app - INFO - 数据库初始化完成
+2025-08-05 12:13:26,660 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:13:26,693 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 12:13:26,704 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 12:17:00,050 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:17:00,051 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:17:00,052 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:17:00,053 - app - INFO - 总房间数配置: 29
+2025-08-05 12:17:00,053 - app - INFO - 数据库初始化完成
+2025-08-05 12:17:00,053 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:17:00,100 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 12:17:00,100 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 12:17:00,102 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 12:17:01,563 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:17:01,563 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:17:01,564 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:17:01,565 - app - INFO - 总房间数配置: 29
+2025-08-05 12:17:01,565 - app - INFO - 数据库初始化完成
+2025-08-05 12:17:01,565 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:17:01,716 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 12:17:01,730 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 12:17:05,470 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:17:05] "[33mGET /room_types HTTP/1.1[0m" 404 -
+2025-08-05 12:17:12,168 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:17:12] "GET / HTTP/1.1" 200 -
+2025-08-05 12:17:12,267 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:17:12] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:17:12,273 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:17:12] "GET /static/js/home.js HTTP/1.1" 200 -
+2025-08-05 12:17:14,765 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:17:14] "[33mGET /room_types HTTP/1.1[0m" 404 -
+2025-08-05 12:17:15,791 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:17:15] "[33mGET /room_types HTTP/1.1[0m" 404 -
+2025-08-05 12:17:29,342 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:17:29] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-08-05 12:17:33,399 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:17:33] "[33mGET /room_types HTTP/1.1[0m" 404 -
+2025-08-05 12:17:33,486 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:17:33] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-08-05 12:20:14,499 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 12:20:14,651 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 12:20:16,005 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:20:16,005 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:20:16,005 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:20:16,006 - app - INFO - 总房间数配置: 29
+2025-08-05 12:20:16,006 - app - INFO - 数据库初始化完成
+2025-08-05 12:20:16,006 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:20:16,034 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 12:20:16,047 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 12:20:39,554 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 12:20:39,695 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 12:20:41,079 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:20:41,079 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:20:41,080 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:20:41,080 - app - INFO - 总房间数配置: 29
+2025-08-05 12:20:41,080 - app - INFO - 数据库初始化完成
+2025-08-05 12:20:41,081 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:20:41,111 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 12:20:41,123 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 12:26:21,420 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:26:21,421 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:26:21,421 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:26:21,421 - app - INFO - 总房间数配置: 29
+2025-08-05 12:26:21,421 - app - INFO - 数据库初始化完成
+2025-08-05 12:26:21,422 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:26:21,471 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 12:26:21,472 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 12:26:21,474 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 12:26:22,861 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 12:26:22,861 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 12:26:22,861 - app - INFO - 数据库管理密码已配置
+2025-08-05 12:26:22,862 - app - INFO - 总房间数配置: 29
+2025-08-05 12:26:22,862 - app - INFO - 数据库初始化完成
+2025-08-05 12:26:22,863 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 12:26:22,892 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 12:26:22,906 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 12:26:26,355 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:26:26] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:26:26,460 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:26:26] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:26:35,599 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:26:35] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:26:35,682 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:26:35] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:26:45,136 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:26:45] "POST /room_types/edit HTTP/1.1" 200 -
+2025-08-05 12:26:46,737 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:26:46] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:26:46,817 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:26:46] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:27:44,668 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:27:44] "POST /room_types/edit HTTP/1.1" 200 -
+2025-08-05 12:27:46,149 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:27:46] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:27:46,203 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:27:46] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:28:43,898 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:28:43] "POST /room_types/edit HTTP/1.1" 200 -
+2025-08-05 12:28:45,650 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:28:45] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:28:45,710 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:28:45] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:29:06,161 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:29:06] "POST /room_types/edit HTTP/1.1" 200 -
+2025-08-05 12:29:07,479 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:29:07] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:29:07,532 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:29:07] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:29:33,937 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:29:33] "POST /room_types/edit HTTP/1.1" 200 -
+2025-08-05 12:29:35,226 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:29:35] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:29:35,325 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:29:35] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:30:18,388 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:30:18] "POST /room_types/edit HTTP/1.1" 200 -
+2025-08-05 12:30:20,055 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:30:20] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:30:20,105 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:30:20] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:30:40,897 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:30:40] "POST /room_types/edit HTTP/1.1" 200 -
+2025-08-05 12:30:42,511 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:30:42] "GET /room_types HTTP/1.1" 200 -
+2025-08-05 12:30:42,563 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:30:42] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:30:58,227 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 12:30:58,239 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 12:30:58,310 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:30:58] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 12:30:58,377 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:30:58] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 12:31:01,233 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 12:31:01,249 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 12:31:01,252 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:31:01] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 12:31:01,345 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 12:31:01] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 14:22:58,191 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 14:22:58,524 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:23:00,513 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:23:00,514 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:23:00,514 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:23:00,515 - app - INFO - 总房间数配置: 29
+2025-08-05 14:23:00,515 - app - INFO - 数据库初始化完成
+2025-08-05 14:23:00,515 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:23:00,554 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:23:00,569 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:24:16,282 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 14:24:16,428 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:24:18,144 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:24:18,144 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:24:18,144 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:24:18,145 - app - INFO - 总房间数配置: 29
+2025-08-05 14:24:18,145 - app - INFO - 数据库初始化完成
+2025-08-05 14:24:18,145 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:24:18,181 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:24:18,196 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:24:33,565 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 14:24:33,714 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:24:35,009 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:24:35,010 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:24:35,010 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:24:35,010 - app - INFO - 总房间数配置: 29
+2025-08-05 14:24:35,010 - app - INFO - 数据库初始化完成
+2025-08-05 14:24:35,011 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:24:35,046 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:24:35,058 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:24:56,498 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 14:24:56,638 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:24:57,972 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:24:57,972 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:24:57,972 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:24:57,973 - app - INFO - 总房间数配置: 29
+2025-08-05 14:24:57,973 - app - INFO - 数据库初始化完成
+2025-08-05 14:24:57,974 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:24:58,004 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:24:58,016 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:29:16,947 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:29:16,947 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:29:16,948 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:29:16,948 - app - INFO - 总房间数配置: 29
+2025-08-05 14:29:16,948 - app - INFO - 数据库初始化完成
+2025-08-05 14:29:16,949 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:29:17,003 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 14:29:17,003 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 14:29:17,004 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:29:18,268 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:29:18,268 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:29:18,268 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:29:18,269 - app - INFO - 总房间数配置: 29
+2025-08-05 14:29:18,269 - app - INFO - 数据库初始化完成
+2025-08-05 14:29:18,269 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:29:18,303 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:29:18,315 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:29:26,051 - app - ERROR - 生成周报表时发生错误: name 'cursor' is not defined
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1450, in generate_weekly_report
+    cursor.execute("SELECT type_name FROM room_types ORDER BY type_name")
+NameError: name 'cursor' is not defined
+2025-08-05 14:29:26,232 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:29:26] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 14:29:26,293 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:29:26] "GET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+2025-08-05 14:29:26,297 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:29:26] "GET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+2025-08-05 14:29:26,360 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:29:26] "GET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=5pOpscQeKiOaFXS5Utjf HTTP/1.1" 200 -
+2025-08-05 14:29:26,652 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:29:26] "GET /weekly_report?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+2025-08-05 14:29:36,428 - app - ERROR - 生成周报表时发生错误: name 'cursor' is not defined
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1450, in generate_weekly_report
+    cursor.execute("SELECT type_name FROM room_types ORDER BY type_name")
+NameError: name 'cursor' is not defined
+2025-08-05 14:29:36,452 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:29:36] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 14:29:36,518 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:29:36] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-08-05 14:29:36,521 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:29:36] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-08-05 14:29:36,672 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:29:36] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=5pOpscQeKiOaFXS5Utjf HTTP/1.1[0m" 304 -
+2025-08-05 14:29:44,813 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:29:44] "[33mGET /room_types HTTP/1.1[0m" 404 -
+2025-08-05 14:30:18,837 - app - ERROR - 生成周报表时发生错误: name 'cursor' is not defined
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1450, in generate_weekly_report
+    cursor.execute("SELECT type_name FROM room_types ORDER BY type_name")
+NameError: name 'cursor' is not defined
+2025-08-05 14:30:18,893 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:30:18] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 14:30:18,974 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:30:18] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-08-05 14:30:18,988 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:30:18] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-08-05 14:30:19,197 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:30:19] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=5pOpscQeKiOaFXS5Utjf HTTP/1.1[0m" 304 -
+2025-08-05 14:32:21,509 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 14:32:21,668 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:32:23,389 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:32:23,390 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:32:23,390 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:32:23,391 - app - INFO - 总房间数配置: 29
+2025-08-05 14:32:23,391 - app - INFO - 数据库初始化完成
+2025-08-05 14:32:23,391 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:32:23,422 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:32:23,442 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:32:40,819 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 14:32:40,959 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:32:42,659 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:32:42,659 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:32:42,659 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:32:42,660 - app - INFO - 总房间数配置: 29
+2025-08-05 14:32:42,660 - app - INFO - 数据库初始化完成
+2025-08-05 14:32:42,660 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:32:42,686 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:32:42,697 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:43:32,918 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:43:32,919 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:43:32,919 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:43:32,919 - app - INFO - 总房间数配置: 29
+2025-08-05 14:43:32,919 - app - INFO - 数据库初始化完成
+2025-08-05 14:43:32,920 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:43:32,972 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 14:43:32,973 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 14:43:32,975 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:43:34,248 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:43:34,248 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:43:34,248 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:43:34,249 - app - INFO - 总房间数配置: 29
+2025-08-05 14:43:34,249 - app - INFO - 数据库初始化完成
+2025-08-05 14:43:34,249 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:43:34,278 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:43:34,289 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:43:40,497 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:43:40] "GET / HTTP/1.1" 200 -
+2025-08-05 14:43:40,633 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:43:40] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 14:43:40,638 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:43:40] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 14:43:42,982 - app - ERROR - 生成周报表时发生错误: 'room_type'
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'room_type'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1426, in generate_weekly_report
+    room_type_df = accommodation_df[accommodation_df['room_type'].notna()]
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/frame.py", line 4107, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'room_type'
+2025-08-05 14:43:43,155 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:43:43] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 14:43:43,203 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:43:43] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-08-05 14:43:43,232 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:43:43] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-08-05 14:43:43,255 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:43:43] "GET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=NhdRoBiDgDjX55BCl4dF HTTP/1.1" 200 -
+2025-08-05 14:43:51,987 - app - ERROR - 生成周报表时发生错误: 'room_type'
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'room_type'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1426, in generate_weekly_report
+    room_type_df = accommodation_df[accommodation_df['room_type'].notna()]
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/frame.py", line 4107, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'room_type'
+2025-08-05 14:43:52,030 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:43:52] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 14:43:52,078 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:43:52] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-08-05 14:43:52,082 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:43:52] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-08-05 14:43:52,200 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:43:52] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=NhdRoBiDgDjX55BCl4dF HTTP/1.1[0m" 304 -
+2025-08-05 14:49:46,658 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 14:49:46,818 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:49:48,644 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:49:48,644 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:49:48,644 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:49:48,645 - app - INFO - 总房间数配置: 29
+2025-08-05 14:49:48,645 - app - INFO - 数据库初始化完成
+2025-08-05 14:49:48,645 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:49:48,685 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:49:48,697 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:50:52,171 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:50:52,171 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:50:52,171 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:50:52,173 - app - INFO - 总房间数配置: 29
+2025-08-05 14:50:52,174 - app - INFO - 数据库初始化完成
+2025-08-05 14:50:52,174 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:50:52,227 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 14:50:52,227 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 14:50:52,229 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:50:53,675 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:50:53,676 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:50:53,676 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:50:53,677 - app - INFO - 总房间数配置: 29
+2025-08-05 14:50:53,678 - app - INFO - 数据库初始化完成
+2025-08-05 14:50:53,678 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:50:53,731 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:50:53,746 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:51:21,995 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 14:51:22,006 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 14:51:22,175 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:22] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 14:51:22,244 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:22] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-08-05 14:51:22,245 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:22] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-08-05 14:51:22,265 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:22] "GET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=b2WhfNVvVBzSQb5OORcs HTTP/1.1" 200 -
+2025-08-05 14:51:22,411 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:22] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-08-05 14:51:25,253 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 14:51:25,267 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 14:51:25,283 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:25] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 14:51:25,352 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:25] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-08-05 14:51:25,356 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:25] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-08-05 14:51:25,379 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:25] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=b2WhfNVvVBzSQb5OORcs HTTP/1.1[0m" 304 -
+2025-08-05 14:51:25,594 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:25] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-08-05 14:51:38,737 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:38] "GET / HTTP/1.1" 200 -
+2025-08-05 14:51:38,795 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:38] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 14:51:38,808 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:38] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 14:51:41,092 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 14:51:41,114 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 14:51:41,129 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:41] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 14:51:41,230 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:41] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-08-05 14:51:41,236 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:41] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-08-05 14:51:41,280 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:51:41] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=b2WhfNVvVBzSQb5OORcs HTTP/1.1[0m" 304 -
+2025-08-05 14:52:12,519 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 14:52:12,666 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:52:14,157 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:52:14,157 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:52:14,157 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:52:14,158 - app - INFO - 总房间数配置: 29
+2025-08-05 14:52:14,158 - app - INFO - 数据库初始化完成
+2025-08-05 14:52:14,158 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:52:14,190 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:52:14,203 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:52:23,110 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 14:52:23,124 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 14:52:23,331 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:52:23] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 14:52:23,436 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:52:23] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-08-05 14:52:23,438 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:52:23] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-08-05 14:52:23,569 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:52:23] "GET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=vTmr9Z7e17oq7HtAo0tN HTTP/1.1" 200 -
+2025-08-05 14:52:23,681 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:52:23] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-08-05 14:53:20,797 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 14:53:20,978 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:53:22,520 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:53:22,521 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:53:22,521 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:53:22,521 - app - INFO - 总房间数配置: 29
+2025-08-05 14:53:22,521 - app - INFO - 数据库初始化完成
+2025-08-05 14:53:22,522 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:53:22,547 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:53:22,558 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:53:47,046 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 14:53:47,252 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:53:48,622 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:53:48,622 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:53:48,622 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:53:48,623 - app - INFO - 总房间数配置: 29
+2025-08-05 14:53:48,623 - app - INFO - 数据库初始化完成
+2025-08-05 14:53:48,623 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:53:48,651 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:53:48,664 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:54:20,925 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:54:20,925 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:54:20,925 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:54:20,926 - app - INFO - 总房间数配置: 29
+2025-08-05 14:54:20,926 - app - INFO - 数据库初始化完成
+2025-08-05 14:54:20,926 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:54:20,967 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 14:54:20,968 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 14:54:20,969 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:54:22,386 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:54:22,386 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:54:22,386 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:54:22,387 - app - INFO - 总房间数配置: 29
+2025-08-05 14:54:22,387 - app - INFO - 数据库初始化完成
+2025-08-05 14:54:22,387 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:54:22,416 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:54:22,429 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:54:23,314 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 14:54:23,330 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 14:54:23,541 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:54:23] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 14:54:23,632 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:54:23] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-08-05 14:54:23,640 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:54:23] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-08-05 14:54:23,720 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:54:23] "GET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=YM2E7Pax7xGyORng3E3g HTTP/1.1" 200 -
+2025-08-05 14:54:24,007 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:54:24] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-08-05 14:54:53,211 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 14:54:53,383 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:54:54,912 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:54:54,913 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:54:54,913 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:54:54,914 - app - INFO - 总房间数配置: 29
+2025-08-05 14:54:54,915 - app - INFO - 数据库初始化完成
+2025-08-05 14:54:54,915 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:54:54,947 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:54:54,970 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:55:19,688 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:55:19,688 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:55:19,688 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:55:19,689 - app - INFO - 总房间数配置: 29
+2025-08-05 14:55:19,689 - app - INFO - 数据库初始化完成
+2025-08-05 14:55:19,690 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:55:19,730 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 14:55:19,730 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 14:55:19,732 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 14:55:21,171 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 14:55:21,171 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 14:55:21,171 - app - INFO - 数据库管理密码已配置
+2025-08-05 14:55:21,172 - app - INFO - 总房间数配置: 29
+2025-08-05 14:55:21,172 - app - INFO - 数据库初始化完成
+2025-08-05 14:55:21,172 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 14:55:21,202 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 14:55:21,213 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 14:55:21,376 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 14:55:21,389 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 14:55:21,541 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:55:21] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 14:55:21,691 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:55:21] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 14:55:37,251 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 14:55:37,267 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 14:55:37,270 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:55:37] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 14:55:37,417 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:55:37] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 14:56:18,562 - app - INFO - 生成周报表图表数据: 日期数=8, 有无日期数据=True
+2025-08-05 14:56:18,573 - app - INFO - 图表数据生成完成: {"dates": ["07-27", "07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星...
+2025-08-05 14:56:18,575 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:56:18] "GET /weekly_report?start_date=2025-07-27&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 14:56:18,635 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:56:18] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 14:56:43,938 - app - INFO - 生成周报表图表数据: 日期数=8, 有无日期数据=True
+2025-08-05 14:56:43,950 - app - INFO - 图表数据生成完成: {"dates": ["07-27", "07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星...
+2025-08-05 14:56:43,952 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:56:43] "GET /weekly_report?start_date=2025-07-27&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 14:56:43,976 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:56:43] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 14:59:54,825 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 14:59:54,844 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 14:59:54,850 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:59:54] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 14:59:54,934 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 14:59:54] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:01:14,612 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:01:14,626 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:01:14,629 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:01:14] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 15:01:57,019 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 15:01:57,178 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 15:01:59,210 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:01:59,210 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:01:59,210 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:01:59,211 - app - INFO - 总房间数配置: 29
+2025-08-05 15:01:59,211 - app - INFO - 数据库初始化完成
+2025-08-05 15:01:59,211 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 15:01:59,244 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 15:01:59,256 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 15:02:37,909 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:02:37,910 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:02:37,910 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:02:37,910 - app - INFO - 总房间数配置: 29
+2025-08-05 15:02:37,911 - app - INFO - 数据库初始化完成
+2025-08-05 15:02:37,911 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 15:02:37,962 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 15:02:37,962 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 15:02:37,964 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 15:02:39,323 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:02:39,323 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:02:39,323 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:02:39,324 - app - INFO - 总房间数配置: 29
+2025-08-05 15:02:39,324 - app - INFO - 数据库初始化完成
+2025-08-05 15:02:39,324 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 15:02:39,351 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 15:02:39,363 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 15:02:39,500 - app - ERROR - 生成周报表时发生错误: name 'room_type_data' is not defined
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1428, in generate_weekly_report
+    'room_type_data': room_type_data,  # 房型分析数据
+NameError: name 'room_type_data' is not defined
+2025-08-05 15:02:39,684 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:02:39] "[35m[1mGET /weekly_report?start_date=2025-07-27&end_date=2025-08-03 HTTP/1.1[0m" 500 -
+2025-08-05 15:02:39,734 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:02:39] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-08-05 15:02:39,748 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:02:39] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-08-05 15:02:39,821 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:02:39] "GET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=KdvwX0CQqON4od4rdp92 HTTP/1.1" 200 -
+2025-08-05 15:02:40,145 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:02:40] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-08-05 15:03:21,812 - werkzeug - INFO -  * Detected change in '/Users/binbin/Desktop/hotel/app.py', reloading
+2025-08-05 15:03:21,972 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 15:03:23,667 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:03:23,667 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:03:23,667 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:03:23,668 - app - INFO - 总房间数配置: 29
+2025-08-05 15:03:23,669 - app - INFO - 数据库初始化完成
+2025-08-05 15:03:23,669 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 15:03:23,723 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 15:03:23,737 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 15:03:50,211 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:03:50,212 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:03:50,212 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:03:50,213 - app - INFO - 总房间数配置: 29
+2025-08-05 15:03:50,214 - app - INFO - 数据库初始化完成
+2025-08-05 15:03:50,215 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 15:03:50,282 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5002
+ * Running on http://198.18.0.1:5002
+2025-08-05 15:03:50,283 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 15:03:50,284 - werkzeug - INFO -  * Restarting with stat
+2025-08-05 15:03:51,644 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:03:51,644 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:03:51,644 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:03:51,646 - app - INFO - 总房间数配置: 29
+2025-08-05 15:03:51,646 - app - INFO - 数据库初始化完成
+2025-08-05 15:03:51,647 - app - INFO - 启动Web服务器在端口 5002...
+2025-08-05 15:03:51,680 - werkzeug - WARNING -  * Debugger is active!
+2025-08-05 15:03:51,693 - werkzeug - INFO -  * Debugger PIN: 118-974-613
+2025-08-05 15:04:03,670 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:04:03,683 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:04:03,842 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:04:03] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 15:04:03,915 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:04:03] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-08-05 15:04:03,921 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:04:03] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-08-05 15:04:03,972 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:04:03] "GET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=F5uIHPnHKnUDmsjzR1zF HTTP/1.1" 200 -
+2025-08-05 15:04:06,645 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:04:06,655 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:04:06,668 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:04:06] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 15:04:06,695 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:04:06] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 304 -
+2025-08-05 15:04:06,701 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:04:06] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 304 -
+2025-08-05 15:04:06,743 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:04:06] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=console.png&s=F5uIHPnHKnUDmsjzR1zF HTTP/1.1[0m" 304 -
+2025-08-05 15:04:06,908 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:04:06] "[36mGET /weekly_report?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 304 -
+2025-08-05 15:06:56,083 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:06:56,084 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:06:56,084 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:06:56,084 - app - INFO - 总房间数配置: 29
+2025-08-05 15:06:56,085 - app - INFO - 数据库初始化完成
+2025-08-05 15:06:56,085 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 15:06:56,093 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 15:06:56,093 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 15:07:01,477 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:07:01] "GET / HTTP/1.1" 200 -
+2025-08-05 15:07:01,540 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:07:01] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:07:01,562 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:07:01] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 15:07:04,164 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:07:04,173 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:07:04,292 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 1082, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 259, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 370, in block 'content'
+    <td><strong>{{ room_type_summary.total_room_nights }}</strong></td>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'room_type_summary' is undefined
+2025-08-05 15:07:04,314 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:07:04] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 15:07:08,677 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:07:08,690 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:07:08,692 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 1082, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 259, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 370, in block 'content'
+    <td><strong>{{ room_type_summary.total_room_nights }}</strong></td>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'room_type_summary' is undefined
+2025-08-05 15:07:08,693 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:07:08] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 15:09:21,418 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:09:21,418 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:09:21,418 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:09:21,419 - app - INFO - 总房间数配置: 29
+2025-08-05 15:09:21,419 - app - INFO - 数据库初始化完成
+2025-08-05 15:09:21,419 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 15:09:21,426 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 15:09:21,427 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 15:09:34,176 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:09:34] "GET / HTTP/1.1" 200 -
+2025-08-05 15:09:34,212 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:09:34] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:09:34,299 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:09:34] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 15:09:36,509 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:09:36,517 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:09:36,639 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 1083, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 259, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 384, in block 'content'
+    <td><strong>{{ "%.2f"|format(room_type_summary.total_revenue) }}</strong></td>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1043, in do_format
+    return soft_str(value) % (kwargs or args)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'total_revenue'
+2025-08-05 15:09:36,660 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:09:36] "[35m[1mGET /weekly_report HTTP/1.1[0m" 500 -
+2025-08-05 15:10:56,527 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:10:56,527 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:10:56,527 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:10:56,527 - app - INFO - 总房间数配置: 29
+2025-08-05 15:10:56,528 - app - INFO - 数据库初始化完成
+2025-08-05 15:10:56,528 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 15:10:56,533 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 15:10:56,534 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 15:11:00,414 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:11:00,425 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:11:00,556 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:11:00] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 15:11:00,590 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:11:00] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:11:11,697 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:11:11,709 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:11:11,711 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:11:11] "GET /weekly_report?start_date=2025-07-30&end_date=2025-08-05 HTTP/1.1" 200 -
+2025-08-05 15:11:11,744 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:11:11] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:17:54,472 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:17:54,473 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:17:54,473 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:17:54,473 - app - INFO - 总房间数配置: 29
+2025-08-05 15:17:54,473 - app - INFO - 数据库初始化完成
+2025-08-05 15:17:54,474 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 15:17:54,482 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 15:17:54,482 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 15:18:02,538 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:18:02,549 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:18:02,701 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:18:02] "GET /weekly_report?start_date=2025-07-30&end_date=2025-08-05 HTTP/1.1" 200 -
+2025-08-05 15:18:02,752 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:18:02] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:18:14,466 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:18:14,483 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:18:14,491 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:18:14] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 15:18:14,628 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:18:14] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:19:17,590 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:19:17] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:20:03,792 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:20:03,804 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 15:20:03,810 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:20:03] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 15:20:03,906 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:20:03] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:23:16,472 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:23:16,495 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:23:16,506 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:23:16] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 15:23:16,563 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:23:16] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:23:28,675 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:23:28,686 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:23:28,691 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:23:28] "GET /weekly_report?start_date=2025-07-30&end_date=2025-08-05 HTTP/1.1" 200 -
+2025-08-05 15:23:28,739 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:23:28] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:24:05,219 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:24:05,219 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:24:05,219 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:24:05,220 - app - INFO - 总房间数配置: 29
+2025-08-05 15:24:05,220 - app - INFO - 数据库初始化完成
+2025-08-05 15:24:05,220 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 15:24:05,229 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 15:24:05,229 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 15:24:10,457 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:24:10] "GET / HTTP/1.1" 200 -
+2025-08-05 15:24:10,494 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:24:10] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:24:10,584 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:24:10] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 15:24:13,513 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:24:13,524 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:24:13,666 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:24:13] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 15:24:13,796 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:24:13] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:24:30,515 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:24:30,526 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 15:24:30,534 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:24:30] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 15:24:30,575 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:24:30] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:51:16,871 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:51:16,871 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:51:16,872 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:51:16,872 - app - INFO - 总房间数配置: 29
+2025-08-05 15:51:16,872 - app - INFO - 数据库初始化完成
+2025-08-05 15:51:16,872 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 15:51:16,882 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 15:51:16,883 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 15:51:19,595 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:51:19,607 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 15:51:19,781 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:19] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 15:51:19,841 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:19] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:51:25,357 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:51:25,369 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 15:51:25,376 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:25] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 15:51:25,408 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:25] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:51:33,908 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:51:33,921 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 15:51:33,929 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:33] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 15:51:33,993 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:33] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:51:53,408 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:53] "GET / HTTP/1.1" 200 -
+2025-08-05 15:51:53,432 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:53] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:51:53,541 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:53] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 15:51:56,474 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:56] "GET /entry HTTP/1.1" 200 -
+2025-08-05 15:51:56,530 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:56] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:51:57,203 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:57] "GET /view HTTP/1.1" 200 -
+2025-08-05 15:51:57,253 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:57] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:51:58,068 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:58] "GET /analytics HTTP/1.1" 200 -
+2025-08-05 15:51:58,173 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:58] "GET /static/css/analytics.css?v=678910 HTTP/1.1" 200 -
+2025-08-05 15:51:58,189 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:58] "GET /static/css/print.css?v=123456 HTTP/1.1" 200 -
+2025-08-05 15:51:58,200 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:58] "GET /static/js/analytics.js?v=234567 HTTP/1.1" 200 -
+2025-08-05 15:51:58,214 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:58] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:51:58,868 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:51:58] "[33mGET /room_types HTTP/1.1[0m" 404 -
+2025-08-05 15:52:02,908 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:52:02,919 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:52:02,925 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:52:02] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 15:52:02,973 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:52:02] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:52:04,852 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:52:04] "GET /system_guide HTTP/1.1" 200 -
+2025-08-05 15:52:04,892 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:52:04] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:52:06,233 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:52:06] "[32mGET /db_admin HTTP/1.1[0m" 302 -
+2025-08-05 15:52:06,247 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:52:06] "GET /db_admin/login HTTP/1.1" 200 -
+2025-08-05 15:52:08,732 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:52:08] "[33mGET /room_types HTTP/1.1[0m" 404 -
+2025-08-05 15:52:10,405 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:52:10,415 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 15:52:10,422 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:52:10] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 15:52:10,463 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:52:10] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:52:17,897 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 15:52:17,910 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 15:52:17,918 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:52:17] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 15:52:17,967 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:52:17] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:54:26,436 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:54:26] "[32mGET /db_admin HTTP/1.1[0m" 302 -
+2025-08-05 15:54:26,456 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:54:26] "GET /db_admin/login HTTP/1.1" 200 -
+2025-08-05 15:54:29,607 - app - INFO - 登录调试 - 环境变量密码: 已设置
+2025-08-05 15:54:29,608 - app - INFO - 登录调试 - 配置密码: 已设置
+2025-08-05 15:54:29,609 - app - INFO - 登录调试 - 当前工作目录: /Users/binbin/Desktop/hotel
+2025-08-05 15:54:29,609 - app - INFO - 登录调试 - .env文件存在: True
+2025-08-05 15:54:29,610 - app - INFO - 登录成功
+2025-08-05 15:54:29,611 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:54:29] "[32mPOST /db_admin/login HTTP/1.1[0m" 302 -
+2025-08-05 15:54:29,624 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:54:29] "GET /db_admin HTTP/1.1" 200 -
+2025-08-05 15:54:29,707 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:54:29] "GET /static/js/db_admin.js HTTP/1.1" 200 -
+2025-08-05 15:54:29,759 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:54:29] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:54:52,009 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:54:52] "POST /db_admin/delete_by_date_range HTTP/1.1" 200 -
+2025-08-05 15:55:54,424 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:55:54,425 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:55:54,425 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:55:54,426 - app - INFO - 总房间数配置: 29
+2025-08-05 15:55:54,426 - app - INFO - 数据库初始化完成
+2025-08-05 15:55:54,427 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 15:55:54,436 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 15:55:54,437 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 15:55:59,321 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:55:59] "GET /db_admin HTTP/1.1" 200 -
+2025-08-05 15:55:59,382 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:55:59] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:55:59,384 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:55:59] "[36mGET /static/js/db_admin.js HTTP/1.1[0m" 304 -
+2025-08-05 15:56:10,009 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:56:10] "POST /db_admin/delete_by_date_range HTTP/1.1" 200 -
+2025-08-05 15:57:02,594 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 15:57:02,595 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 15:57:02,595 - app - INFO - 数据库管理密码已配置
+2025-08-05 15:57:02,595 - app - INFO - 总房间数配置: 29
+2025-08-05 15:57:02,595 - app - INFO - 数据库初始化完成
+2025-08-05 15:57:02,596 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 15:57:02,606 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 15:57:02,606 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 15:57:05,818 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:57:05] "GET /db_admin HTTP/1.1" 200 -
+2025-08-05 15:57:05,891 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:57:05] "GET /static/js/db_admin.js HTTP/1.1" 200 -
+2025-08-05 15:57:05,892 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:57:05] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-08-05 15:57:06,858 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:57:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-05 15:57:18,876 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:57:18] "POST /db_admin/delete_by_date_range HTTP/1.1" 200 -
+2025-08-05 15:57:18,912 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:57:18] "GET /db_admin/records HTTP/1.1" 200 -
+2025-08-05 15:57:23,125 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:57:23] "GET /view HTTP/1.1" 200 -
+2025-08-05 15:57:23,193 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:57:23] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:57:31,301 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:57:31] "GET / HTTP/1.1" 200 -
+2025-08-05 15:57:31,350 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:57:31] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 15:57:31,366 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 15:57:31] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 16:03:28,817 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:28] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 16:03:28,886 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:28] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:03:36,954 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:36] "[32mPOST /import_excel HTTP/1.1[0m" 302 -
+2025-08-05 16:03:36,962 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:36] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:03:37,030 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:37] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:03:40,432 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:40] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:03:40,467 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:40] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:03:42,723 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:42] "GET / HTTP/1.1" 200 -
+2025-08-05 16:03:42,769 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:42] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:03:42,773 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:42] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 16:03:44,279 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:44] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 16:03:44,326 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:44] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:03:51,193 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:51] "[32mPOST /import_excel HTTP/1.1[0m" 302 -
+2025-08-05 16:03:51,202 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:51] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:03:51,276 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:51] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:03:54,909 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:54] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:03:54,982 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:54] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:03:57,011 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:57] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:03:57,087 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:57] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:03:57,520 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:57] "GET /entry HTTP/1.1" 200 -
+2025-08-05 16:03:57,560 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:57] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:03:58,128 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:58] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:03:58,183 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:58] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:03:59,193 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:59] "GET /entry HTTP/1.1" 200 -
+2025-08-05 16:03:59,252 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:03:59] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:04:00,525 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:00] "GET / HTTP/1.1" 200 -
+2025-08-05 16:04:00,569 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:00] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:04:00,578 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:00] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 16:04:01,686 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:01] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 16:04:01,739 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:01] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:04:09,229 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:09] "[32mPOST /import_excel HTTP/1.1[0m" 302 -
+2025-08-05 16:04:09,240 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:09] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:04:09,299 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:09] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:04:11,259 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:11] "GET / HTTP/1.1" 200 -
+2025-08-05 16:04:11,327 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:11] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:04:11,337 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:11] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 16:04:14,545 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:14] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 16:04:14,578 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:14] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:04:19,575 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:19] "[32mPOST /import_excel HTTP/1.1[0m" 302 -
+2025-08-05 16:04:19,583 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:19] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:04:19,610 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:19] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:04:34,926 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:34] "GET /view?year=2025&month=07 HTTP/1.1" 200 -
+2025-08-05 16:04:34,994 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:04:34] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:08:43,619 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:08:43] "GET /db_admin HTTP/1.1" 200 -
+2025-08-05 16:08:43,692 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:08:43] "[36mGET /static/js/db_admin.js HTTP/1.1[0m" 304 -
+2025-08-05 16:08:43,694 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:08:43] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:08:54,264 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 16:08:54,264 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 16:08:54,264 - app - INFO - 数据库管理密码已配置
+2025-08-05 16:08:54,265 - app - INFO - 总房间数配置: 29
+2025-08-05 16:08:54,265 - app - INFO - 数据库初始化完成
+2025-08-05 16:08:54,266 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 16:08:54,273 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 16:08:54,274 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 16:08:56,599 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:08:56] "GET /db_admin HTTP/1.1" 200 -
+2025-08-05 16:08:56,695 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:08:56] "[36mGET /static/js/db_admin.js HTTP/1.1[0m" 304 -
+2025-08-05 16:08:56,695 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:08:56] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:08:58,599 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:08:58] "GET /system_guide HTTP/1.1" 200 -
+2025-08-05 16:08:58,624 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:08:58] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:08:59,264 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:08:59] "GET /db_admin HTTP/1.1" 200 -
+2025-08-05 16:08:59,341 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:08:59] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:08:59,343 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:08:59] "[36mGET /static/js/db_admin.js HTTP/1.1[0m" 304 -
+2025-08-05 16:09:18,723 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:18] "POST /db_admin/delete_by_date_range HTTP/1.1" 200 -
+2025-08-05 16:09:18,756 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:18] "GET /db_admin/records HTTP/1.1" 200 -
+2025-08-05 16:09:21,899 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:21] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:09:21,932 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:21] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:09:25,686 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:25] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:09:25,760 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:25] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:09:27,067 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:27] "GET / HTTP/1.1" 200 -
+2025-08-05 16:09:27,129 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:27] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:09:27,130 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:27] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 16:09:28,989 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:28] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 16:09:29,051 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:29] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:09:32,122 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:32] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 16:09:32,156 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:32] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:09:38,062 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:38] "[32mPOST /import_excel HTTP/1.1[0m" 302 -
+2025-08-05 16:09:38,069 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:38] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:09:38,107 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:38] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:09:42,170 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:42] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 16:09:47,873 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:47] "[32mPOST /import_excel HTTP/1.1[0m" 302 -
+2025-08-05 16:09:47,880 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:47] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:09:47,920 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:47] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:09:48,716 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:48] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 16:09:53,295 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:53] "[32mPOST /import_excel HTTP/1.1[0m" 302 -
+2025-08-05 16:09:53,305 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:53] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:09:53,371 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:53] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:09:54,338 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:54] "GET /import_excel HTTP/1.1" 200 -
+2025-08-05 16:09:58,938 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:58] "[32mPOST /import_excel HTTP/1.1[0m" 302 -
+2025-08-05 16:09:58,947 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:58] "GET /view HTTP/1.1" 200 -
+2025-08-05 16:09:58,990 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:09:58] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:10:02,300 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:10:02] "GET / HTTP/1.1" 200 -
+2025-08-05 16:10:02,352 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:10:02] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:10:02,370 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:10:02] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 16:10:05,820 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:10:05] "GET / HTTP/1.1" 200 -
+2025-08-05 16:10:05,868 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:10:05] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:10:05,874 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:10:05] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 16:10:08,277 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:10:08,288 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 16:10:08,472 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:10:08] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 16:10:08,505 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:10:08] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:10:14,967 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:10:14,979 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:10:14,986 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:10:14] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:10:15,026 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:10:15] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:27:37,283 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 16:27:37,284 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 16:27:37,284 - app - INFO - 数据库管理密码已配置
+2025-08-05 16:27:37,285 - app - INFO - 总房间数配置: 29
+2025-08-05 16:27:37,286 - app - INFO - 数据库初始化完成
+2025-08-05 16:27:37,286 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 16:27:37,294 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 16:27:37,294 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 16:27:43,109 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:27:43] "GET / HTTP/1.1" 200 -
+2025-08-05 16:27:43,171 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:27:43] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:27:43,324 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:27:43] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 16:27:47,073 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:27:47,085 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 16:27:47,231 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:27:47] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 16:27:47,322 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:27:47] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:27:55,766 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:27:55,778 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:27:55,785 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:27:55] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:27:55,813 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:27:55] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:32:52,035 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 16:32:52,035 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 16:32:52,035 - app - INFO - 数据库管理密码已配置
+2025-08-05 16:32:52,036 - app - INFO - 总房间数配置: 29
+2025-08-05 16:32:52,037 - app - INFO - 数据库初始化完成
+2025-08-05 16:32:52,038 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 16:32:52,045 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 16:32:52,045 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 16:32:56,751 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:32:56,765 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:32:56,930 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:32:56] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:32:57,009 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:32:57] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:32:57,838 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:32:57,852 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:32:57,860 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:32:57] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:32:57,908 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:32:57] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:39:07,286 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 16:39:07,286 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 16:39:07,287 - app - INFO - 数据库管理密码已配置
+2025-08-05 16:39:07,287 - app - INFO - 总房间数配置: 29
+2025-08-05 16:39:07,287 - app - INFO - 数据库初始化完成
+2025-08-05 16:39:07,288 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 16:39:07,295 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 16:39:07,295 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 16:39:37,448 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:39:37,463 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:39:37,646 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:39:37] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:39:37,707 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:39:37] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:39:41,263 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:39:41,275 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:39:41,285 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:39:41] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:39:41,355 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:39:41] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:39:50,516 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:39:50,528 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:39:50,536 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:39:50] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:39:50,578 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:39:50] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-08-05 16:39:52,148 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:39:52] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-05 16:39:53,659 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:39:53,670 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:39:53,678 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:39:53] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:39:53,722 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:39:53] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:40:08,592 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:40:08,607 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:40:08,614 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:40:08] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:40:08,656 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:40:08] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-08-05 16:40:12,975 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:40:12,986 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:40:12,995 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:40:12] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:40:13,010 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:40:13] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:53:46,942 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 16:53:46,942 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 16:53:46,943 - app - INFO - 数据库管理密码已配置
+2025-08-05 16:53:46,944 - app - INFO - 总房间数配置: 29
+2025-08-05 16:53:46,944 - app - INFO - 数据库初始化完成
+2025-08-05 16:53:46,945 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 16:53:46,953 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 16:53:46,953 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 16:53:52,826 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:53:52,839 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:53:53,011 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:53:53] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:53:53,081 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:53:53] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-08-05 16:53:54,432 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:53:54] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-05 16:54:31,142 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 934, in weekly_report
+    start_date = request.args.get('start_date', (datetime.strptime(end_date, '%Y-%m-%d') - timedelta(days=6)).strftime('%Y-%m-%d'))
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/_strptime.py", line 352, in _strptime
+    raise ValueError("unconverted data remains: %s" %
+ValueError: unconverted data remains: 、
+2025-08-05 16:54:31,158 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:54:31] "[35m[1mGET /weekly_report?start_date=2025-07-28&end_date=2025-08-03、 HTTP/1.1[0m" 500 -
+2025-08-05 16:54:34,935 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:54:34,946 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:54:34,954 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:54:34] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:54:35,001 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:54:35] "GET /static/css/tailwind.css HTTP/1.1" 200 -
+2025-08-05 16:56:48,393 - app - INFO - === 乐巷酒店数据智能分析系统启动 ===
+2025-08-05 16:56:48,393 - app - INFO - 默认使用模型: deepseek-reasoner
+2025-08-05 16:56:48,394 - app - INFO - 数据库管理密码已配置
+2025-08-05 16:56:48,395 - app - INFO - 总房间数配置: 29
+2025-08-05 16:56:48,395 - app - INFO - 数据库初始化完成
+2025-08-05 16:56:48,395 - app - INFO - 启动Web服务器在端口 5001...
+2025-08-05 16:56:48,403 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://198.18.0.1:5001
+2025-08-05 16:56:48,403 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-05 16:56:57,733 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:56:57] "GET / HTTP/1.1" 200 -
+2025-08-05 16:56:57,816 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:56:57] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:56:57,828 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:56:57] "[36mGET /static/js/home.js HTTP/1.1[0m" 304 -
+2025-08-05 16:56:58,381 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:56:58] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-08-05 16:57:00,247 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:57:00,262 - app - INFO - 图表数据生成完成: {"dates": ["07-30", "07-31", "08-01", "08-02", "08-03", "08-04", "08-05"], "day_names": ["星期三", "星期四...
+2025-08-05 16:57:00,460 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:57:00] "GET /weekly_report HTTP/1.1" 200 -
+2025-08-05 16:57:00,575 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:57:00] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 16:57:11,934 - app - INFO - 生成周报表图表数据: 日期数=7, 有无日期数据=True
+2025-08-05 16:57:11,946 - app - INFO - 图表数据生成完成: {"dates": ["07-28", "07-29", "07-30", "07-31", "08-01", "08-02", "08-03"], "day_names": ["星期一", "星期二...
+2025-08-05 16:57:11,956 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:57:11] "GET /weekly_report?start_date=2025-07-28&end_date=2025-08-03 HTTP/1.1" 200 -
+2025-08-05 16:57:12,000 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 16:57:12] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 17:00:01,577 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 17:00:01] "GET /analytics HTTP/1.1" 200 -
+2025-08-05 17:00:01,650 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 17:00:01] "GET /static/css/analytics.css?v=678910 HTTP/1.1" 200 -
+2025-08-05 17:00:01,652 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 17:00:01] "[36mGET /static/css/tailwind.css HTTP/1.1[0m" 304 -
+2025-08-05 17:00:01,662 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 17:00:01] "GET /static/js/analytics.js?v=234567 HTTP/1.1" 200 -
+2025-08-05 17:00:01,663 - werkzeug - INFO - 127.0.0.1 - - [05/Aug/2025 17:00:01] "GET /static/css/print.css?v=123456 HTTP/1.1" 200 -

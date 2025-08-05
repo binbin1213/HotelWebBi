@@ -28,9 +28,11 @@
         <div class="mb-4">
             <h2 class="text-xl font-semibold mb-2">导入说明</h2>
             <ul class="list-disc pl-5 space-y-1 text-gray-700">
-                <li>请确保Excel文件包含以下列：<span class="font-medium">统计渠道</span>、<span class="font-medium">营业日</span>、<span class="font-medium">房费科目</span>、<span class="font-medium">间夜数</span>、<span class="font-medium">房费</span></li>
-                <li>系统会自动按照渠道、日期和房费科目对数据进行汇总</li>
-                <li>如果数据库中已存在相同渠道、日期和房费科目的记录，系统会更新现有记录</li>
+                <li><strong>必需列：</strong><span class="font-medium">统计渠道</span>、<span class="font-medium">营业日</span>、<span class="font-medium">房费科目</span>、<span class="font-medium">间夜数</span>、<span class="font-medium">房费</span></li>
+                <li><strong>可选列：</strong><span class="font-medium">房型</span>、<span class="font-medium">客人</span></li>
+                <li>系统会自动识别房型信息，如果Excel中包含"房型"列，会自动创建新的房型分类</li>
+                <li>房型信息对数据分析很有价值，建议在Excel中包含此列</li>
+                <li>如果数据库中已存在相同订单ID的记录，系统会跳过重复导入</li>
                 <li>支持.xlsx和.xls格式的Excel文件</li>
             </ul>
         </div>

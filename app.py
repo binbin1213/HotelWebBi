@@ -946,11 +946,17 @@ def weekly_report():
             'occupancy_rate': 0.0,
             'revpar': 0.0
         }
+        empty_room_type_summary = {
+            'total_room_nights': 0,
+            'total_revenue': 0.0,
+            'overall_avg_price': 0.0
+        }
         return render_template('weekly_report.html',
                                start_date=start_date,
                                end_date=end_date,
                                report_data={'total_summary': empty_total_summary},
-                               channel_data=[], daily_data=[], detail_data=[], chart_data=json.dumps({}), pivot_html="")
+                               channel_data=[], daily_data=[], detail_data=[], chart_data=json.dumps({}), pivot_html="",
+                               room_type_data=[], room_type_summary=empty_room_type_summary)
 
     # 准备渠道分析数据
     channel_summary_dict = report_data.get('channel_summary', {})
@@ -1079,6 +1085,13 @@ def weekly_report():
     
     app.logger.info(f"图表数据生成完成: {chart_data[:100]}...")
 
+    # 确保房型汇总数据有正确的默认值
+    default_room_type_summary = {
+        'total_room_nights': 0,
+        'total_revenue': 0.0,
+        'overall_avg_price': 0.0
+    }
+
     return render_template('weekly_report.html',
                            start_date=start_date,
                            end_date=end_date,
@@ -1087,7 +1100,9 @@ def weekly_report():
                            daily_data=daily_data,
                            detail_data=detail_data,
                            chart_data=chart_data,
-                           pivot_html=report_data.get('pivot_table', ''))
+                           pivot_html=report_data.get('pivot_table', ''),
+                           room_type_data=report_data.get('room_type_data', []),
+                           room_type_summary=report_data.get('room_type_summary', default_room_type_summary))
 
 def generate_weekly_report(start_date, end_date):
     """生成周报表数据"""
@@ -1099,11 +1114,12 @@ def generate_weekly_report(start_date, end_date):
                     record_date,
                     channel,
                     fee_type,
+                    room_type,
                     SUM(room_nights) as room_nights,
                     SUM(revenue) as revenue
                 FROM DailyRevenue
                 WHERE record_date BETWEEN ? AND ?
-                GROUP BY record_date, channel, fee_type
+                GROUP BY record_date, channel, fee_type, room_type
             """
             df = pd.read_sql_query(query, conn, params=(start_date, end_date))
 
@@ -1406,6 +1422,181 @@ def generate_weekly_report(start_date, end_date):
             ).sort_values('revenue', ascending=False)
             fee_type_summary['revenue_percent'] = (fee_type_summary['revenue'] / total_accommodation_revenue * 100) if total_accommodation_revenue > 0 else 0
 
+            # 房型分析 - 按渠道和房型分组
+            room_type_data = []
+            room_type_summary = {
+                'total_room_nights': 0,
+                'total_revenue': 0.0,
+                'overall_avg_price': 0.0
+            }
+            room_type_comparison = {}
+            room_type_year_comparison = {}
+
+            # 获取所有房型信息
+            cursor = conn.cursor()
+            cursor.execute("SELECT type_name FROM room_types ORDER BY type_name")
+            all_room_types = [row[0] for row in cursor.fetchall()]
+
+            # 获取所有渠道
+            all_channels = expected_channels
+
+            if 'room_type' in accommodation_df.columns and not accommodation_df.empty:
+                # 当前周期房型分析 - 按渠道和房型分组
+                room_type_df = accommodation_df[accommodation_df['room_type'].notna()]
+                if not room_type_df.empty:
+                    # 按渠道和房型分组统计
+                    current_room_type_summary = room_type_df.groupby(['standardized_channel', 'room_type']).agg(
+                        room_nights=('room_nights', 'sum'),
+                        revenue=('revenue', 'sum')
+                    ).reset_index()
+
+                    # 计算总计
+                    total_room_type_nights = current_room_type_summary['room_nights'].sum()
+                    total_room_type_revenue = current_room_type_summary['revenue'].sum()
+
+                    # 为每个渠道和房型组合创建数据
+                    for channel in all_channels:
+                        for room_type in all_room_types:
+                            # 查找当前渠道和房型的数据
+                            mask = (current_room_type_summary['standardized_channel'] == channel) & \
+                                   (current_room_type_summary['room_type'] == room_type)
+                            filtered_data = current_room_type_summary[mask]
+
+                            if not filtered_data.empty:
+                                room_nights = filtered_data['room_nights'].iloc[0]
+                                revenue = filtered_data['revenue'].iloc[0]
+                            else:
+                                room_nights = 0
+                                revenue = 0
+
+                            avg_price = revenue / room_nights if room_nights > 0 else 0
+                            room_nights_pct = (room_nights / total_room_type_nights * 100) if total_room_type_nights > 0 else 0
+                            revenue_pct = (revenue / total_room_type_revenue * 100) if total_room_type_revenue > 0 else 0
+
+                            room_type_data.append({
+                                'channel': channel,
+                                'room_type_name': room_type,
+                                'room_nights': int(room_nights),
+                                'revenue': float(revenue),
+                                'avg_price': round(avg_price, 2),
+                                'room_nights_pct': round(room_nights_pct, 2),
+                                'revenue_pct': round(revenue_pct, 2)
+                            })
+
+                    room_type_summary = {
+                        'total_room_nights': int(total_room_type_nights),
+                        'total_revenue': round(total_room_type_revenue, 2),
+                        'overall_avg_price': round(total_room_type_revenue / total_room_type_nights, 2) if total_room_type_nights > 0 else 0
+                    }
+
+                    # 环比数据（与上周对比）
+                    if not df_last_week.empty and 'room_type' in df_last_week.columns:
+                        df_last_week['standardized_channel'] = df_last_week['channel'].apply(standardize_channel_name)
+                        last_week_accommodation_df = df_last_week[df_last_week['fee_type'].isin(['房费', '手工输入房费', '调整房费'])]
+                        last_week_room_type_df = last_week_accommodation_df[last_week_accommodation_df['room_type'].notna()]
+
+                        if not last_week_room_type_df.empty:
+                            last_week_room_type_summary = last_week_room_type_df.groupby(['standardized_channel', 'room_type']).agg(
+                                room_nights=('room_nights', 'sum'),
+                                revenue=('revenue', 'sum')
+                            ).reset_index()
+
+                            # 计算环比变化
+                            for channel in all_channels:
+                                for room_type in all_room_types:
+                                    # 当前周数据
+                                    current_mask = (current_room_type_summary['standardized_channel'] == channel) & \
+                                                 (current_room_type_summary['room_type'] == room_type)
+                                    current_data = current_room_type_summary[current_mask]
+                                    current_nights = current_data['room_nights'].iloc[0] if not current_data.empty else 0
+                                    current_revenue = current_data['revenue'].iloc[0] if not current_data.empty else 0
+                                    current_avg_price = current_revenue / current_nights if current_nights > 0 else 0
+
+                                    # 上周数据
+                                    last_week_mask = (last_week_room_type_summary['standardized_channel'] == channel) & \
+                                                   (last_week_room_type_summary['room_type'] == room_type)
+                                    last_week_data = last_week_room_type_summary[last_week_mask]
+                                    last_week_nights = last_week_data['room_nights'].iloc[0] if not last_week_data.empty else 0
+                                    last_week_revenue = last_week_data['revenue'].iloc[0] if not last_week_data.empty else 0
+                                    last_week_avg_price = last_week_revenue / last_week_nights if last_week_nights > 0 else 0
+
+                                    # 计算变化率
+                                    nights_change_rate = ((current_nights - last_week_nights) / last_week_nights * 100) if last_week_nights > 0 else 0
+                                    revenue_change_rate = ((current_revenue - last_week_revenue) / last_week_revenue * 100) if last_week_revenue > 0 else 0
+                                    avg_price_change_rate = ((current_avg_price - last_week_avg_price) / last_week_avg_price * 100) if last_week_avg_price > 0 else 0
+
+                                    key = f"{channel}_{room_type}"
+                                    room_type_comparison[key] = {
+                                        'channel': channel,
+                                        'room_type': room_type,
+                                        'current_nights': int(current_nights),
+                                        'last_week_nights': int(last_week_nights),
+                                        'nights_change': int(current_nights - last_week_nights),
+                                        'nights_change_rate': round(nights_change_rate, 2),
+                                        'current_revenue': round(current_revenue, 2),
+                                        'last_week_revenue': round(last_week_revenue, 2),
+                                        'revenue_change': round(current_revenue - last_week_revenue, 2),
+                                        'revenue_change_rate': round(revenue_change_rate, 2),
+                                        'current_avg_price': round(current_avg_price, 2),
+                                        'last_week_avg_price': round(last_week_avg_price, 2),
+                                        'avg_price_change': round(current_avg_price - last_week_avg_price, 2),
+                                        'avg_price_change_rate': round(avg_price_change_rate, 2)
+                                    }
+
+                    # 同比数据（与去年同期对比）
+                    if not df_last_year.empty and 'room_type' in df_last_year.columns:
+                        df_last_year['standardized_channel'] = df_last_year['channel'].apply(standardize_channel_name)
+                        last_year_accommodation_df = df_last_year[df_last_year['fee_type'].isin(['房费', '手工输入房费', '调整房费'])]
+                        last_year_room_type_df = last_year_accommodation_df[last_year_accommodation_df['room_type'].notna()]
+
+                        if not last_year_room_type_df.empty:
+                            last_year_room_type_summary = last_year_room_type_df.groupby(['standardized_channel', 'room_type']).agg(
+                                room_nights=('room_nights', 'sum'),
+                                revenue=('revenue', 'sum')
+                            ).reset_index()
+
+                            # 计算同比变化
+                            for channel in all_channels:
+                                for room_type in all_room_types:
+                                    # 当前周数据
+                                    current_mask = (current_room_type_summary['standardized_channel'] == channel) & \
+                                                 (current_room_type_summary['room_type'] == room_type)
+                                    current_data = current_room_type_summary[current_mask]
+                                    current_nights = current_data['room_nights'].iloc[0] if not current_data.empty else 0
+                                    current_revenue = current_data['revenue'].iloc[0] if not current_data.empty else 0
+                                    current_avg_price = current_revenue / current_nights if current_nights > 0 else 0
+
+                                    # 去年同期数据
+                                    last_year_mask = (last_year_room_type_summary['standardized_channel'] == channel) & \
+                                                   (last_year_room_type_summary['room_type'] == room_type)
+                                    last_year_data = last_year_room_type_summary[last_year_mask]
+                                    last_year_nights = last_year_data['room_nights'].iloc[0] if not last_year_data.empty else 0
+                                    last_year_revenue = last_year_data['revenue'].iloc[0] if not last_year_data.empty else 0
+                                    last_year_avg_price = last_year_revenue / last_year_nights if last_year_nights > 0 else 0
+
+                                    # 计算变化率
+                                    nights_year_change_rate = ((current_nights - last_year_nights) / last_year_nights * 100) if last_year_nights > 0 else 0
+                                    revenue_year_change_rate = ((current_revenue - last_year_revenue) / last_year_revenue * 100) if last_year_revenue > 0 else 0
+                                    avg_price_year_change_rate = ((current_avg_price - last_year_avg_price) / last_year_avg_price * 100) if last_year_avg_price > 0 else 0
+
+                                    key = f"{channel}_{room_type}"
+                                    room_type_year_comparison[key] = {
+                                        'channel': channel,
+                                        'room_type': room_type,
+                                        'current_nights': int(current_nights),
+                                        'last_year_nights': int(last_year_nights),
+                                        'nights_change': int(current_nights - last_year_nights),
+                                        'nights_change_rate': round(nights_year_change_rate, 2),
+                                        'current_revenue': round(current_revenue, 2),
+                                        'last_year_revenue': round(last_year_revenue, 2),
+                                        'revenue_change': round(current_revenue - last_year_revenue, 2),
+                                        'revenue_change_rate': round(revenue_year_change_rate, 2),
+                                        'current_avg_price': round(current_avg_price, 2),
+                                        'last_year_avg_price': round(last_year_avg_price, 2),
+                                        'avg_price_change': round(current_avg_price - last_year_avg_price, 2),
+                                        'avg_price_change_rate': round(avg_price_year_change_rate, 2)
+                                    }
+
             # 准备最终结果
             report = {
                 'total_summary': {
@@ -1425,6 +1616,10 @@ def generate_weekly_report(start_date, end_date):
                 'yearly_comparison': yearly_comparison,  # 同比对比数据（与去年同期对比）
                 'yearly_comparison_period': f"{last_year_start_str.replace('-', '.')} - {last_year_end_str.replace('-', '.')}",  # 同比对比周期
                 'fee_type_summary': fee_type_summary.round(2).to_dict(orient='index'),
+                'room_type_data': room_type_data,  # 房型分析数据
+                'room_type_summary': room_type_summary,  # 房型汇总数据
+                'room_type_comparison': room_type_comparison,  # 房型环比对比数据
+                'room_type_year_comparison': room_type_year_comparison,  # 房型同比对比数据
                 'pivot_table': pivot_df.round(2).to_html(classes='table table-sm table-bordered', escape=False, sparsify=True)
             }
             
@@ -1463,10 +1658,17 @@ def import_excel():
                 # 检查必要的列是否存在
                 required_columns = ['统计渠道', '营业日', '房费科目', '间夜数', '房费']
                 missing_columns = [col for col in required_columns if col not in df.columns]
-                
+
                 if missing_columns:
                     flash(f'Excel文件缺少必要的列: {", ".join(missing_columns)}')
                     return redirect(request.url)
+
+                # 检查是否包含房型列
+                has_room_type = '房型' in df.columns
+                if has_room_type:
+                    print("检测到房型列，将导入房型信息")
+                else:
+                    print("未检测到房型列，房型信息将为空")
                 
                 # 数据预处理
                 success_count = 0
@@ -1500,13 +1702,14 @@ def import_excel():
                             revenue = float(row['房费'])
                             order_id = row['order_id']
                             guest_name = row.get('客人', '')  # 如果Excel中有客人姓名列
+                            room_type = row.get('房型', '')  # 获取房型信息
 
                             # 业务规则：不计入间夜数的费用类型
                             if fee_type in ['加收全天', '手工输入房费', '调整房费']:
                                 room_nights = 0
 
                             # 打印每行数据以便调试
-                            print(f"导入数据: 渠道={channel}, 日期={record_date}, 科目={fee_type}, 间夜={room_nights}, 房费={revenue}, 订单ID={order_id}")
+                            print(f"导入数据: 渠道={channel}, 日期={record_date}, 科目={fee_type}, 房型={room_type}, 间夜={room_nights}, 房费={revenue}, 订单ID={order_id}")
 
                             # 检查是否已存在相同的订单记录（防止重复导入）
                             cursor.execute(
@@ -1521,8 +1724,8 @@ def import_excel():
                                 continue
                             else:
                                 # 插入新的订单记录
-                                sql = "INSERT INTO DailyRevenue (record_date, channel, fee_type, room_nights, revenue, order_id, guest_name) VALUES (?, ?, ?, ?, ?, ?, ?)"
-                                cursor.execute(sql, (record_date, channel, fee_type, room_nights, revenue, order_id, guest_name))
+                                sql = "INSERT INTO DailyRevenue (record_date, channel, fee_type, room_type, room_nights, revenue, order_id, guest_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+                                cursor.execute(sql, (record_date, channel, fee_type, room_type, room_nights, revenue, order_id, guest_name))
                             
                             success_count += 1
                             
@@ -1888,12 +2091,12 @@ def db_admin_delete_by_date_range():
         if not start_date or not end_date:
             return jsonify({'success': False, 'error': '请提供开始日期和结束日期'})
 
-        conn = sqlite3.connect(DB_PATH)
+        conn = sqlite3.connect(DATABASE)
         cursor = conn.cursor()
 
         # 删除指定日期范围内的记录
         cursor.execute('''
-            DELETE FROM revenue_data
+            DELETE FROM DailyRevenue
             WHERE record_date BETWEEN ? AND ?
         ''', (start_date, end_date))
 
@@ -1914,8 +2117,8 @@ def db_admin_clear_database():
 
     try:
         # 删除数据库文件
-        if os.path.exists(DB_PATH):
-            os.remove(DB_PATH)
+        if os.path.exists(DATABASE):
+            os.remove(DATABASE)
 
         # 重新初始化数据库
         init_db()
