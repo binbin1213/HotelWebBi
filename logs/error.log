@@ -492,3 +492,167 @@ Traceback (most recent call last):
   File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1013, in do_float
     return float(value)
 jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'total_revenue'
+2025-08-05 14:29:26,051 - app - ERROR - 生成周报表时发生错误: name 'cursor' is not defined
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1450, in generate_weekly_report
+    cursor.execute("SELECT type_name FROM room_types ORDER BY type_name")
+NameError: name 'cursor' is not defined
+2025-08-05 14:29:36,428 - app - ERROR - 生成周报表时发生错误: name 'cursor' is not defined
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1450, in generate_weekly_report
+    cursor.execute("SELECT type_name FROM room_types ORDER BY type_name")
+NameError: name 'cursor' is not defined
+2025-08-05 14:30:18,837 - app - ERROR - 生成周报表时发生错误: name 'cursor' is not defined
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1450, in generate_weekly_report
+    cursor.execute("SELECT type_name FROM room_types ORDER BY type_name")
+NameError: name 'cursor' is not defined
+2025-08-05 14:43:42,982 - app - ERROR - 生成周报表时发生错误: 'room_type'
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'room_type'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1426, in generate_weekly_report
+    room_type_df = accommodation_df[accommodation_df['room_type'].notna()]
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/frame.py", line 4107, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'room_type'
+2025-08-05 14:43:51,987 - app - ERROR - 生成周报表时发生错误: 'room_type'
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3812, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 167, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 196, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7096, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'room_type'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1426, in generate_weekly_report
+    room_type_df = accommodation_df[accommodation_df['room_type'].notna()]
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/frame.py", line 4107, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+KeyError: 'room_type'
+2025-08-05 15:02:39,500 - app - ERROR - 生成周报表时发生错误: name 'room_type_data' is not defined
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/app.py", line 1428, in generate_weekly_report
+    'room_type_data': room_type_data,  # 房型分析数据
+NameError: name 'room_type_data' is not defined
+2025-08-05 15:07:04,292 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 1082, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 259, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 370, in block 'content'
+    <td><strong>{{ room_type_summary.total_room_nights }}</strong></td>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'room_type_summary' is undefined
+2025-08-05 15:07:08,692 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 1082, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 259, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 370, in block 'content'
+    <td><strong>{{ room_type_summary.total_room_nights }}</strong></td>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 490, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'room_type_summary' is undefined
+2025-08-05 15:09:36,639 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 1083, in weekly_report
+    return render_template('weekly_report.html',
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/binbin/Desktop/hotel/templates/base.html", line 259, in top-level template code
+    {% block content %}{% endblock %}
+  File "/Users/binbin/Desktop/hotel/templates/weekly_report.html", line 384, in block 'content'
+    <td><strong>{{ "%.2f"|format(room_type_summary.total_revenue) }}</strong></td>
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/jinja2/filters.py", line 1043, in do_format
+    return soft_str(value) % (kwargs or args)
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'total_revenue'
+2025-08-05 16:54:31,142 - app - ERROR - Exception on /weekly_report [GET]
+Traceback (most recent call last):
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/binbin/Desktop/hotel/venv/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/binbin/Desktop/hotel/app.py", line 934, in weekly_report
+    start_date = request.args.get('start_date', (datetime.strptime(end_date, '%Y-%m-%d') - timedelta(days=6)).strftime('%Y-%m-%d'))
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/_strptime.py", line 568, in _strptime_datetime
+    tt, fraction, gmtoff_fraction = _strptime(data_string, format)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/_strptime.py", line 352, in _strptime
+    raise ValueError("unconverted data remains: %s" %
+ValueError: unconverted data remains: 、
