@@ -4,11 +4,25 @@
 
 ## 1. GitHub Actions 自动构建设置
 
-### 启用 GitHub Container Registry
+### 配置 Docker Hub 密钥
 1. 进入你的 GitHub 仓库：https://github.com/binbin1213/HotelWebBi
 2. 点击 **Settings** 标签
-3. 在左侧菜单中找到 **Actions** > **General**
-4. 确保 **Actions permissions** 设置为允许运行 Actions
+3. 在左侧菜单中找到 **Secrets and variables** > **Actions**
+4. 点击 **New repository secret** 添加以下密钥：
+   - `DOCKERHUB_USERNAME`: 你的 Docker Hub 用户名
+   - `DOCKERHUB_TOKEN`: 你的 Docker Hub Access Token
+
+### 获取 Docker Hub Access Token
+1. 登录 [Docker Hub](https://hub.docker.com/)
+2. 点击右上角头像 > **Account Settings**
+3. 选择 **Security** 标签
+4. 点击 **New Access Token**
+5. 输入描述（如 "GitHub Actions"），选择权限，点击 **Generate**
+6. 复制生成的 token（只显示一次）
+
+### 启用 GitHub Actions
+1. 在仓库 **Settings** 中找到 **Actions** > **General**
+2. 确保 **Actions permissions** 设置为允许运行 Actions
 
 ### 自动构建触发条件
 GitHub Actions 会在以下情况自动构建镜像：
@@ -16,18 +30,26 @@ GitHub Actions 会在以下情况自动构建镜像：
 - 创建新的版本标签（如 `v1.0.0`）
 - 创建 Pull Request
 
-## 2. 镜像标签说明
+## 2. 镜像仓库说明
 
-构建的镜像会自动推送到：`ghcr.io/binbin1213/hotelwebbi`
+构建的镜像会同时推送到两个仓库：
 
-标签规则：
+### GitHub Container Registry
+- 地址：`ghcr.io/binbin1213/hotelwebbi`
+- 免费使用，与 GitHub 仓库集成
+
+### Docker Hub
+- 地址：`binbin1213/hotelwebbi`（需要配置密钥）
+- 全球最大的容器镜像仓库，使用更方便
+
+### 标签规则
 - `latest` - 最新的 main/master 分支版本
 - `main` 或 `master` - 对应分支的最新版本
 - `v1.0.0` - 版本标签（如果你创建了 git tag）
 
 ## 3. 生产环境部署
 
-### 使用预构建镜像部署
+### 方式一：使用 Docker Hub 镜像（推荐）
 
 1. **准备环境文件**
    ```bash
@@ -35,12 +57,25 @@ GitHub Actions 会在以下情况自动构建镜像：
    # 编辑 .env 文件，填入你的配置
    ```
 
-2. **使用 GitHub 构建的镜像启动**
+2. **直接使用 Docker Hub 镜像**
+   ```bash
+   docker run -d \
+     --name hotel-analytics \
+     -p 5004:5004 \
+     -v ./hotel_revenue.db:/app/hotel_revenue.db \
+     -v ./logs:/app/logs \
+     --env-file .env \
+     binbin1213/hotelwebbi:latest
+   ```
+
+### 方式二：使用 GitHub Container Registry
+
+1. **使用 GHCR 镜像启动**
    ```bash
    docker-compose -f docker-compose.github.yml up -d
    ```
 
-3. **查看运行状态**
+2. **查看运行状态**
    ```bash
    docker-compose -f docker-compose.github.yml ps
    docker-compose -f docker-compose.github.yml logs -f
