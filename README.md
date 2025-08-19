@@ -94,4 +94,4 @@ docker-compose up -d
 
 - 默认端口为5004，可以在docker-compose.yml中修改
 - 系统数据存储在SQLite数据库中，确保数据库文件的权限正确
-- 生产环境建议使用 GitHub 预构建镜像以获得更好的性能和稳定性 
+- 生产环境建议使用 GitHub 预构建镜像以获得更好的性能和稳定性
