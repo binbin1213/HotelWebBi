@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  hotel-analytics:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: hotel-analytics
+    ports:
+      - "5004:5004"
+    volumes:
+      - /home/binbin/hotel_data/hotel_revenue.db:/app/hotel_revenue.db
+      - /home/binbin/hotel_data/app.py:/app/app.py
+      - /home/binbin/hotel_data/ai_service.py:/app/ai_service.py
+      - /home/binbin/hotel_data/static:/app/static
+      - /home/binbin/hotel_data/templates:/app/templates
+      - /home/binbin/hotel_data/logs:/app/logs
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DEEPSEEK_API_KEY=sk-6fe6290840a0496b87b694c48728cf71
+      - DEFAULT_MODEL=deepseek-reasoner
+      - TOTAL_ROOMS=29
+      - DB_ADMIN_PASSWORD=690960
+    command: gunicorn -w 4 -b 0.0.0.0:5004 app:app --reload

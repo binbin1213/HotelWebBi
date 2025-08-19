@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  hotel-analytics:
+    image: ghcr.io/binbin1213/hotelwebbi:latest
+    container_name: hotel-analytics
+    ports:
+      - "5004:5004"
+    volumes:
+      - ./hotel_revenue.db:/app/hotel_revenue.db
+      - ./logs:/app/logs
+    restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
+    env_file:
+      - .env

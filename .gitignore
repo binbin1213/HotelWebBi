@@ -1,0 +1,124 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Frontend Build
+frontend-build/
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Backups
+backups/
+*.csv
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+
+# Archives
+*.tar.gz
+*.zip
+*.rar
+
+# Environment variables (contains API keys and sensitive data)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker configuration with sensitive data
+docker-compose.yml
+docker-compose.override.yml
+
+# Docker configuration with sensitive data
+docker-compose.yml
+docker-compose.override.yml
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# AI Assistant Files
+.serena/
+
+# Archive/Backup directories
+archive/
+backup/
+backups/
+
+# Documentation (keep only essential docs)
+*综合文档.md
+server_deploy_steps.md
+
+# Deployment packages
+hotel_deploy.tar.gz
+update_files.tar.gz
+*.deployment.tar.gz
+
+# Print CSS (if not needed in production)
+static/css/print.css

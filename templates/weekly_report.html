@@ -1,0 +1,1595 @@
+{% extends "base.html" %}
+
+{% block title %}乐巷酒店 - 周报表{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+<style>
+    .report-card {
+        background-color: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .chart-container {
+        height: 400px; /* Adjusted height for better layout */
+        width: 100%;
+        margin-top: 10px; /* 为标题留出空间 */
+    }
+    .summary-card {
+        background-color: #f3f4f6;
+        border-left: 4px solid #4f46e5;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+    .summary-value {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #1f2937;
+    }
+    .summary-label {
+        font-size: 0.875rem;
+        color: #6b7280;
+    }
+    .table-responsive { overflow-x: auto; }
+    .report-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .report-table th, .report-table td {
+        padding: 0.5rem;
+        border: 1px solid #e5e7eb;
+        text-align: center;
+    }
+    .report-table th {
+        background-color: #f3f4f6;
+        font-weight: 600;
+    }
+    .report-table tr:nth-child(even) { background-color: #f9fafb; }
+    .report-table tr:hover { background-color: #f3f4f6; }
+    .tab-container { margin-bottom: 1rem; }
+    .tab-buttons {
+        display: flex;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 1rem;
+    }
+    .tab-button {
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        color: #6b7280;
+        cursor: pointer;
+        border-bottom: 2px solid transparent;
+    }
+    .tab-button:hover { color: #4f46e5; }
+    .tab-button.active {
+        color: #4f46e5;
+        border-bottom-color: #4f46e5;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .date-range-form {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    @media print {
+        body { font-size: 12px; }
+        .no-print { display: none; }
+        .print-page-break { page-break-before: always; }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
+    <div style="width: 100%; text-align: center; margin-bottom: 1.5rem;">
+        <h1 style="font-size: 2rem; font-weight: bold; color: #111827; margin: 0 auto 1rem auto; text-align: center; display: block; width: 100%;">周客源分析表</h1>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem;">
+            <a href="/analytics" style="padding: 0.5rem 0.75rem; background-color: #f3f4f6; color: #1f2937; border-radius: 0.375rem; text-decoration: none; font-size: 0.875rem;">返回分析</a>
+            <a href="/" style="padding: 0.5rem 0.75rem; background-color: #4f46e5; color: white; border-radius: 0.375rem; text-decoration: none; font-size: 0.875rem;">返回主页</a>
+        </div>
+    </div>
+    
+    <div class="report-card no-print">
+        <h2 class="text-lg font-semibold mb-3">选择日期范围</h2>
+        <form action="/weekly_report" method="get" class="date-range-form">
+            <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 w-full">
+                <div class="flex-1">
+                    <label for="start_date" class="block text-sm font-medium text-gray-700 mb-1">开始日期</label>
+                    <input type="date" id="start_date" name="start_date" value="{{ start_date }}" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                </div>
+                <div class="flex-1">
+                    <label for="end_date" class="block text-sm font-medium text-gray-700 mb-1">结束日期</label>
+                    <input type="date" id="end_date" name="end_date" value="{{ end_date }}" class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                </div>
+            </div>
+            <div class="mt-4 sm:mt-0 sm:self-end">
+                <button type="submit" class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">生成报表</button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="text-center my-6">
+        <h2 class="text-xl font-bold">周客源分析表</h2>
+        <p class="text-gray-600">{{ report_data.total_summary.date_range }}</p>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mb-6">
+        <div class="summary-card">
+            <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.total_revenue|float) }}</div>
+            <div class="summary-label">住宿费用</div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-value">{{ report_data.total_summary.room_nights }}</div>
+            <div class="summary-label">总间夜数</div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.avg_price|float) }}</div>
+            <div class="summary-label">平均房价</div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-value">{{ "%.2f"|format(report_data.total_summary.occupancy_rate|float) }}%</div>
+            <div class="summary-label">入住率</div>
+        </div>
+        <div class="summary-card">
+            <div class="summary-value">¥{{ "%.2f"|format(report_data.total_summary.revpar|float) }}</div>
+            <div class="summary-label">RevPAR</div>
+        </div>
+    </div>
+    
+    <div class="tab-container">
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="tab-summary">客源分析表</button>
+            <button class="tab-button" data-tab="tab-room-types">房型分析表</button>
+            <button class="tab-button" data-tab="tab-daily">日期明细表</button>
+            <button class="tab-button" data-tab="tab-charts">图表分析</button>
+        </div>
+        
+        <div id="tab-summary" class="tab-content active">
+            <div class="report-card">
+                <h3 class="text-lg font-semibold mb-3 text-center">渠道分析</h3>
+                <div class="table-responsive">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th>项目</th>
+                                {% for item in channel_data %}<th>{{ item.channel }}</th>{% endfor %}
+                                <th>合计</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>间夜房数量</td>
+                                {% for item in channel_data %}<td>{{ item.room_nights }}</td>{% endfor %}
+                                <td>{{ report_data.total_summary.room_nights }}</td>
+                            </tr>
+                            <tr>
+                                <td>客源数量占比</td>
+                                {% for item in channel_data %}<td>{{ "%.2f"|format(item.room_nights_pct|float) }}%</td>{% endfor %}
+                                <td>100.00%</td>
+                            </tr>
+                            <tr>
+                                <td>间夜房收入</td>
+                                {% for item in channel_data %}<td>{{ "%.2f"|format(item.room_revenue|float) }}</td>{% endfor %}
+                                <td>{{ "%.2f"|format(report_data.total_summary.room_revenue|float) }}</td>
+                            </tr>
+                            <tr>
+                                <td>收入占比</td>
+                                {% for item in channel_data %}<td>{{ "%.2f"|format(item.revenue_percent|float) }}%</td>{% endfor %}
+                                <td>100.00%</td>
+                            </tr>
+                            <tr>
+                                <td>平均房价</td>
+                                {% for item in channel_data %}<td>{{ "%.2f"|format(item.avg_price|float) }}</td>{% endfor %}
+                                <td>{{ "%.2f"|format(report_data.total_summary.avg_price|float) }}</td>
+                            </tr>
+                            <tr>
+                                <td>钟点房收入</td>
+                                {% for item in channel_data %}<td>{{ "%.2f"|format(item.hourly_revenue|float) }}</td>{% endfor %}
+                                <td>{{ "%.2f"|format(report_data.total_summary.hourly_revenue|float) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 渠道周环比对比分析 -->
+            {% if report_data.channel_comparison and report_data.channel_comparison|length > 0 %}
+            <div class="report-card mt-6">
+                <h3 class="text-lg font-semibold mb-3 text-center">渠道周环比对比分析</h3>
+                <p class="text-sm text-gray-600 mb-3">
+                    本周：{{ report_data.total_summary.date_range }} vs 上周：{{ report_data.comparison_period }}
+                </p>
+                <div class="table-responsive">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">渠道</th>
+                                <th colspan="3">间夜数量</th>
+                                <th colspan="3">收入</th>
+                            </tr>
+                            <tr>
+                                <th>上周</th>
+                                <th>上上周</th>
+                                <th>变化</th>
+                                <th>上周</th>
+                                <th>上上周</th>
+                                <th>变化</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for channel, data in report_data.channel_comparison.items() %}
+                            {% if channel != '合计' %}
+                            <tr>
+                                <td><strong>{{ channel }}</strong></td>
+                                <td>{{ data.current_room_nights }}</td>
+                                <td>{{ data.last_room_nights }}</td>
+                                <td class="{% if data.room_nights_change > 0 %}text-green-600{% elif data.room_nights_change < 0 %}text-red-600{% endif %}">
+                                    {{ data.room_nights_change }}
+                                    {% if data.room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.room_nights_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                                <td>{{ "%.2f"|format(data.current_revenue) }}</td>
+                                <td>{{ "%.2f"|format(data.last_revenue) }}</td>
+                                <td class="{% if data.revenue_change > 0 %}text-green-600{% elif data.revenue_change < 0 %}text-red-600{% endif %}">
+                                    {{ "%.2f"|format(data.revenue_change) }}
+                                    {% if data.revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.revenue_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            <!-- 合计行 -->
+                            {% if report_data.channel_comparison['合计'] %}
+                            <tr class="font-bold bg-gray-100 border-t-2">
+                                <td><strong>合计</strong></td>
+                                <td><strong>{{ report_data.channel_comparison['合计'].current_room_nights }}</strong></td>
+                                <td><strong>{{ report_data.channel_comparison['合计'].last_room_nights }}</strong></td>
+                                <td class="{% if report_data.channel_comparison['合计'].room_nights_change > 0 %}text-green-600{% elif report_data.channel_comparison['合计'].room_nights_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ report_data.channel_comparison['合计'].room_nights_change }}
+                                    {% if report_data.channel_comparison['合计'].room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(report_data.channel_comparison['合计'].room_nights_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                                <td><strong>{{ "%.2f"|format(report_data.channel_comparison['合计'].current_revenue) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(report_data.channel_comparison['合计'].last_revenue) }}</strong></td>
+                                <td class="{% if report_data.channel_comparison['合计'].revenue_change > 0 %}text-green-600{% elif report_data.channel_comparison['合计'].revenue_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ "%.2f"|format(report_data.channel_comparison['合计'].revenue_change) }}
+                                    {% if report_data.channel_comparison['合计'].revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(report_data.channel_comparison['合计'].revenue_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- 渠道同比对比分析（与去年同期对比） -->
+            {% if report_data.yearly_comparison and report_data.yearly_comparison|length > 0 %}
+            <div class="report-card mt-6">
+                <h3 class="text-lg font-semibold mb-3 text-center">渠道同比对比分析</h3>
+                <p class="text-sm text-gray-600 mb-3">
+                    本周：{{ report_data.total_summary.date_range }} vs 去年同期：{{ report_data.yearly_comparison_period }}
+                </p>
+                <div class="table-responsive">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">渠道</th>
+                                <th colspan="3">间夜数量</th>
+                                <th colspan="3">收入</th>
+                            </tr>
+                            <tr>
+                                <th>本周</th>
+                                <th>去年同期</th>
+                                <th>变化</th>
+                                <th>本周</th>
+                                <th>去年同期</th>
+                                <th>变化</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for channel, data in report_data.yearly_comparison.items() %}
+                            {% if channel != '合计' %}
+                            <tr>
+                                <td><strong>{{ channel }}</strong></td>
+                                <td>{{ data.current_room_nights }}</td>
+                                <td>{{ data.last_year_room_nights }}</td>
+                                <td class="{% if data.room_nights_change > 0 %}text-green-600{% elif data.room_nights_change < 0 %}text-red-600{% endif %}">
+                                    {{ data.room_nights_change }}
+                                    {% if data.room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.room_nights_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                                <td>{{ "%.2f"|format(data.current_revenue) }}</td>
+                                <td>{{ "%.2f"|format(data.last_year_revenue) }}</td>
+                                <td class="{% if data.revenue_change > 0 %}text-green-600{% elif data.revenue_change < 0 %}text-red-600{% endif %}">
+                                    {{ "%.2f"|format(data.revenue_change) }}
+                                    {% if data.revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.revenue_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            <!-- 合计行 -->
+                            {% if report_data.yearly_comparison['合计'] %}
+                            <tr class="font-bold bg-gray-100 border-t-2">
+                                <td><strong>合计</strong></td>
+                                <td><strong>{{ report_data.yearly_comparison['合计'].current_room_nights }}</strong></td>
+                                <td><strong>{{ report_data.yearly_comparison['合计'].last_year_room_nights }}</strong></td>
+                                <td class="{% if report_data.yearly_comparison['合计'].room_nights_change > 0 %}text-green-600{% elif report_data.yearly_comparison['合计'].room_nights_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ report_data.yearly_comparison['合计'].room_nights_change }}
+                                    {% if report_data.yearly_comparison['合计'].room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(report_data.yearly_comparison['合计'].room_nights_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                                <td><strong>{{ "%.2f"|format(report_data.yearly_comparison['合计'].current_revenue) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(report_data.yearly_comparison['合计'].last_year_revenue) }}</strong></td>
+                                <td class="{% if report_data.yearly_comparison['合计'].revenue_change > 0 %}text-green-600{% elif report_data.yearly_comparison['合计'].revenue_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ "%.2f"|format(report_data.yearly_comparison['合计'].revenue_change) }}
+                                    {% if report_data.yearly_comparison['合计'].revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(report_data.yearly_comparison['合计'].revenue_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div id="tab-room-types" class="tab-content">
+            <div class="report-card">
+                <h3 class="text-lg font-semibold mb-3 text-center">房型分析 - 按渠道分组</h3>
+                <p class="text-sm text-gray-600 mb-3 text-center">
+                    各渠道对应房型的间夜数、收入、平均房价分析
+                </p>
+
+                {% if room_type_data and room_type_data|length > 0 %}
+                <!-- 获取所有房型名称和渠道 -->
+                {% set room_types = room_type_data | map(attribute='room_type_name') | unique | list %}
+                {% set channels = room_type_data | map(attribute='channel') | unique | list %}
+
+                <!-- 为每个房型创建独立的表格 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {% for room_type in room_types %}
+                    <div class="bg-white border border-gray-200 rounded-lg p-4">
+                        <h4 class="text-md font-semibold mb-3 text-center text-blue-600">{{ room_type }}</h4>
+                        <div class="table-responsive">
+                            <table class="min-w-full divide-y divide-gray-200 text-sm">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th rowspan="2" class="px-2 py-3 text-center text-xs font-medium text-gray-500 uppercase border-r">渠道</th>
+                                        <th colspan="3" class="px-2 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">间夜数</th>
+                                        <th colspan="3" class="px-2 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">收入</th>
+                                        <th colspan="3" class="px-2 py-1 text-center text-xs font-medium text-gray-500 uppercase">均价</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">本周</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">环比</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">同比</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">本周</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">环比</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">同比</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">本周</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase border-r">环比</th>
+                                        <th class="px-1 py-1 text-center text-xs font-medium text-gray-500 uppercase">同比</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <!-- 先计算小计数据 -->
+                                    {% set ns = namespace(
+                                        room_type_total_nights=0,
+                                        room_type_total_revenue=0,
+                                        room_type_last_week_nights=0,
+                                        room_type_last_week_revenue=0,
+                                        room_type_last_year_nights=0,
+                                        room_type_last_year_revenue=0
+                                    ) %}
+
+                                    {% for channel in channels %}
+                                        {% set room_data = room_type_data | selectattr('room_type_name', 'equalto', room_type) | selectattr('channel', 'equalto', channel) | first %}
+                                        {% set comparison_key = channel + '_' + room_type %}
+                                        {% set comparison_data = report_data.room_type_comparison.get(comparison_key) %}
+                                        {% set year_comparison_data = report_data.room_type_year_comparison.get(comparison_key) %}
+
+                                        {% if room_data %}
+                                            {% set ns.room_type_total_nights = ns.room_type_total_nights + room_data.room_nights %}
+                                            {% set ns.room_type_total_revenue = ns.room_type_total_revenue + room_data.revenue %}
+                                        {% endif %}
+
+                                        {% if comparison_data %}
+                                            {% set ns.room_type_last_week_nights = ns.room_type_last_week_nights + comparison_data.last_week_nights %}
+                                            {% set ns.room_type_last_week_revenue = ns.room_type_last_week_revenue + comparison_data.last_week_revenue %}
+                                        {% endif %}
+
+                                        {% if year_comparison_data %}
+                                            {% set ns.room_type_last_year_nights = ns.room_type_last_year_nights + year_comparison_data.last_year_nights %}
+                                            {% set ns.room_type_last_year_revenue = ns.room_type_last_year_revenue + year_comparison_data.last_year_revenue %}
+                                        {% endif %}
+                                    {% endfor %}
+
+                                    <!-- 现在显示数据行 -->
+                                    {% for channel in channels %}
+                                    {% set room_data = room_type_data | selectattr('room_type_name', 'equalto', room_type) | selectattr('channel', 'equalto', channel) | first %}
+                                    {% set comparison_key = channel + '_' + room_type %}
+                                    {% set comparison_data = report_data.room_type_comparison.get(comparison_key, {}) %}
+                                    {% set year_comparison_data = report_data.room_type_year_comparison.get(comparison_key, {}) %}
+
+                                    <tr class="border-b">
+                                        <td class="px-2 py-2 text-sm font-medium text-gray-900 border-r">{{ channel }}</td>
+
+                                        <!-- 间夜数 -->
+                                        <td class="px-1 py-2 text-xs text-center border-r">{{ room_data.room_nights if room_data else 0 }}</td>
+                                        <td class="px-1 py-2 text-xs text-center border-r">
+                                            {% if comparison_data %}
+                                            {{ comparison_data.last_week_nights }}
+                                            {% else %}
+                                            <span class="text-gray-400">-</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="px-1 py-2 text-xs text-center border-r">
+                                            {% if year_comparison_data %}
+                                            {{ year_comparison_data.last_year_nights }}
+                                            {% else %}
+                                            <span class="text-gray-400">-</span>
+                                            {% endif %}
+                                        </td>
+
+                                        <!-- 收入 -->
+                                        <td class="px-1 py-2 text-xs text-center border-r">{{ "%.0f"|format(room_data.revenue) if room_data else 0 }}</td>
+                                        <td class="px-1 py-2 text-xs text-center border-r">
+                                            {% if comparison_data %}
+                                            {{ "%.0f"|format(comparison_data.last_week_revenue) }}
+                                            {% else %}
+                                            <span class="text-gray-400">-</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="px-1 py-2 text-xs text-center border-r">
+                                            {% if year_comparison_data %}
+                                            {{ "%.0f"|format(year_comparison_data.last_year_revenue) }}
+                                            {% else %}
+                                            <span class="text-gray-400">-</span>
+                                            {% endif %}
+                                        </td>
+
+                                        <!-- 均价 -->
+                                        <td class="px-1 py-2 text-xs text-center border-r">{{ "%.0f"|format(room_data.avg_price) if room_data else 0 }}</td>
+                                        <td class="px-1 py-2 text-xs text-center border-r">
+                                            {% if comparison_data %}
+                                            {{ "%.0f"|format(comparison_data.last_week_avg_price) }}
+                                            {% else %}
+                                            <span class="text-gray-400">-</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="px-1 py-2 text-xs text-center">
+                                            {% if year_comparison_data %}
+                                            {{ "%.0f"|format(year_comparison_data.last_year_avg_price) }}
+                                            {% else %}
+                                            <span class="text-gray-400">-</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    <!-- 房型小计 -->
+                                    {% set room_type_avg_price = (ns.room_type_total_revenue / ns.room_type_total_nights) if ns.room_type_total_nights > 0 else 0 %}
+                                    {% set room_type_last_week_avg_price = (ns.room_type_last_week_revenue / ns.room_type_last_week_nights) if ns.room_type_last_week_nights > 0 else 0 %}
+                                    {% set room_type_last_year_avg_price = (ns.room_type_last_year_revenue / ns.room_type_last_year_nights) if ns.room_type_last_year_nights > 0 else 0 %}
+
+                                    <tr class="bg-blue-50 border-t-2 border-blue-200">
+                                        <td class="px-2 py-2 text-sm font-bold text-blue-800 border-r">小计</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ ns.room_type_total_nights }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ ns.room_type_last_week_nights if ns.room_type_last_week_nights > 0 else "-" }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ ns.room_type_last_year_nights if ns.room_type_last_year_nights > 0 else "-" }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ "%.0f"|format(ns.room_type_total_revenue) }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ "%.0f"|format(ns.room_type_last_week_revenue) if ns.room_type_last_week_revenue > 0 else "-" }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ "%.0f"|format(ns.room_type_last_year_revenue) if ns.room_type_last_year_revenue > 0 else "-" }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ "%.0f"|format(room_type_avg_price) }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800 border-r">{{ "%.0f"|format(room_type_last_week_avg_price) if room_type_last_week_avg_price > 0 else "-" }}</td>
+                                        <td class="px-1 py-2 text-xs text-center font-bold text-blue-800">{{ "%.0f"|format(room_type_last_year_avg_price) if room_type_last_year_avg_price > 0 else "-" }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- 总计汇总表 -->
+                <div class="mt-6 bg-gray-50 border border-gray-200 rounded-lg p-4">
+                    <h4 class="text-md font-semibold mb-3 text-center text-gray-800">总计汇总</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div class="bg-white p-3 rounded border">
+                            <div class="text-2xl font-bold text-blue-600">{{ room_type_summary.total_room_nights }}</div>
+                            <div class="text-sm text-gray-600">总间夜数</div>
+                        </div>
+                        <div class="bg-white p-3 rounded border">
+                            <div class="text-2xl font-bold text-green-600">¥{{ "%.2f"|format(room_type_summary.total_revenue) }}</div>
+                            <div class="text-sm text-gray-600">总收入</div>
+                        </div>
+                        <div class="bg-white p-3 rounded border">
+                            <div class="text-2xl font-bold text-purple-600">¥{{ "%.2f"|format(room_type_summary.overall_avg_price) }}</div>
+                            <div class="text-sm text-gray-600">平均房价</div>
+                        </div>
+                    </div>
+                </div>
+
+                {% else %}
+                <div class="text-center py-8 text-gray-500">
+                    <p>暂无房型数据</p>
+                    <p class="text-sm mt-2">请确保数据中包含房型信息</p>
+                </div>
+                {% endif %}
+            </div>
+
+            {% if room_type_comparison and room_type_comparison|length > 0 %}
+            <div class="report-card mt-6">
+                <h3 class="text-lg font-semibold mb-3 text-center">房型周环比对比分析</h3>
+                <p class="text-sm text-gray-600 mb-3">
+                    本周：{{ report_data.total_summary.date_range }} vs 上周：{{ report_data.comparison_period }}
+                </p>
+                <div class="table-responsive">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">房型</th>
+                                <th colspan="3">间夜数量</th>
+                                <th colspan="3">收入</th>
+                                <th colspan="3">平均房价</th>
+                            </tr>
+                            <tr>
+                                <th>本周</th>
+                                <th>上周</th>
+                                <th>变化</th>
+                                <th>本周</th>
+                                <th>上周</th>
+                                <th>变化</th>
+                                <th>本周</th>
+                                <th>上周</th>
+                                <th>变化</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for room_type, data in room_type_comparison.items() %}
+                            {% if room_type != '合计' %}
+                            <tr>
+                                <td><strong>{{ room_type }}</strong></td>
+                                <td>{{ data.current_room_nights }}</td>
+                                <td>{{ data.last_room_nights }}</td>
+                                <td class="{% if data.room_nights_change > 0 %}text-green-600{% elif data.room_nights_change < 0 %}text-red-600{% endif %}">
+                                    {{ data.room_nights_change }}
+                                    {% if data.room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.room_nights_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                                <td>{{ "%.2f"|format(data.current_revenue) }}</td>
+                                <td>{{ "%.2f"|format(data.last_revenue) }}</td>
+                                <td class="{% if data.revenue_change > 0 %}text-green-600{% elif data.revenue_change < 0 %}text-red-600{% endif %}">
+                                    {{ "%.2f"|format(data.revenue_change) }}
+                                    {% if data.revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.revenue_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                                <td>{{ "%.2f"|format(data.current_avg_price) }}</td>
+                                <td>{{ "%.2f"|format(data.last_avg_price) }}</td>
+                                <td class="{% if data.avg_price_change > 0 %}text-green-600{% elif data.avg_price_change < 0 %}text-red-600{% endif %}">
+                                    {{ "%.2f"|format(data.avg_price_change) }}
+                                    {% if data.avg_price_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.avg_price_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            <!-- 合计行 -->
+                            {% if room_type_comparison['合计'] %}
+                            <tr class="font-bold bg-gray-100 border-t-2">
+                                <td><strong>合计</strong></td>
+                                <td><strong>{{ room_type_comparison['合计'].current_room_nights }}</strong></td>
+                                <td><strong>{{ room_type_comparison['合计'].last_room_nights }}</strong></td>
+                                <td class="{% if room_type_comparison['合计'].room_nights_change > 0 %}text-green-600{% elif room_type_comparison['合计'].room_nights_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ room_type_comparison['合计'].room_nights_change }}
+                                    {% if room_type_comparison['合计'].room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(room_type_comparison['合计'].room_nights_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                                <td><strong>{{ "%.2f"|format(room_type_comparison['合计'].current_revenue) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(room_type_comparison['合计'].last_revenue) }}</strong></td>
+                                <td class="{% if room_type_comparison['合计'].revenue_change > 0 %}text-green-600{% elif room_type_comparison['合计'].revenue_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ "%.2f"|format(room_type_comparison['合计'].revenue_change) }}
+                                    {% if room_type_comparison['合计'].revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(room_type_comparison['合计'].revenue_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                                <td><strong>{{ "%.2f"|format(room_type_comparison['合计'].current_avg_price) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(room_type_comparison['合计'].last_avg_price) }}</strong></td>
+                                <td class="{% if room_type_comparison['合计'].avg_price_change > 0 %}text-green-600{% elif room_type_comparison['合计'].avg_price_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ "%.2f"|format(room_type_comparison['合计'].avg_price_change) }}
+                                    {% if room_type_comparison['合计'].avg_price_change_rate != 0 %}
+                                        ({{ "%.1f"|format(room_type_comparison['合计'].avg_price_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if room_type_year_comparison and room_type_year_comparison|length > 0 %}
+            <div class="report-card mt-6">
+                <h3 class="text-lg font-semibold mb-3 text-center">房型同比对比分析</h3>
+                <p class="text-sm text-gray-600 mb-3">
+                    今年：{{ report_data.total_summary.date_range }} vs 去年同期：{{ report_data.year_comparison_period }}
+                </p>
+                <div class="table-responsive">
+                    <table class="report-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">房型</th>
+                                <th colspan="3">间夜数量</th>
+                                <th colspan="3">收入</th>
+                                <th colspan="3">平均房价</th>
+                            </tr>
+                            <tr>
+                                <th>今年</th>
+                                <th>去年</th>
+                                <th>变化</th>
+                                <th>今年</th>
+                                <th>去年</th>
+                                <th>变化</th>
+                                <th>今年</th>
+                                <th>去年</th>
+                                <th>变化</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for room_type, data in room_type_year_comparison.items() %}
+                            {% if room_type != '合计' %}
+                            <tr>
+                                <td><strong>{{ room_type }}</strong></td>
+                                <td>{{ data.current_room_nights }}</td>
+                                <td>{{ data.last_year_room_nights }}</td>
+                                <td class="{% if data.room_nights_change > 0 %}text-green-600{% elif data.room_nights_change < 0 %}text-red-600{% endif %}">
+                                    {{ data.room_nights_change }}
+                                    {% if data.room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.room_nights_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                                <td>{{ "%.2f"|format(data.current_revenue) }}</td>
+                                <td>{{ "%.2f"|format(data.last_year_revenue) }}</td>
+                                <td class="{% if data.revenue_change > 0 %}text-green-600{% elif data.revenue_change < 0 %}text-red-600{% endif %}">
+                                    {{ "%.2f"|format(data.revenue_change) }}
+                                    {% if data.revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.revenue_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                                <td>{{ "%.2f"|format(data.current_avg_price) }}</td>
+                                <td>{{ "%.2f"|format(data.last_year_avg_price) }}</td>
+                                <td class="{% if data.avg_price_change > 0 %}text-green-600{% elif data.avg_price_change < 0 %}text-red-600{% endif %}">
+                                    {{ "%.2f"|format(data.avg_price_change) }}
+                                    {% if data.avg_price_change_rate != 0 %}
+                                        ({{ "%.1f"|format(data.avg_price_change_rate) }}%)
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                            <!-- 合计行 -->
+                            {% if room_type_year_comparison['合计'] %}
+                            <tr class="font-bold bg-gray-100 border-t-2">
+                                <td><strong>合计</strong></td>
+                                <td><strong>{{ room_type_year_comparison['合计'].current_room_nights }}</strong></td>
+                                <td><strong>{{ room_type_year_comparison['合计'].last_year_room_nights }}</strong></td>
+                                <td class="{% if room_type_year_comparison['合计'].room_nights_change > 0 %}text-green-600{% elif room_type_year_comparison['合计'].room_nights_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ room_type_year_comparison['合计'].room_nights_change }}
+                                    {% if room_type_year_comparison['合计'].room_nights_change_rate != 0 %}
+                                        ({{ "%.1f"|format(room_type_year_comparison['合计'].room_nights_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                                <td><strong>{{ "%.2f"|format(room_type_year_comparison['合计'].current_revenue) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(room_type_year_comparison['合计'].last_year_revenue) }}</strong></td>
+                                <td class="{% if room_type_year_comparison['合计'].revenue_change > 0 %}text-green-600{% elif room_type_year_comparison['合计'].revenue_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ "%.2f"|format(room_type_year_comparison['合计'].revenue_change) }}
+                                    {% if room_type_year_comparison['合计'].revenue_change_rate != 0 %}
+                                        ({{ "%.1f"|format(room_type_year_comparison['合计'].revenue_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                                <td><strong>{{ "%.2f"|format(room_type_year_comparison['合计'].current_avg_price) }}</strong></td>
+                                <td><strong>{{ "%.2f"|format(room_type_year_comparison['合计'].last_year_avg_price) }}</strong></td>
+                                <td class="{% if room_type_year_comparison['合计'].avg_price_change > 0 %}text-green-600{% elif room_type_year_comparison['合计'].avg_price_change < 0 %}text-red-600{% endif %}">
+                                    <strong>{{ "%.2f"|format(room_type_year_comparison['合计'].avg_price_change) }}
+                                    {% if room_type_year_comparison['合计'].avg_price_change_rate != 0 %}
+                                        ({{ "%.1f"|format(room_type_year_comparison['合计'].avg_price_change_rate) }}%)
+                                    {% endif %}</strong>
+                                </td>
+                            </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div id="tab-daily" class="tab-content">
+            <div class="report-card">
+                <h3 class="text-lg font-semibold mb-3">日期明细</h3>
+                <div class="table-responsive">
+                    <table class="report-table">
+                        <thead>
+                            <tr><th>日期</th><th>星期</th><th>间夜数</th><th>收入</th><th>平均房价</th><th>出租率</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for item in daily_data %}
+                            <tr>
+                                <td>{{ item.record_date.strftime('%Y-%m-%d') }}</td>
+                                <td>{{ item.day_name }}</td>
+                                <td>{{ item.room_nights }}</td>
+                                <td>{{ "%.2f"|format(item.revenue|float) }}</td>
+                                <td>{{ "%.2f"|format(item.avg_price|float) }}</td>
+                                <td>{{ "%.2f"|format(item.occupancy_rate|float) }}%</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="report-card mt-6">
+                <h3 class="text-lg font-semibold mb-3">渠道日期明细</h3>
+                <div class="table-responsive">
+                    <table class="report-table" id="detail-table">
+                        <thead>
+                            <tr><th>日期</th><th>星期</th><th>渠道</th><th>间夜数</th><th>收入</th><th>平均房价</th></tr>
+                        </thead>
+                        <tbody>
+                            {% for item in detail_data %}
+                            <tr>
+                                <td>{{ item.record_date.strftime('%Y-%m-%d') }}</td>
+                                <td>{{ item.day_name }}</td>
+                                <td>{{ item.channel }}</td>
+                                <td>{{ item.room_nights }}</td>
+                                <td>{{ "%.2f"|format(item.revenue|float) }}</td>
+                                <td>{% if item.room_nights > 0 %}{{ "%.2f"|format((item.revenue / item.room_nights)|float) }}{% else %}0.00{% endif %}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div id="tab-charts" class="tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="report-card">
+                    <h3 class="text-lg font-semibold mb-3 text-center">间夜趋势</h3>
+                    <div id="room-nights-chart" class="chart-container"></div>
+                </div>
+                <div class="report-card">
+                    <h3 class="text-lg font-semibold mb-3 text-center">收入趋势</h3>
+                    <div id="revenue-chart" class="chart-container"></div>
+                </div>
+                <div class="report-card">
+                    <h3 class="text-lg font-semibold mb-3 text-center">平均房价趋势</h3>
+                    <div id="avg-price-chart" class="chart-container"></div>
+                </div>
+                <div class="report-card">
+                    <h3 class="text-lg font-semibold mb-3 text-center">周收入分布</h3>
+                    <div id="weekly-revenue-chart" class="chart-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex justify-end gap-4 mt-6 no-print">
+        <button id="print-report" class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">打印报表</button>
+        <button id="export-pdf" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">导出PDF</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js/dist/html2pdf.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+<script>
+// 全局变量
+let chartInstances = {};
+let chartData = null;
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("页面加载完成，开始初始化...");
+
+    // 检查是否有后端错误信息
+    const reportDataError = {{ report_data.get('error') | tojson | safe }};
+    if (reportDataError) {
+        alert('生成报表时出错: ' + reportDataError);
+        return;
+    }
+
+    // 从模板获取数据
+    try {
+        chartData = {{ chart_data|tojson|safe }};
+        console.log("原始图表数据:", chartData);
+        
+        // 确保chartData是对象而非字符串
+        if (typeof chartData === 'string') {
+            try {
+                chartData = JSON.parse(chartData);
+                console.log("解析后的图表数据:", chartData);
+            } catch (e) {
+                console.error("解析图表数据失败:", e);
+            }
+        }
+    } catch (e) {
+        console.error("获取或解析图表数据时出错:", e);
+    }
+    try {
+    $('#detail-table').DataTable({
+        paging: true,
+        searching: true,
+        ordering: true,
+        info: true,
+        pageLength: 10,
+        language: { url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/zh.json' }
+    });
+    } catch (e) {
+        console.error("初始化DataTables出错:", e);
+    }
+
+    // --- 选项卡切换逻辑 ---
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            console.log("切换到选项卡:", tabId);
+
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            this.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+
+            if (tabId === 'tab-charts') {
+                console.log("图表选项卡被激活，准备渲染图表...");
+                // 先确保图表容器可见
+                document.getElementById('tab-charts').style.display = 'block';
+                
+                // 给图表容器一点时间来计算其尺寸
+                setTimeout(function() {
+                    console.log("开始初始化图表...");
+                    // 确保标题可见
+                    document.querySelectorAll('#tab-charts h3').forEach(title => {
+                        title.style.display = 'block';
+                    });
+                    initCharts();
+                }, 200); // 增加延迟时间
+            }
+        });
+    });
+    
+    // --- 页面事件 ---
+
+    // 窗口大小改变时重置图表大小
+    window.addEventListener('resize', function() {
+        console.log("窗口大小改变，重新调整图表尺寸");
+        for (const id in chartInstances) {
+            if (chartInstances.hasOwnProperty(id) && chartInstances[id]) {
+                try {
+                chartInstances[id].resize();
+                    console.log(`已调整图表 ${id} 的尺寸`);
+                } catch (e) {
+                    console.error(`调整图表 ${id} 尺寸时出错:`, e);
+                }
+            }
+        }
+    });
+
+    // 打印
+    document.getElementById('print-report').addEventListener('click', function() {
+        window.print();
+    });
+
+    // 导出 PDF
+    document.getElementById('export-pdf').addEventListener('click', function() {
+        // 显示加载状态
+        const loadingElement = document.createElement('div');
+        loadingElement.style.position = 'fixed';
+        loadingElement.style.top = '0';
+        loadingElement.style.left = '0';
+        loadingElement.style.width = '100%';
+        loadingElement.style.height = '100%';
+        loadingElement.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+        loadingElement.style.display = 'flex';
+        loadingElement.style.alignItems = 'center';
+        loadingElement.style.justifyContent = 'center';
+        loadingElement.style.zIndex = '9999';
+        loadingElement.innerHTML = '<div style="text-align: center;"><div style="border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; margin: 0 auto; animation: spin 2s linear infinite;"></div><p style="margin-top: 10px;">正在生成PDF，请稍候...</p></div>';
+        document.body.appendChild(loadingElement);
+        
+        // 添加旋转动画样式
+        const styleElement = document.createElement('style');
+        styleElement.textContent = '@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }';
+        document.head.appendChild(styleElement);
+        
+        // 保存当前活动的选项卡
+        const activeTab = document.querySelector('.tab-button.active').getAttribute('data-tab');
+        
+        // 创建一个用于PDF导出的容器
+        const pdfContainer = document.createElement('div');
+        pdfContainer.style.backgroundColor = 'white';
+        pdfContainer.style.padding = '20px';
+        pdfContainer.style.width = '210mm'; // A4宽度
+        
+        // 添加报表标题
+        const titleDiv = document.createElement('div');
+        titleDiv.style.textAlign = 'center';
+        titleDiv.style.marginBottom = '20px';
+        titleDiv.innerHTML = `
+            <h1 style="font-size: 24px; margin-bottom: 5px;">周客源分析表</h1>
+            <p style="color: #666;">${document.querySelector('.text-gray-600').textContent}</p>
+        `;
+        pdfContainer.appendChild(titleDiv);
+        
+        // 添加摘要卡片
+        const summaryCards = document.querySelectorAll('.summary-card');
+        const summaryRow = document.createElement('div');
+        summaryRow.style.display = 'flex';
+        summaryRow.style.justifyContent = 'space-between';
+        summaryRow.style.marginBottom = '20px';
+        summaryRow.style.flexWrap = 'wrap';
+        
+        summaryCards.forEach(card => {
+            const cardClone = card.cloneNode(true);
+            cardClone.style.width = '19%';
+            cardClone.style.padding = '10px';
+            cardClone.style.boxSizing = 'border-box';
+            cardClone.style.marginBottom = '10px';
+            summaryRow.appendChild(cardClone);
+        });
+        
+        pdfContainer.appendChild(summaryRow);
+        
+        // 添加渠道分析表
+        const channelAnalysis = document.querySelector('#tab-summary .report-card').cloneNode(true);
+        channelAnalysis.style.marginBottom = '20px';
+        channelAnalysis.style.pageBreakInside = 'avoid';
+        pdfContainer.appendChild(channelAnalysis);
+        
+        // 添加日期明细
+        const dailyDetails = document.querySelector('#tab-daily .report-card').cloneNode(true);
+        dailyDetails.style.marginBottom = '20px';
+        dailyDetails.style.pageBreakInside = 'avoid';
+        
+        // 添加分页符
+        const pageBreak = document.createElement('div');
+        pageBreak.style.pageBreakBefore = 'always';
+        pageBreak.style.height = '1px';
+        pdfContainer.appendChild(pageBreak);
+        
+        pdfContainer.appendChild(dailyDetails);
+        
+        // 添加图表（如果当前有渲染的图表）
+        if (chartInstances && Object.keys(chartInstances).length > 0) {
+            const chartsPageBreak = document.createElement('div');
+            chartsPageBreak.style.pageBreakBefore = 'always';
+            chartsPageBreak.style.height = '1px';
+            pdfContainer.appendChild(chartsPageBreak);
+            
+            const chartsTitle = document.createElement('h2');
+            chartsTitle.textContent = '图表分析';
+            chartsTitle.style.fontSize = '18px';
+            chartsTitle.style.marginBottom = '15px';
+            pdfContainer.appendChild(chartsTitle);
+            
+            // 添加图表图像
+            const chartIds = ['room-nights-chart', 'revenue-chart', 'avg-price-chart', 'weekly-revenue-chart'];
+            let chartCount = 0;
+            
+            chartIds.forEach(chartId => {
+                if (chartInstances[chartId]) {
+                    const chartTitle = document.querySelector(`#${chartId}`).parentNode.querySelector('h3').textContent;
+                    
+                    const chartContainer = document.createElement('div');
+                    chartContainer.style.marginBottom = '20px';
+                    chartContainer.style.pageBreakInside = 'avoid';
+                    
+                    const chartTitleElem = document.createElement('h3');
+                    chartTitleElem.textContent = chartTitle;
+                    chartTitleElem.style.fontSize = '16px';
+                    chartTitleElem.style.marginBottom = '10px';
+                    chartTitleElem.style.textAlign = 'center';
+                    chartContainer.appendChild(chartTitleElem);
+                    
+                    // 获取图表的图像
+                    try {
+                        const chartImg = document.createElement('img');
+                        chartImg.src = chartInstances[chartId].getDataURL({
+                            type: 'png',
+                            pixelRatio: 2,
+                            backgroundColor: '#fff'
+                        });
+                        chartImg.style.width = '100%';
+                        chartImg.style.maxHeight = '300px';
+                        chartImg.style.objectFit = 'contain';
+                        chartContainer.appendChild(chartImg);
+                        
+                        // 添加表格数据（如果有）
+                        const tableData = document.querySelector(`#${chartId}`).parentNode.querySelector('.chart-data-table');
+                        if (tableData) {
+                            const tableClone = tableData.cloneNode(true);
+                            chartContainer.appendChild(tableClone);
+                        }
+                        
+                        pdfContainer.appendChild(chartContainer);
+                        chartCount++;
+                        
+                        // 每两个图表添加一个分页符
+                        if (chartCount % 2 === 0 && chartCount < chartIds.length) {
+                            const chartPageBreak = document.createElement('div');
+                            chartPageBreak.style.pageBreakBefore = 'always';
+                            chartPageBreak.style.height = '1px';
+                            pdfContainer.appendChild(chartPageBreak);
+                        }
+                    } catch (e) {
+                        console.error(`获取图表 ${chartId} 图像失败:`, e);
+                    }
+                }
+            });
+        }
+        
+        // 添加页脚
+        const footer = document.createElement('div');
+        footer.style.marginTop = '20px';
+        footer.style.borderTop = '1px solid #ddd';
+        footer.style.paddingTop = '10px';
+        footer.style.textAlign = 'right';
+        footer.style.fontSize = '12px';
+        footer.style.color = '#666';
+        
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('zh-CN', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        
+        footer.textContent = `生成时间: ${dateStr}`;
+        pdfContainer.appendChild(footer);
+        
+        // 配置PDF选项
+        const options = {
+            margin: 10,
+            filename: `乐巷酒店周客源分析表_${new Date().toISOString().slice(0, 10)}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true, logging: false },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+        
+        // 生成PDF
+        html2pdf().from(pdfContainer).set(options).save()
+        .then(() => {
+            // 移除加载状态
+            document.body.removeChild(loadingElement);
+            document.head.removeChild(styleElement);
+            
+            // 恢复原来的活动选项卡
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(activeTab).classList.add('active');
+        })
+        .catch(error => {
+            console.error('导出PDF失败:', error);
+            alert('导出PDF失败，请稍后再试');
+            
+            // 移除加载状态
+            document.body.removeChild(loadingElement);
+            document.head.removeChild(styleElement);
+        });
+    });
+
+    // 如果当前选项卡是图表，立即初始化图表
+    if (document.querySelector('.tab-button[data-tab="tab-charts"]').classList.contains('active')) {
+        console.log("当前已是图表选项卡，准备渲染图表...");
+        setTimeout(initCharts, 100);
+    }
+});
+
+// 创建数据表格HTML
+function createDataTable(data, columns) {
+    let tableHTML = '<table class="report-table w-full mt-4 text-center"><thead><tr>';
+    
+    // 表头 - 使用传入的列名
+    columns.forEach(column => {
+        tableHTML += `<th>${column}</th>`;
+    });
+    tableHTML += '</tr></thead><tbody>';
+    
+    // 表格数据 - 只处理数据行
+    data.forEach(row => {
+        tableHTML += '<tr>';
+        row.forEach((cell, index) => {
+            if (index === 0) {
+                tableHTML += `<td class="font-bold">${cell}</td>`;
+            } else {
+                // 如果是数字，则格式化
+                const formattedCell = !isNaN(cell) && typeof cell === 'number' 
+                    ? (cell % 1 === 0 ? cell : cell.toFixed(2)) 
+                    : cell;
+                tableHTML += `<td>${formattedCell}</td>`;
+            }
+        });
+        tableHTML += '</tr>';
+    });
+    
+    // 添加合计行
+    if (data.length > 0) {
+        const colCount = columns.length;
+        const totals = new Array(colCount).fill(0);
+        
+        // 第一列为"合计"文本
+        totals[0] = "合计";
+        
+        // 计算每列的合计值
+        data.forEach(row => {
+            row.forEach((cell, index) => {
+                if (index > 0 && !isNaN(cell) && typeof cell === 'number') {
+                    totals[index] += cell;
+                }
+            });
+        });
+        
+        // 添加合计行到表格
+        tableHTML += '<tr class="bg-gray-100 font-bold">';
+        totals.forEach((total, index) => {
+            if (index === 0) {
+                tableHTML += `<td class="font-bold">${total}</td>`;
+            } else {
+                // 格式化数字
+                const formattedTotal = (total % 1 === 0) ? total : total.toFixed(2);
+                tableHTML += `<td>${formattedTotal}</td>`;
+            }
+        });
+        tableHTML += '</tr>';
+    }
+    
+    tableHTML += '</tbody></table>';
+    return tableHTML;
+}
+
+// --- 图表相关函数 ---
+// 渲染普通图表（垂直方向）
+function renderChart(elementId, options) {
+    console.log(`开始渲染图表: ${elementId}`);
+    
+    const chartDom = document.getElementById(elementId);
+    if (!chartDom) {
+        console.error(`找不到图表容器: ${elementId}`);
+        return;
+    }
+    
+    console.log(`图表容器 ${elementId} 尺寸: ${chartDom.offsetWidth}x${chartDom.offsetHeight}`);
+    
+    try {
+        // 先清除可能的旧实例
+        if (chartInstances[elementId]) {
+            console.log(`销毁图表 ${elementId} 的旧实例`);
+            chartInstances[elementId].dispose();
+        }
+        
+        // 预定义颜色映射
+        const colorMap = {
+            '美团': '#4e79a7',
+            '携程': '#f28e2c',
+            '飞猪': '#aaaaaa',
+            '去哪儿': '#59a14f',
+            '直销': '#e15759',
+            '微信': '#76b7b2',
+            '线下': '#edc949'
+        };
+        
+        // 创建新图表实例
+        const myChart = echarts.init(chartDom);
+        
+        const option = {
+            tooltip: {
+                trigger: 'axis'
+            },
+            legend: {
+                data: options.series.map(item => item.name),
+                bottom: 0
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '15%',
+                top: '10%',  // 减少顶部空间，因为我们不再在图表内部显示标题
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                data: options.xAxis,
+                boundaryGap: options.series[0].type === 'bar',
+                axisLabel: {
+                    interval: 0,
+                    fontSize: 12
+                }
+            },
+            yAxis: {
+                type: 'value',
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
+                }
+            },
+            series: options.series.map(series => ({
+                ...series,
+                label: series.type === 'bar' ? {
+                    show: true,  // 柱状图显示数值标签
+                    position: 'top',
+                    formatter: '{c}',
+                    fontSize: 12
+                } : {
+                    show: false,  // 折线图不显示数值标签
+                    position: 'top',
+                    formatter: '{c}',
+                    fontSize: 12
+                },
+                lineStyle: {
+                    width: 2,
+                    color: colorMap[series.name] || null
+                },
+                itemStyle: {
+                    color: colorMap[series.name] || null
+                },
+                symbol: 'circle',
+                symbolSize: 6
+            })),
+            dataset: {
+                source: options.tableData || []
+            }
+        };
+        
+        console.log(`设置图表 ${elementId} 选项:`, option);
+        myChart.setOption(option);
+        chartInstances[elementId] = myChart;
+        
+        // 如果有表格数据，创建表格
+        // 先检查是否已经有表格了
+        const existingTable = chartDom.parentNode.querySelector('.chart-data-table');
+        if (existingTable) {
+            existingTable.remove();
+        }
+        
+        if (options.tableData && options.tableData.length > 0) {
+            const tableContainer = document.createElement('div');
+            tableContainer.className = 'mt-8 table-responsive chart-data-table';
+            tableContainer.innerHTML = createDataTable(options.tableData, options.tableColumns);
+            chartDom.parentNode.appendChild(tableContainer);
+        }
+        
+        console.log(`图表 ${elementId} 渲染成功`);
+    } catch (error) {
+        console.error(`渲染图表 ${elementId} 时发生错误:`, error);
+    }
+}
+
+// 渲染横向柱状图
+function renderHorizontalBarChart(elementId, options) {
+    console.log(`开始渲染横向柱状图: ${elementId}`);
+    
+    const chartDom = document.getElementById(elementId);
+    if (!chartDom) {
+        console.error(`找不到图表容器: ${elementId}`);
+        return;
+    }
+    
+    console.log(`图表容器 ${elementId} 尺寸: ${chartDom.offsetWidth}x${chartDom.offsetHeight}`);
+    
+    try {
+        // 先清除可能的旧实例
+        if (chartInstances[elementId]) {
+            console.log(`销毁图表 ${elementId} 的旧实例`);
+            chartInstances[elementId].dispose();
+        }
+        
+        // 预定义颜色映射
+        const colorMap = {
+            '美团': '#4e79a7',
+            '携程': '#f28e2c',
+            '飞猪': '#aaaaaa',
+            '去哪儿': '#59a14f',
+            '直销': '#e15759',
+            '微信': '#76b7b2',
+            '线下': '#edc949'
+        };
+        
+        // 创建新图表实例
+        const myChart = echarts.init(chartDom);
+        
+        const option = {
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            legend: {
+                data: options.series.map(item => item.name),
+                bottom: 0
+            },
+            grid: {
+                left: '3%',
+                right: '8%',  // 为标签留出更多空间
+                bottom: '15%',
+                top: '10%',  // 减少顶部空间，因为我们不再在图表内部显示标题
+                containLabel: true
+            },
+            xAxis: {  // 横向柱状图中，x轴是数值轴
+                type: 'value',
+                splitLine: {
+                    lineStyle: {
+                        type: 'dashed'
+                    }
+                }
+            },
+            yAxis: {  // 横向柱状图中，y轴是类别轴
+                type: 'category',
+                data: options.yAxis,
+                axisLabel: {
+                    interval: 0,
+                    fontSize: 12
+                }
+            },
+            series: options.series.map(series => ({
+                ...series,
+                label: series.label || {
+                    show: true,
+                    position: 'right',
+                    formatter: '{c}',
+                    fontSize: 12
+                },
+                itemStyle: {
+                    color: colorMap[series.name] || null
+                }
+            })),
+            dataset: {
+                source: options.tableData || []
+            }
+        };
+        
+        console.log(`设置图表 ${elementId} 选项:`, option);
+        myChart.setOption(option);
+        chartInstances[elementId] = myChart;
+        
+        // 如果有表格数据，创建表格
+        // 先检查是否已经有表格了
+        const existingTable = chartDom.parentNode.querySelector('.chart-data-table');
+        if (existingTable) {
+            existingTable.remove();
+        }
+        
+        if (options.tableData && options.tableData.length > 0) {
+            const tableContainer = document.createElement('div');
+            tableContainer.className = 'mt-8 table-responsive chart-data-table';
+            tableContainer.innerHTML = createDataTable(options.tableData, options.tableColumns);
+            chartDom.parentNode.appendChild(tableContainer);
+        }
+        
+        console.log(`图表 ${elementId} 渲染成功`);
+    } catch (error) {
+        console.error(`渲染图表 ${elementId} 时发生错误:`, error);
+    }
+}
+
+function initCharts() {
+    console.log("执行 initCharts 函数");
+    
+    if (!chartData) {
+        console.error("图表数据不可用");
+        document.querySelector('[data-tab="tab-charts"]').style.display = 'none';
+        return;
+    }
+    
+    // 确保所有图表容器可见
+    document.querySelectorAll('.chart-container').forEach(container => {
+        container.style.height = '400px';
+        container.style.visibility = 'visible';
+        console.log(`容器 ${container.id} 尺寸: ${container.offsetWidth}x${container.offsetHeight}`);
+    });
+    
+    try {
+        console.log("准备图表数据:", chartData);
+        
+        // 处理日期和星期几数据
+        const dates = chartData.dates || [];
+        const dayNames = chartData.day_names || [];
+        
+        // 图表使用日期作为X轴标签
+        const chartXAxisLabels = dates;
+        // 表格使用星期几作为列标题
+        const tableColumnLabels = dayNames;
+        
+        // 创建日期到星期的映射，用于查找数据
+        const dateToDay = {};
+        dates.forEach((date, index) => {
+            dateToDay[date] = dayNames[index];
+        });
+        
+        // 获取渠道数据
+        const channelData = chartData.channel_series || {};
+        const channelNames = Object.keys(channelData);
+        
+        // 渲染各图表
+        
+        // 3. 平均房价趋势图表 - 按渠道分组
+        const avgPriceSeries = channelNames.map(channel => {
+            // 按日期组织数据
+            const data = dates.map(date => {
+                return channelData[channel][date] ? channelData[channel][date].avg_price : 0;
+            });
+            
+            return {
+                name: channel,
+                type: 'line',
+                data: data,
+                smooth: true
+            };
+        });
+        
+        // 表格数据按星期几组织
+        const avgPriceTableData = channelNames.map(channel => {
+            const rowData = [channel];
+            dayNames.forEach(day => {
+                // 找到对应这个星期几的日期
+                const matchingDate = dates.find((date, idx) => dayNames[idx] === day);
+                rowData.push(matchingDate && channelData[channel][matchingDate] 
+                    ? channelData[channel][matchingDate].avg_price 
+                    : 0);
+            });
+            return rowData;
+        });
+        
+        renderChart('avg-price-chart', {
+            xAxis: chartXAxisLabels,
+            series: avgPriceSeries,
+            tableData: avgPriceTableData,
+            tableColumns: ['渠道'].concat(tableColumnLabels)
+        });
+        
+        // 1. 间夜趋势图表 - 按渠道分组
+        const roomNightsSeries = channelNames.map(channel => {
+            // 按日期组织数据
+            const data = dates.map(date => {
+                return channelData[channel][date] ? channelData[channel][date].room_nights : 0;
+            });
+            
+            return {
+                name: channel,
+                type: 'line',
+                data: data,
+                smooth: true
+            };
+        });
+        
+        // 表格数据按星期几组织
+        const roomNightsTableData = channelNames.map(channel => {
+            const rowData = [channel];
+            dayNames.forEach(day => {
+                // 找到对应这个星期几的日期
+                const matchingDate = dates.find((date, idx) => dayNames[idx] === day);
+                rowData.push(matchingDate && channelData[channel][matchingDate] 
+                    ? channelData[channel][matchingDate].room_nights 
+                    : 0);
+            });
+            return rowData;
+        });
+        
+        renderChart('room-nights-chart', {
+            xAxis: chartXAxisLabels,
+            series: roomNightsSeries,
+            tableData: roomNightsTableData,
+            tableColumns: ['渠道'].concat(tableColumnLabels)
+        });
+        
+        // 2. 收入趋势图表 - 按渠道分组
+        const revenueSeries = channelNames.map(channel => {
+            // 按日期组织数据
+            const data = dates.map(date => {
+                return channelData[channel][date] ? channelData[channel][date].revenue : 0;
+            });
+            
+            return {
+                name: channel,
+                type: 'line',
+                data: data,
+                smooth: true
+            };
+        });
+        
+        // 表格数据按星期几组织
+        const revenueTableData = channelNames.map(channel => {
+            const rowData = [channel];
+            dayNames.forEach(day => {
+                // 找到对应这个星期几的日期
+                const matchingDate = dates.find((date, idx) => dayNames[idx] === day);
+                rowData.push(matchingDate && channelData[channel][matchingDate] 
+                    ? channelData[channel][matchingDate].revenue 
+                    : 0);
+            });
+            return rowData;
+        });
+        
+        renderChart('revenue-chart', {
+            xAxis: chartXAxisLabels,
+            series: revenueSeries,
+            tableData: revenueTableData,
+            tableColumns: ['渠道'].concat(tableColumnLabels)
+        });
+        
+        // 4. 周收入柱状图
+        const weeklyRevenueData = chartData.weekly_revenue || {};
+        const weeklyRevenueDays = Object.keys(weeklyRevenueData);
+        const weeklyRevenueValues = [];
+        
+        weeklyRevenueDays.forEach(day => {
+            if (weeklyRevenueData[day] && typeof weeklyRevenueData[day].revenue !== 'undefined') {
+                weeklyRevenueValues.push(weeklyRevenueData[day].revenue);
+            } else {
+                weeklyRevenueValues.push(0);
+            }
+        });
+        
+        // 使用普通渲染函数渲染竖向柱状图
+        renderChart('weekly-revenue-chart', {
+            xAxis: weeklyRevenueDays,  // 在竖向柱状图中，类别放在x轴
+            series: [{
+                name: '收入(元)',
+                type: 'bar',
+                barWidth: '50%',  // 控制柱子宽度
+                data: weeklyRevenueValues,
+                label: {
+                    show: true,  // 柱状图保留数值标签
+                    position: 'top',  // 竖向柱状图标签位置改为顶部
+                    formatter: '{c}',
+                    fontSize: 12
+                }
+            }],
+            // 表格数据横向排列 - 星期作为列标题
+            tableData: [['收入(元)'].concat(weeklyRevenueValues)],
+            tableColumns: ['项目'].concat(weeklyRevenueDays)
+        });
+        
+        console.log("所有图表渲染完成");
+    } catch (error) {
+        console.error("渲染图表过程中发生错误:", error);
+    }
+}
+</script>
+{% endblock %}
