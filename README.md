@@ -9,7 +9,7 @@
 
 ## 快速部署
 
-### 方式一：使用 GitHub 预构建镜像（推荐）
+### 方式一：使用 Docker Hub 镜像（推荐）
 
 ```bash
 # 1. 克隆代码库
@@ -20,11 +20,26 @@ cd HotelWebBi
 cp .env.example .env
 # 编辑 .env 文件，填入你的配置
 
-# 3. 使用预构建镜像启动
+# 3. 使用 Docker Hub 镜像启动
+docker-compose -f docker-compose.dockerhub.yml up -d
+```
+
+### 方式二：使用 GitHub Container Registry
+
+```bash
+# 1. 克隆代码库
+git clone https://github.com/binbin1213/HotelWebBi.git
+cd HotelWebBi
+
+# 2. 配置环境变量
+cp .env.example .env
+# 编辑 .env 文件，填入你的配置
+
+# 3. 使用 GHCR 镜像启动
 docker-compose -f docker-compose.github.yml up -d
 ```
 
-### 方式二：本地构建
+### 方式三：本地构建
 
 ```bash
 # 1. 克隆代码库
@@ -81,10 +96,21 @@ docker-compose up -d
 - AI分析：集成DeepSeek AI进行智能数据分析
 - 周报生成：自动生成酒店运营周报
 
-## GitHub 自动构建
+## 自动构建镜像
 
-本项目配置了 GitHub Actions 自动构建 Docker 镜像：
+本项目配置了 GitHub Actions 自动构建 Docker 镜像，同时推送到两个仓库：
+
+### Docker Hub（推荐使用）
+- 镜像地址：`binbin1213/hotelwebbi:latest`
+- 无需域名前缀，使用更方便
+- 全球最大的容器镜像仓库
+
+### GitHub Container Registry
 - 镜像地址：`ghcr.io/binbin1213/hotelwebbi:latest`
+- 与 GitHub 仓库完全集成
+- 免费使用
+
+**构建触发条件：**
 - 每次推送到 main 分支时自动构建
 - 支持版本标签构建（如 `v1.0.0`）
 
