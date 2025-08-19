@@ -1,5 +1,15 @@
 FROM python:3.11-slim
 
+# 添加镜像标签信息
+LABEL org.opencontainers.image.title="乐巷酒店数据智能分析系统"
+LABEL org.opencontainers.image.description="集成数据管理、可视化分析和AI智能分析功能的酒店运营数据分析系统"
+LABEL org.opencontainers.image.version="1.0.0"
+LABEL org.opencontainers.image.authors="binbin1213"
+LABEL org.opencontainers.image.url="https://github.com/binbin1213/HotelWebBi"
+LABEL org.opencontainers.image.source="https://github.com/binbin1213/HotelWebBi"
+LABEL org.opencontainers.image.vendor="乐巷酒店"
+LABEL org.opencontainers.image.licenses="MIT"
+
 WORKDIR /app
 
 # 复制依赖文件
